@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { margin: 0; height: 300vh; background: #000; color: white; font-family: sans-serif; }
+  .logo { position: fixed; bottom: 20px; left: 20px; font-size: 15vw; font-weight: bold; transform-origin: bottom left; transition: transform 0.1s; }
+  .slideshow { position: fixed; inset: 0; z-index: -1; }
+  .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s; }
+  .slide.active { opacity: 1; }
+</style>
+</head>
+<body>
+  <div class="slideshow">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2560&auto=format&fit=crop');"></div>
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=2560&auto=format&fit=crop');"></div>
+  </div>
+  <div class="logo" id="logo">CAVIER</div>
+
+  <script>
+    const logo = document.getElementById('logo');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const maxScroll = window.innerHeight; // The scroll distance over which the animation completes
+      const progress = Math.min(scrollY / maxScroll, 1);
+      
+      // Scale down from 1 to 0.15, move up to top
+      const scale = 1 - (progress * 0.85); 
+      // Need to adjust transform-origin or translate to place it at the top left.
+      // If origin is bottom-left, y translation needs to move it to the top.
+      const startY = 0; 
+      const endY = -(window.innerHeight - 80); // move up by window height minus some padding
+      const y = progress * endY;
+      
+      logo.style.transform = `translateY(${y}px) scale(${scale})`;
+    });
+  </script>
+</body>
+</html>

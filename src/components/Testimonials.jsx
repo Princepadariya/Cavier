@@ -84,7 +84,7 @@ const Testimonials = () => {
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
         >
           {/* Decorative Back Card Outline */}
           <div className="absolute top-0 -right-4 md:-right-8 lg:-right-10 w-[95%] h-full rounded-[1.5rem] border border-white/20 z-0"></div>

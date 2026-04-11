@@ -153,7 +153,7 @@ const FinishingTouch = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.5 }}
           className="mb-14"
         >
           <h2 className="text-3xl font-semibold text-white mb-5 leading-tight">

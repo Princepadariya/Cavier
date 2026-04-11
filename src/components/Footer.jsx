@@ -1,43 +1,69 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Facebook, Linkedin, Twitter, Pin } from 'lucide-react'; // 'X' is custom, reusing Twitter but tweaked
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { Facebook, Linkedin, Twitter, Pin } from 'lucide-react';
 
 const Footer = () => {
   const containerRef = useRef(null);
+  const bigTextRef = useRef(null);
 
-  // Vervaunt-style scroll parallax for the massive footer text
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end end"]
-  });
+  useGSAP(() => {
+    // Vervaunt-style scroll parallax for the massive footer text using ScrollTrigger scrub
+    gsap.fromTo(bigTextRef.current,
+      { y: "60%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: true,
+        }
+      }
+    );
 
-  const bigTextY = useTransform(scrollYProgress, [0, 1], ["60%", "0%"]);
-  const bigTextOpacity = useTransform(scrollYProgress, [0.5, 1], [0, 1]);
+    // Stagger links entrance
+    gsap.fromTo(".gsap-footer-col",
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        stagger: 0.25,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 85%",
+        }
+      }
+    );
 
-  // Vervaunt style stagger links
-  const containerVars = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 }}
-  };
-  const itemVars = {
-    hidden: { opacity: 0, y: 15 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" }}
-  };
+    gsap.fromTo(".gsap-footer-address",
+      { opacity: 0, x: 20 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.5,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: ".gsap-footer-address",
+          start: "top 95%",
+        }
+      }
+    );
+
+  }, { scope: containerRef });
 
   return (
     <footer ref={containerRef} className="relative w-full bg-[#f8f8f8] pt-24 pb-6 px-6 md:px-12 lg:px-24 overflow-hidden z-20">
       <div className="max-w-[1400px] mx-auto">
         
         {/* UPPER SECTION */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20"
-          variants={containerVars}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-10%" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
           {/* Column 1 */}
-          <motion.div variants={itemVars} className="flex flex-col gap-5">
+          <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className="text-xl font-bold tracking-wide text-[#222]">Cavier</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-[#444]">
               <li><a href="#" className="hover:text-black transition-colors">Home</a></li>
@@ -45,10 +71,10 @@ const Footer = () => {
               <li><a href="#" className="hover:text-black transition-colors">Dealership</a></li>
               <li><a href="#" className="hover:text-black transition-colors">Contact</a></li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Column 2 */}
-          <motion.div variants={itemVars} className="flex flex-col gap-5">
+          <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className="text-xl font-bold tracking-wide text-[#222]">Shopping</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-[#555]">
               <li><a href="#" className="hover:text-black transition-colors">Shop</a></li>
@@ -56,10 +82,10 @@ const Footer = () => {
               <li><a href="#" className="hover:text-black transition-colors">Cart</a></li>
               <li><a href="#" className="hover:text-black transition-colors">Wishlist</a></li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Column 3 */}
-          <motion.div variants={itemVars} className="flex flex-col gap-5">
+          <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className="text-xl font-bold tracking-wide text-[#222]">Categories</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-[#555]">
               <li><a href="#" className="hover:text-black transition-colors">Premium</a></li>
@@ -67,10 +93,10 @@ const Footer = () => {
               <li><a href="#" className="hover:text-black transition-colors">Economy</a></li>
               <li><a href="#" className="hover:text-black transition-colors">Bath Accessories</a></li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Column 4 */}
-          <motion.div variants={itemVars} className="flex flex-col gap-5">
+          <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className="text-xl font-bold tracking-wide text-[#222]">Categories</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium text-[#555]">
               <li><a href="#" className="hover:text-black transition-colors">Cock</a></li>
@@ -78,10 +104,10 @@ const Footer = () => {
               <li><a href="#" className="hover:text-black transition-colors">Single Lever</a></li>
               <li><a href="#" className="hover:text-black transition-colors">Concealed Stop Cock</a></li>
             </ul>
-          </motion.div>
+          </div>
 
           {/* Column 5: Contact Info */}
-          <motion.div variants={itemVars} className="flex flex-col gap-1 text-[13px] md:text-sm text-[#333] leading-relaxed">
+          <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-1 text-[13px] md:text-sm text-[#333] leading-relaxed">
             <p><span className="font-bold text-[#222]">Phone:</span> +91 7433993997, 7433993998</p>
             <p><span className="font-bold text-[#222]">Trade Enq:</span> +91 73 83 93 33 33</p>
             <p><span className="font-bold text-[#222]">Toll-free:</span> 1800 313 7724</p>
@@ -91,8 +117,8 @@ const Footer = () => {
               <p className="text-[#555]">Saturday-Thursday: 8:30AM to 7PM</p>
               <p className="text-[#555]">Fridays: Closed</p>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* THIN LINE */}
         <div className="w-full h-px bg-black/20 my-16"></div>
@@ -102,22 +128,16 @@ const Footer = () => {
           
           {/* Vervaunt-style Massive Scroll-Linked Logo */}
           <div className="w-full md:w-3/4 overflow-hidden pt-4 pb-2">
-            <motion.h1 
-              style={{ y: bigTextY, opacity: bigTextOpacity }}
-              className="text-[12vw] sm:text-[14vw] md:text-[13vw] font-bold tracking-tighter text-[#1a1a1a] leading-[0.8] origin-bottom select-none"
+            <h1 
+              ref={bigTextRef}
+              className="text-[12vw] sm:text-[14vw] md:text-[13vw] font-bold tracking-tighter text-[#1a1a1a] leading-[0.8] origin-bottom select-none will-change-transform"
             >
               cavier
-            </motion.h1>
+            </h1>
           </div>
 
           {/* Right Address Block */}
-          <motion.div 
-            className="hidden md:flex flex-col gap-4 text-sm font-medium text-[#333] mb-4"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+          <div className="gsap-footer-address opacity-0 will-change-transform hidden md:flex flex-col gap-4 text-sm font-medium text-[#333] mb-4">
             <div className="leading-relaxed">
               <p>01, Vision Industrial Park</p>
               <p>Changa, Lalpur Road</p>
@@ -132,7 +152,7 @@ const Footer = () => {
               <Twitter size={20} className="hover:text-black cursor-pointer transition-colors" />
               <Pin size={20} className="hover:text-black cursor-pointer transition-colors" />
             </div>
-          </motion.div>
+          </div>
 
         </div>
 

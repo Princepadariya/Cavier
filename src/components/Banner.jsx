@@ -29,7 +29,7 @@ const Banner = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+          transition={{ duration: 1.8, ease: 'easeOut', delay: 0.2 }}
         >
           Design For Your Space Built For
           <br />

@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ShoppingCart, Heart, User, Search } from 'lucide-react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const Navbar = () => {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    // Drop down the cavier logo exactly as requested for the load entry
+    gsap.fromTo(
+      ".gsap-nav-logo",
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 1.8, ease: "expo.out" }
+    );
+  }, { scope: containerRef });
+
   return (
-    <nav className="absolute top-0 w-full z-50 px-6 md:px-12 py-8 flex items-center justify-between">
+    <nav ref={containerRef} className="absolute top-0 w-full z-50 px-6 md:px-12 py-8 flex items-center justify-between">
       {/* Left Links */}
       <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
         <a href="#product" className="hover:text-brand-gold transition-colors relative group text-white">
@@ -23,28 +36,35 @@ const Navbar = () => {
 
       {/* Center Brand */}
       <div className="text-3xl md:text-5xl font-bold tracking-tight text-white logo-text absolute left-1/2 transform -translate-x-1/2">
-        <motion.div
-           initial={{ opacity: 0, y: -20 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8, ease: "easeOut" }}
-           className="lowercase"
-        >
+        <div className="gsap-nav-logo opacity-0 will-change-transform lowercase">
           cavier
-        </motion.div>
+        </div>
       </div>
 
       {/* Right Icons */}
       <div className="flex items-center space-x-4 md:space-x-6">
         <div className="flex items-center space-x-3 md:space-x-4">
-          <button className="p-2 rounded-full border border-white/20 hover:border-brand-gold hover:text-brand-gold transition-all text-white">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-2 rounded-full border border-white/20 hover:border-brand-gold hover:text-brand-gold transition-colors text-white"
+          >
             <ShoppingCart size={16} />
-          </button>
-          <button className="p-2 rounded-full border border-white/20 hover:border-brand-gold hover:text-brand-gold transition-all text-white">
+          </motion.button>
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-2 rounded-full border border-white/20 hover:border-brand-gold hover:text-brand-gold transition-colors text-white"
+          >
             <Heart size={16} />
-          </button>
-          <button className="p-2 rounded-full border border-white/20 hover:border-brand-gold hover:text-brand-gold transition-all text-white">
+          </motion.button>
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="p-2 rounded-full border border-white/20 hover:border-brand-gold hover:text-brand-gold transition-colors text-white"
+          >
             <User size={16} />
-          </button>
+          </motion.button>
         </div>
         
         {/* Search */}
