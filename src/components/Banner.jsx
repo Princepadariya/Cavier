@@ -1,22 +1,114 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { animate, createSpring } from 'animejs';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Banner = () => {
-  return (
-    <section className="relative w-full overflow-hidden h-[75vh] md:h-[85vh] lg:h-[95vh] bg-black">
-      {/* Background Image */}
-      <motion.div
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: "url('/banner_bg.png')" }}
-        initial={{ scale: 1.05 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.6, ease: 'easeOut' }}
-      />
+  const containerRef = useRef(null);
+  const bgRef = useRef(null);
+  const textRef = useRef(null);
 
-      {/* Cursive text — bottom left, exactly like reference */}
-      <div className="absolute bottom-6 left-8 md:bottom-12 md:left-16 z-10">
-        <motion.p
+  // GSAP: Keep parallax scrub on background and text
+  useGSAP(() => {
+    gsap.fromTo(bgRef.current,
+      { y: '-15%' },
+      {
+        y: '15%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      }
+    );
+
+    gsap.fromTo(textRef.current,
+      { y: '30%' },
+      {
+        y: '-30%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        }
+      }
+    );
+  }, { scope: containerRef });
+
+  // Anime.js: Text reveal with character-by-character shimmer
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const textSpans = el.querySelectorAll('.banner-char');
+    const overlay = el.querySelector('.banner-overlay');
+
+    const reset = () => {
+      textSpans.forEach(s => {
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(30px)';
+      });
+      if (overlay) { overlay.style.opacity = '0'; }
+    };
+    reset();
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Overlay fades in
+          if (overlay) {
+            animate(overlay, {
+              opacity: [0, 1],
+              duration: 1200,
+              ease: 'outQuart',
+            });
+          }
+
+          // Characters stagger in with spring
+          animate(textSpans, {
+            opacity: [0, 1],
+            translateY: [30, 0],
+            duration: 1200,
+            delay: (_el, i) => 300 + i * 40,
+            ease: createSpring({ stiffness: 100, damping: 14, mass: 1 }),
+          });
+        } else {
+          reset();
+        }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -80px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Split text into characters for stagger animation
+  const line1 = 'Design For Your Space Built For';
+  const line2 = 'Your Way';
+
+  return (
+    <section ref={containerRef} className="relative w-full overflow-hidden h-[75vh] md:h-[85vh] lg:h-[95vh] bg-black">
+      {/* Background Image */}
+      <div
+        ref={bgRef}
+        className="absolute inset-[-15%] w-[130%] h-[130%] bg-cover bg-center will-change-transform"
+        style={{ backgroundImage: "url('/banner_bg.png')" }}
+      />
+      
+      {/* Dark overlay */}
+      <div className="banner-overlay absolute inset-0 bg-black/20 pointer-events-none opacity-0" />
+
+      {/* Cursive text with character-by-character reveal */}
+      <div ref={textRef} className="absolute bottom-6 left-8 md:bottom-12 md:left-16 z-10 will-change-transform">
+        <p
           className="text-white leading-tight"
           style={{
             fontFamily: "'Great Vibes', cursive",
@@ -26,15 +118,19 @@ const Banner = () => {
             letterSpacing: '0.02em',
             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
           }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 1.8, ease: 'easeOut', delay: 0.2 }}
         >
-          Design For Your Space Built For
+          {line1.split('').map((char, i) => (
+            <span key={`l1-${i}`} className="banner-char inline-block opacity-0 will-change-transform" style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
           <br />
-          Your Way
-        </motion.p>
+          {line2.split('').map((char, i) => (
+            <span key={`l2-${i}`} className="banner-char inline-block opacity-0 will-change-transform" style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
+              {char === ' ' ? '\u00A0' : char}
+            </span>
+          ))}
+        </p>
       </div>
     </section>
   );

@@ -12,10 +12,22 @@ export default function Hero() {
   const bgRef = useRef(null);
 
   useGSAP(() => {
-    // 6. Hero Section: subtle background movement scale: 1 -> 1.1 (slow)
-    // Linked to ScrollTrigger per your exact requirements
+    // 6. Hero Section: 3D Depth Parallax
+    // Background moves slower (20%) while foreground moves faster
     gsap.to(bgRef.current, {
-      scale: 1.1,
+      y: 150,
+      scale: 1.15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      }
+    });
+
+    gsap.to(".hero-text-content", {
+      y: -100,
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -63,7 +75,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.0, duration: 1.8, ease: [0.33, 1, 0.68, 1] }}
-        className="relative z-40 flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none"
+        className="hero-text-content relative z-40 flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none"
       >
         <h1 className="text-5xl md:text-7xl font-light leading-tight">
           Live Extra Ordinary with <br />

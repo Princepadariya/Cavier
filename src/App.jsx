@@ -1,35 +1,50 @@
 import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Features from './components/Features';
-import Categories from './components/Categories';
-import FinishingTouch from './components/FinishingTouch';
-import Products from './components/Products';
-import Banner from './components/Banner';
-import Insights from './components/Insights';
-import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
+import ScrollLine from './components/ScrollLine';
+import CustomCursor from './components/CustomCursor';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Product from './pages/Product';
+import ProductDetail from './pages/ProductDetail';
+import Checkout from './pages/Checkout';
+import Contact from './pages/Contact';
+import Dealership from './pages/Dealership';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const location = useLocation();
+  const isContactOrAbout = location.pathname === '/contact' || location.pathname === '/about';
+
   useEffect(() => {
-    // Ultra-cinematic, buttery smooth Lenis configuration
-    // Increased duration and modified easing for a high-end, heavy scroll feel
     const lenis = new Lenis({
-      duration: 3.5, // Much slower and more deliberate
+      duration: 3.5,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
       smoothWheel: true,
-      wheelMultiplier: 0.6, // Slower map to mouse wheel
+      wheelMultiplier: 0.6,
       infinite: false,
     });
 
-    lenis.on('scroll', ScrollTrigger.update);
+    lenis.on('scroll', (e) => {
+      ScrollTrigger.update();
+      // Dispatch custom event so ScrollLine can track progress
+      window.dispatchEvent(new CustomEvent('lenis-scroll', {
+        detail: {
+          scroll: e.scroll,
+          limit: e.limit,
+          velocity: e.velocity,
+          direction: e.direction,
+          progress: e.progress,
+        },
+      }));
+    });
 
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
@@ -45,17 +60,21 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-black">
-      <Navbar />
-      <Hero />
-      <About />
-      <Features />
-      <Categories />
-      <FinishingTouch />
-      <Products />
-      <Banner />
-      <Insights />
-      <Testimonials />
-      <Footer />
+      <div className="film-grain" />
+      <CustomCursor />
+      <ScrollLine />
+      <Navbar variant={isContactOrAbout ? 'contact' : 'default'} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/dealership" element={<Dealership />} />
+      </Routes>
+      {/* We only render Footer here. If certain pages shouldn't have it, we could conditionally hide it. */}
+      {location.pathname !== '/checkout' && <Footer />}
     </div>
   );
 }
