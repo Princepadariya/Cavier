@@ -228,9 +228,9 @@ const Product = () => {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-70 md:w-5 md:h-5">
               <path d="M4 6h16M6 12h12M8 18h8" />
             </svg>
-            <span className="text-base md:text-lg font-medium font-outfit hidden sm:inline">Filter</span>
+            <span className="text-base md:text-lg font-medium font-outfit">Filter</span>
           </div>
-          <h2 className="filter-item absolute left-1/2 -translate-x-1/2 text-white text-xl md:text-3xl font-light tracking-wide font-outfit opacity-0 will-change-transform">Thames</h2>
+          <h2 className="filter-item absolute right-0 md:right-auto md:left-1/2 md:-translate-x-1/2 text-white text-xl md:text-3xl font-light tracking-wide font-outfit opacity-0 will-change-transform">Themes</h2>
           <div className="filter-item hidden md:flex items-center gap-2 text-white/70 text-xs md:text-sm opacity-0 will-change-transform">
             <span>Single Lever</span>
             <span className="text-white/30">|</span>
@@ -240,9 +240,9 @@ const Product = () => {
           </div>
         </div>
         <div className="filter-line w-full h-[1px] bg-white/10" style={{ transformOrigin: 'left center' }} />
-        <div className="flex items-center justify-between py-5 overflow-x-auto no-scrollbar">
+        <div className="flex items-center justify-start md:justify-between py-5 overflow-x-auto no-scrollbar space-x-6 md:space-x-0">
           {['Price', 'Area', 'Color Finishes', 'Category', 'Shape'].map((filter) => (
-            <button key={filter} className="filter-item flex items-center gap-2 text-white text-sm font-medium whitespace-nowrap hover:text-white/70 transition-colors opacity-0 will-change-transform pr-4 last:pr-0">
+            <button key={filter} className="filter-item flex-shrink-0 flex items-center gap-2 text-white text-sm font-medium whitespace-nowrap hover:text-white/70 transition-colors opacity-0 will-change-transform md:pr-4 last:pr-0">
               <span>{filter}</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 9l6 6 6-6" />
