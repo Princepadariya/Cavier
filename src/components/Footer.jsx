@@ -110,11 +110,11 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer ref={containerRef} className="relative w-full bg-[#f8f8f8] pt-24 pb-6 px-6 md:px-12 lg:px-32 overflow-hidden z-20">
+    <footer ref={containerRef} className="relative w-full bg-[#f8f8f8] pt-16 md:pt-24 pb-6 px-4 sm:px-6 md:px-12 lg:px-32 overflow-hidden z-20">
       <div className="max-w-[1440px] mx-auto">
         
         {/* UPPER SECTION */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-8 mb-12 md:mb-20">
           {/* Column 1 */}
           <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className="text-xl font-bold tracking-wide text-[#222]">Cavier</h4>
@@ -174,7 +174,7 @@ const Footer = () => {
         </div>
 
         {/* THIN LINE */}
-        <div className="footer-line w-full h-px bg-black/20 my-16" style={{ transformOrigin: 'left center' }}></div>
+        <div className="footer-line w-full h-px bg-black/20 my-10 md:my-16" style={{ transformOrigin: 'left center' }}></div>
 
         {/* LOWER SECTION */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-8 relative gap-10">

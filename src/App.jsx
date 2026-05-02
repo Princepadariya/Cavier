@@ -21,7 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const location = useLocation();
-  const isContactOrAbout = location.pathname === '/contact' || location.pathname === '/about';
+  const isContactOrAbout = location.pathname === '/contact';
 
   useEffect(() => {
     const lenis = new Lenis({

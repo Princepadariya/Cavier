@@ -107,14 +107,14 @@ const Banner = () => {
       <div className="banner-overlay absolute inset-0 bg-black/20 pointer-events-none opacity-0" />
 
       {/* Cursive text with character-by-character reveal */}
-      <div ref={textRef} className="absolute bottom-6 left-8 md:bottom-12 md:left-16 z-10 will-change-transform">
+      <div ref={textRef} className="absolute bottom-8 left-4 md:bottom-12 md:left-16 z-10 will-change-transform pr-4">
         <p
           className="text-white leading-tight"
           style={{
             fontFamily: "'Great Vibes', cursive",
-            fontSize: 'clamp(3rem, 6vw, 6rem)',
+            fontSize: 'clamp(2.5rem, 8vw, 6rem)',
             fontWeight: 400,
-            lineHeight: 1.5,
+            lineHeight: 1.2,
             letterSpacing: '0.02em',
             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
           }}

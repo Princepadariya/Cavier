@@ -40,7 +40,7 @@ export default function Hero() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative h-screen overflow-hidden text-white">
+    <div ref={containerRef} className="relative h-[100dvh] md:h-screen overflow-hidden text-white">
 
       {/* Background with GSAP ScrollTrigger Parallax */}
       <div
@@ -75,14 +75,14 @@ export default function Hero() {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.0, duration: 1.8, ease: [0.33, 1, 0.68, 1] }}
-        className="hero-text-content relative z-40 flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none"
+        className="hero-text-content relative z-40 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 pointer-events-none"
       >
-        <h1 className="text-5xl md:text-7xl font-light leading-tight">
-          Live Extra Ordinary with <br />
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-light leading-tight">
+          Live Extra Ordinary with <br className="hidden md:block" />
           <span className="font-semibold">Cavier</span>
         </h1>
 
-        <p className="mt-6 max-w-xl text-gray-300">
+        <p className="mt-4 sm:mt-6 max-w-xs sm:max-w-md md:max-w-xl text-sm sm:text-base text-gray-300">
           Eco-friendly, lead-free bath fittings designed to meet global
           safety standards. Pioneering innovation with high-performance
           solutions for modern infrastructure.
@@ -92,7 +92,7 @@ export default function Hero() {
         <motion.button 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-8 px-6 py-3 border border-white hover:bg-white hover:text-black transition uppercase text-sm tracking-widest pointer-events-auto"
+          className="mt-6 sm:mt-8 px-5 sm:px-6 py-2.5 sm:py-3 border border-white hover:bg-white hover:text-black transition uppercase text-xs sm:text-sm tracking-widest pointer-events-auto"
         >
           Explore more
         </motion.button>

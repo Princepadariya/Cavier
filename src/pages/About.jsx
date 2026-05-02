@@ -331,7 +331,7 @@ const About = () => {
       </div>
 
       {/* 4-Card Category Grid */}
-      <section ref={catRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={catRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 font-outfit will-change-transform">
           Crafted for Every Bath Space
         </h2>
@@ -354,7 +354,7 @@ const About = () => {
       </section>
 
       {/* CAVIER in Numbers */}
-      <section ref={numRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12">
+      <section ref={numRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12">
         <h2 className="sec-title text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide mb-12 font-outfit will-change-transform">
           CAVIER in Numbers
         </h2>
@@ -365,7 +365,7 @@ const About = () => {
             { label: 'Years of Experience' },
             { label: 'Faucets Manufacture' },
           ].map((s, i) => (
-            <div key={i} className="stat-card border border-white/20 rounded-sm px-6 py-8 md:py-10 flex flex-col items-center text-center will-change-transform">
+            <div key={i} className="stat-card border border-white/20 rounded-sm px-4 md:px-6 py-6 md:py-10 flex flex-col items-center text-center will-change-transform">
               <span className="stat-counter text-white text-2xl md:text-3xl lg:text-4xl font-semibold font-outfit mb-3">0</span>
               <span className="text-[#a3a3a3] text-xs md:text-sm font-light">{s.label}</span>
             </div>
@@ -374,7 +374,7 @@ const About = () => {
       </section>
 
       {/* Crafted for Every Bath Space */}
-      <section ref={craftRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={craftRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
           <div className="craft-text w-full md:w-[45%] flex flex-col justify-center will-change-transform">
             <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-8 font-outfit">
@@ -399,7 +399,7 @@ const About = () => {
       </section>
 
       {/* The Foundation of Our Excellence */}
-      <section ref={foundRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={foundRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 font-outfit will-change-transform">
           The Foundation of Our Excellence
         </h2>
@@ -438,14 +438,14 @@ const About = () => {
       </section>
 
       {/* Engineered Perfection */}
-      <section ref={engRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={engRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
           <div className="eng-img w-full md:w-[45%] will-change-transform">
             <img src="/img6.png" alt="Engineered Perfection" className="w-full h-auto object-contain" />
           </div>
           <div className="w-full md:w-[55%] flex flex-col justify-center">
             <span className="eng-text text-[#a3a3a3] text-xs tracking-[0.3em] uppercase mb-6 font-light will-change-transform">Materiality</span>
-            <h2 className="eng-text text-white text-4xl md:text-5xl lg:text-6xl font-semibold tracking-wide leading-[1.1] mb-16 font-outfit uppercase will-change-transform">
+            <h2 className="eng-text text-white text-4xl md:text-5xl lg:text-6xl font-semibold tracking-wide leading-[1.1] mb-10 md:mb-16 font-outfit uppercase will-change-transform">
               Engineered<br />Perfection.
             </h2>
             <div className="mb-10">
@@ -467,7 +467,7 @@ const About = () => {
       </section>
 
       {/* Cavier Authorised Dealer Showroom */}
-      <section ref={dealerRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={dealerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-stretch">
           <div className="dealer-text w-full md:w-[45%] flex flex-col justify-center will-change-transform">
             <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-8 font-outfit">
@@ -493,11 +493,11 @@ const About = () => {
       </section>
 
       {/* Meet Our Team */}
-      <section ref={teamRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={teamRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 font-outfit will-change-transform">
           Meet Our Team
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0 w-full">
           {[
             { name: 'Varna Ajudiya', img: '/team_varna.png' },
             { name: 'Rakesh Ajudiya', img: '/team_rakesh.png' },
@@ -519,7 +519,7 @@ const About = () => {
       </section>
 
       {/* Experiences That Speak for Quality */}
-      <section ref={testRef} className="w-full bg-[#1F1F21] py-24 px-6 md:px-12 lg:px-32">
+      <section ref={testRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
           <div className="test-left w-full md:w-[35%] flex flex-col justify-center will-change-transform">
             <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-10 font-outfit">

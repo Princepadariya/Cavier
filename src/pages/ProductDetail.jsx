@@ -94,11 +94,17 @@ const ProductDetail = () => {
     const title = el.querySelectorAll('.feat-title');
     const items = el.querySelectorAll('.feat-item');
     return [
-      { targets: [...title], from: { opacity: '0', transform: 'translateY(30px)' },
-        anim: { opacity: [0,1], translateY: [30,0], duration: 1200, ease: 'outQuart' } },
-      { targets: [...items], from: { opacity: '0', transform: 'translateX(-30px)' },
-        anim: { opacity: [0,1], translateX: [-30,0],
-          duration: 1000, delay: stagger(80, { start: 300 }), ease: 'outQuart' } },
+      {
+        targets: [...title], from: { opacity: '0', transform: 'translateY(30px)' },
+        anim: { opacity: [0, 1], translateY: [30, 0], duration: 1200, ease: 'outQuart' }
+      },
+      {
+        targets: [...items], from: { opacity: '0', transform: 'translateX(-30px)' },
+        anim: {
+          opacity: [0, 1], translateX: [-30, 0],
+          duration: 1000, delay: stagger(80, { start: 300 }), ease: 'outQuart'
+        }
+      },
     ];
   });
 
@@ -106,9 +112,13 @@ const ProductDetail = () => {
   useSection(reviewRef, el => {
     const items = el.querySelectorAll('.review-item');
     return [
-      { targets: [...items], from: { opacity: '0', transform: 'translateY(30px)' },
-        anim: { opacity: [0,1], translateY: [30,0],
-          duration: 1200, delay: stagger(100, { start: 200 }), ease: 'outQuart' } },
+      {
+        targets: [...items], from: { opacity: '0', transform: 'translateY(30px)' },
+        anim: {
+          opacity: [0, 1], translateY: [30, 0],
+          duration: 1200, delay: stagger(100, { start: 200 }), ease: 'outQuart'
+        }
+      },
     ];
   });
 
@@ -117,34 +127,40 @@ const ProductDetail = () => {
     const title = el.querySelectorAll('.sim-title');
     const cards = el.querySelectorAll('.sim-card');
     return [
-      { targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0,1], translateY: [40,0], duration: 1200, ease: 'outQuart' } },
-      { targets: [...cards], from: { opacity: '0', transform: 'translateY(70px) scale(0.9)' },
-        anim: { opacity: [0,1], translateY: [70,0], scale: [0.9,1],
+      {
+        targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+      },
+      {
+        targets: [...cards], from: { opacity: '0', transform: 'translateY(70px) scale(0.9)' },
+        anim: {
+          opacity: [0, 1], translateY: [70, 0], scale: [0.9, 1],
           duration: 1400, delay: stagger(120, { start: 300 }),
-          ease: createSpring({ stiffness: 70, damping: 14, mass: 1 }) } },
+          ease: createSpring({ stiffness: 70, damping: 14, mass: 1 })
+        }
+      },
     ];
   });
 
   const finishes = [
     { name: 'Rose Gold', color: '#C27B5C', filter: 'sepia(1) hue-rotate(-20deg) saturate(1.5) brightness(0.9) contrast(1.1)' },
-    { name: 'Gold',      color: '#D4B678', filter: 'sepia(1) hue-rotate(5deg) saturate(1.8) brightness(0.9) contrast(1.1)' },
-    { name: 'Gunmetal',  color: '#6B6B6B', filter: 'grayscale(1) brightness(0.6) contrast(1.4)' },
-    { name: 'Chrome',    color: '#E8E8E8', filter: 'grayscale(0) brightness(1) contrast(1)' },
+    { name: 'Gold', color: '#D4B678', filter: 'sepia(1) hue-rotate(5deg) saturate(1.8) brightness(0.9) contrast(1.1)' },
+    { name: 'Gunmetal', color: '#6B6B6B', filter: 'grayscale(1) brightness(0.6) contrast(1.4)' },
+    { name: 'Chrome', color: '#E8E8E8', filter: 'grayscale(0) brightness(1) contrast(1)' },
   ];
 
   const handleFinishChange = (finish) => {
     if (finish.name === selectedFinish) return;
     setIsMorphing(true);
-    
+
     // Ambient Background Transition
     const root = document.documentElement;
     root.style.setProperty('--ambient-glow', finish.color + '22'); // 22 is ~13% opacity
-    
+
     setTimeout(() => {
       setSelectedFinish(finish.name);
       setIsMorphing(false);
-    }, 400); 
+    }, 400);
   };
 
   const currentFinishObj = finishes.find(f => f.name === selectedFinish) || finishes[3];
@@ -152,10 +168,10 @@ const ProductDetail = () => {
   const thumbs = ['/img2.png', '/img2.png', '/img2.png', '/img2.png'];
 
   return (
-    <div className="w-full bg-[#1F1F21] min-h-screen transition-colors duration-1000" 
-         style={{ 
-           backgroundImage: `radial-gradient(circle at 50% 20%, var(--ambient-glow, #ffffff11) 0%, transparent 70%)` 
-         }}>
+    <div className="w-full bg-[#1F1F21] min-h-screen transition-colors duration-1000"
+      style={{
+        backgroundImage: `radial-gradient(circle at 50% 20%, var(--ambient-glow, #ffffff11) 0%, transparent 70%)`
+      }}>
 
 
 
@@ -168,7 +184,7 @@ const ProductDetail = () => {
 
             {/* ── Left: Image + Thumbnails ── */}
             <div className="detail-img w-full md:w-[36%] will-change-transform relative">
-              <div 
+              <div
                 ref={precisionContainerRef}
                 className={`relative w-full aspect-square rounded-sm overflow-hidden transition-all duration-700 ease-in-out border
                   ${isPrecisionMode ? 'bg-[#0a111a] border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.1)]' : 'bg-[#181818] border-white/10'}`}
@@ -190,7 +206,7 @@ const ProductDetail = () => {
                       alt="Body"
                       className={`absolute w-full h-full object-contain transition-all duration-1000 
                         ${isPrecisionMode ? 'saturate-150 contrast-125' : ''}`}
-                      style={{ 
+                      style={{
                         zIndex: 10,
                         filter: `${currentFinishObj.filter} ${isPrecisionMode ? 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.5))' : ''}`,
                         clipPath: isPrecisionMode ? 'polygon(0 40%, 100% 40%, 100% 100%, 0 100%)' : 'none',
@@ -198,7 +214,7 @@ const ProductDetail = () => {
                     />
 
                     {/* Light Sweep Effect Overlay */}
-                    <div 
+                    <div
                       className={`absolute inset-0 z-30 pointer-events-none transition-all duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12
                         ${isMorphing ? 'translate-x-[200%] opacity-100' : '-translate-x-[200%] opacity-0'}`}
                     />
@@ -210,7 +226,7 @@ const ProductDetail = () => {
                       src="/img2.png"
                       alt="Handle"
                       className="absolute w-[80%] h-[80%] object-contain contrast-125"
-                      style={{ 
+                      style={{
                         zIndex: 15,
                         transform: 'translateY(-40px) translateX(20px)',
                         filter: `${currentFinishObj.filter} drop-shadow(0 0 15px rgba(6, 182, 212, 0.8))`,
@@ -220,29 +236,29 @@ const ProductDetail = () => {
                   )}
 
                   {/* Technical Callouts (Lines and Text) */}
-                  <div 
+                  <div
                     ref={calloutsRef}
                     className={`absolute inset-0 z-20 pointer-events-none transition-opacity duration-500 ${isPrecisionMode ? 'opacity-100' : 'opacity-0'}`}
                   >
                     {/* Callout 1: Handle */}
-                    <div className="absolute top-[25%] right-[5%] flex items-center gap-2">
-                      <div className="h-[1px] w-12 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                      <div className="text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-2 py-1 border border-cyan-500/20">
-                        Precision Handle<br/>Control System
+                    <div className="absolute top-[25%] right-[2%] md:right-[5%] flex items-center gap-1 md:gap-2">
+                      <div className="h-[1px] w-6 md:w-12 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                      <div className="text-[7px] md:text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-1.5 md:px-2 py-1 border border-cyan-500/20">
+                        Precision Handle<br />Control System
                       </div>
                     </div>
                     {/* Callout 2: Body */}
-                    <div className="absolute bottom-[30%] left-[5%] flex items-center gap-2">
-                      <div className="text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-2 py-1 border border-cyan-500/20 text-right">
-                        Solid Brass Ingot<br/>Forged Body
+                    <div className="absolute bottom-[30%] left-[2%] md:left-[5%] flex items-center gap-1 md:gap-2">
+                      <div className="text-[7px] md:text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-1.5 md:px-2 py-1 border border-cyan-500/20 text-right">
+                        Solid Brass Ingot<br />Forged Body
                       </div>
-                      <div className="h-[1px] w-12 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+                      <div className="h-[1px] w-6 md:w-12 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
                     </div>
                     {/* Callout 3: Aerator */}
-                    <div className="absolute bottom-[15%] right-[15%] flex flex-col items-start">
-                      <div className="h-8 w-[1px] bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] ml-4" />
-                      <div className="text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-2 py-1 border border-cyan-500/20">
-                        Honeycomb<br/>Flow Regulator
+                    <div className="absolute bottom-[15%] right-[10%] md:right-[15%] flex flex-col items-start">
+                      <div className="h-6 md:h-8 w-[1px] bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] ml-4" />
+                      <div className="text-[7px] md:text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-1.5 md:px-2 py-1 border border-cyan-500/20">
+                        Honeycomb<br />Flow Regulator
                       </div>
                     </div>
                   </div>
@@ -263,21 +279,21 @@ const ProductDetail = () => {
               </div>
 
               {/* Precision Mode Toggle */}
-              <button 
+              <button
                 onClick={() => setIsPrecisionMode(!isPrecisionMode)}
                 className={`absolute top-4 right-4 z-30 px-3 py-1.5 rounded-full border text-[10px] uppercase tracking-widest font-bold transition-all duration-300 flex items-center gap-2
                   ${isPrecisionMode ? 'bg-cyan-500 text-black border-cyan-400' : 'bg-black/50 text-white border-white/20 hover:border-white/50'}`}
               >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
                 {isPrecisionMode ? 'Exit Tech Mode' : 'Precision Engineering'}
               </button>
 
               {/* Thumbnail strip */}
-              <div className="flex justify-between mt-4">
+              <div className="flex gap-2 md:gap-4 mt-4 w-full">
                 {thumbs.map((src, i) => (
                   <button
                     key={i}
-                    className={`w-[calc(25%-12px)] aspect-square bg-[#181818] border rounded-sm overflow-hidden flex-shrink-0
+                    className={`flex-1 aspect-square bg-[#181818] border rounded-sm overflow-hidden flex-shrink-0
                       ${i === 0 ? 'border-white/40' : 'border-white/10 hover:border-white/25'}
                       transition-colors duration-200`}
                   >
@@ -290,13 +306,13 @@ const ProductDetail = () => {
             {/* ── Right: Product Info ── */}
             <div className="w-full md:w-[58%] flex flex-col">
               <h1 className="detail-info text-white text-2xl md:text-[1.75rem] lg:text-[2rem] font-bold leading-tight font-outfit mb-3 will-change-transform">
-                Upper Parts Kit for S/L Concealed<br />Basin Mixer | VL 10 202
+                Upper Parts Kit for S/L Concealed<br className="hidden md:block" />Basin Mixer | VL 10 202
               </h1>
               <p className="detail-info text-[#a3a3a3] text-[11px] md:text-xs leading-relaxed font-light mb-3 max-w-md will-change-transform">
                 Fully Brass Faucets made out of Brass Ingots. Flow rate: 13.5 LPM at 3 bar pressure. Total Spout Length = 180mm. Sturdy brass aerator housing.
               </p>
               <div className="detail-info flex gap-0.5 mb-5 will-change-transform">
-                {[1,2,3,4,5].map(s => <span key={s} className="text-yellow-400 text-xs">★</span>)}
+                {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-yellow-400 text-xs">★</span>)}
               </div>
 
               <h2 className="detail-info text-white text-lg md:text-xl font-bold font-outfit mb-10 will-change-transform">
@@ -306,14 +322,14 @@ const ProductDetail = () => {
               {/* ── Finishing ── */}
               <div className="detail-info mb-10 will-change-transform">
                 <h3 className="text-white text-lg md:text-xl font-bold font-outfit mb-5">Finishing</h3>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-3 md:gap-4">
                   {finishes.map(f => (
                     <button
                       key={f.name}
                       title={f.name}
                       onClick={() => handleFinishChange(f)}
-                      className={`w-20 h-12 rounded-md border transition-all duration-300 relative overflow-hidden group
-                        ${selectedFinish === f.name ? 'border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'border-white/15 hover:border-white/40'}`}
+                      className={`w-[45%] sm:w-20 h-12 rounded-md border transition-all duration-300 relative overflow-hidden group
+                        ${selectedFinish === f.name ? 'border-white scale-105 md:scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'border-white/15 hover:border-white/40'}`}
                       style={{ backgroundColor: f.color }}
                     >
                       {/* Subtle reflection on the button */}
@@ -329,8 +345,8 @@ const ProductDetail = () => {
               </h3>
 
               {/* ── Actions ── */}
-              <div className="detail-info flex items-center gap-3 will-change-transform">
-                <button 
+              <div className="detail-info flex items-center gap-2 md:gap-3 will-change-transform">
+                <button
                   onClick={() => openCart({
                     id: 'VL 10 202',
                     name: 'Upper Parts Kit for S/L Concealed Basin Mixer | VL 10 202',
@@ -338,17 +354,17 @@ const ProductDetail = () => {
                     height: '180mm',
                     price: 2000,
                     img: '/img2.png',
-                  })} 
-                  className="flex-1 max-w-[340px] border border-white/30 rounded-full text-white text-[13px] py-3 flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors uppercase tracking-wider font-medium"
+                  })}
+                  className="flex-1 max-w-[340px] border border-white/30 rounded-full text-white text-xs md:text-[13px] py-3 md:py-3 px-2 flex items-center justify-center gap-1.5 md:gap-2 hover:bg-white hover:text-black transition-colors uppercase tracking-wide md:tracking-wider font-medium"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" /></svg>
                   <span>Add to cart</span>
                 </button>
-                <button className="w-11 h-11 border border-white/30 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                <button className="w-10 h-10 md:w-11 md:h-11 border border-white/30 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors shrink-0">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="md:w-[18px] md:h-[18px]"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
                 </button>
-                <button className="w-11 h-11 border border-white/30 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors shrink-0">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 10a4 4 0 01-8 0M3 6h18M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /></svg>
+                <button className="w-10 h-10 md:w-11 md:h-11 border border-white/30 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors shrink-0">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="md:w-[18px] md:h-[18px]"><path d="M16 10a4 4 0 01-8 0M3 6h18M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /></svg>
                 </button>
               </div>
             </div>
@@ -358,7 +374,7 @@ const ProductDetail = () => {
           <div ref={featRef} className="mt-14">
             <h2 className="feat-title text-white text-lg md:text-xl font-semibold font-outfit mb-6 will-change-transform">Key Features</h2>
             <ul className="flex flex-col gap-4 text-white text-sm md:text-base font-light">
-              {['10 Years Warranty for defects against craftsmanship','Dynamic Color Options','Imported bought out parts','1,00,000 Life cycle tested spindles','Passed 120 hours anti-corrosion finish test'].map(f => (
+              {['10 Years Warranty for defects against craftsmanship', 'Dynamic Color Options', 'Imported bought out parts', '1,00,000 Life cycle tested spindles', 'Passed 120 hours anti-corrosion finish test'].map(f => (
                 <li key={f} className="feat-item flex items-start gap-3 will-change-transform">
                   <span className="text-white/50 mt-0.5">•</span><span>{f}</span>
                 </li>
@@ -378,12 +394,12 @@ const ProductDetail = () => {
           <h3 className="text-white text-lg font-semibold font-outfit">Yash Patel</h3>
         </div>
         <textarea placeholder="Enter Your Opinion" className="review-item w-full bg-[#2a2a2c] border border-white/20 rounded-sm text-white text-sm px-5 py-4 h-28 resize-none outline-none focus:border-white/40 transition-colors placeholder:text-white/30 mb-6 will-change-transform" />
-        <div className="review-item flex items-center gap-4 will-change-transform">
-          <button className="flex items-center gap-2 border border-white/30 rounded-full text-white text-xs px-5 py-2.5 hover:bg-white/10 transition-colors">
+        <div className="review-item flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 will-change-transform">
+          <button className="flex items-center justify-center gap-2 border border-white/30 rounded-full text-white text-xs px-5 py-3 sm:py-2.5 hover:bg-white/10 transition-colors">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" /></svg>
             <span>Add a photo</span>
           </button>
-          <button className="flex items-center gap-2 border border-white/30 rounded-full text-white text-xs px-5 py-2.5 hover:bg-white/10 transition-colors">
+          <button className="flex items-center justify-center gap-2 border border-white/30 rounded-full text-white text-xs px-5 py-3 sm:py-2.5 hover:bg-white/10 transition-colors">
             <span>Share your content</span>
           </button>
         </div>
@@ -399,18 +415,18 @@ const ProductDetail = () => {
                 <Link to={`/product/${item}`} className="block w-full h-full relative">
                   {/* Technical Ghost Layer (Exploded View) */}
                   <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-20 transition-all duration-700 pointer-events-none scale-100 group-hover:scale-125 blur-[2px]">
-                    <img 
-                      src="/img2.png" 
-                      alt="" 
+                    <img
+                      src="/img2.png"
+                      alt=""
                       className="w-full h-full object-contain p-8 invert brightness-200"
                     />
                   </div>
-                  
+
                   {/* Main Image Layer */}
                   <div className="w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 relative z-10">
-                    <img 
-                      src="/img2.png" 
-                      alt="Similar Item" 
+                    <img
+                      src="/img2.png"
+                      alt="Similar Item"
                       className="w-full h-full object-contain p-8 transform group-hover:translate-y-[-15px] transition-transform duration-700"
                     />
                   </div>
@@ -423,10 +439,10 @@ const ProductDetail = () => {
                 <h3 className="text-white text-sm md:text-base font-medium mb-1">SO 04 101 | Pillar Cock with Base</h3>
                 <p className="text-white text-sm font-semibold mb-2">INR 1930</p>
                 <div className="flex justify-center gap-0.5 mb-4">
-                  {[1,2,3,4,5].map(s => <span key={s} className="text-yellow-400 text-xs">★</span>)}
+                  {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-yellow-400 text-xs">★</span>)}
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => openCart({
                   id: `SIM-${item}`,
                   name: 'SO 04 101 | Pillar Cock with Base',
@@ -450,9 +466,8 @@ const ProductDetail = () => {
       <div
         ref={backdropRef}
         onClick={closeCart}
-        className={`fixed inset-0 bg-black/60 z-[9998] ${
-          cartOpen ? 'pointer-events-auto' : 'pointer-events-none opacity-0'
-        }`}
+        className={`fixed inset-0 bg-black/60 z-[9998] ${cartOpen ? 'pointer-events-auto' : 'pointer-events-none opacity-0'
+          }`}
       />
 
       {/* ── Cart Drawer Panel ── */}
@@ -462,7 +477,7 @@ const ProductDetail = () => {
         style={{ transform: 'translateX(100%)' }}
       >
         {/* Header */}
-        <div className="px-10 pt-14 pb-6 flex items-center justify-between">
+        <div className="px-6 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex items-center justify-between">
           <h2 className="text-white text-2xl font-bold font-outfit">Your Cart</h2>
           <button onClick={closeCart} className="text-white/30 hover:text-white transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -470,10 +485,10 @@ const ProductDetail = () => {
             </svg>
           </button>
         </div>
-        <div className="mx-10 border-t border-white/10" />
+        <div className="mx-6 md:mx-10 border-t border-white/10" />
 
         {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto px-10 py-10">
+        <div className="flex-1 overflow-y-auto px-6 md:px-10 py-8 md:py-10">
           {cartItems.length === 0 ? (
             <p className="text-white/20 text-sm text-center mt-20">Your cart is empty</p>
           ) : (
@@ -491,7 +506,7 @@ const ProductDetail = () => {
                       <p className="text-white/40 text-[10px] mb-1">Color / Finish : {item.finish}</p>
                       <p className="text-white/40 text-[10px]">Total Height = {item.height}</p>
                     </div>
-                    
+
                     <div className="mt-auto flex items-center justify-between">
                       {/* Qty Controls */}
                       <div className="flex items-center border border-white/20 rounded-[2px] h-7">
@@ -524,7 +539,7 @@ const ProductDetail = () => {
 
         {/* Footer */}
         {cartItems.length > 0 && (
-          <div className="px-10 pb-12 pt-8">
+          <div className="px-6 md:px-10 pb-10 md:pb-12 pt-6 md:pt-8">
             <div className="border-t border-white/10 mb-8" />
             <div className="flex items-center justify-between mb-10">
               <span className="text-white text-2xl font-bold font-outfit">Cart Total</span>

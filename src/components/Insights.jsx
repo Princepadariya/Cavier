@@ -100,11 +100,11 @@ const Insights = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="w-full bg-[#181818] py-24 px-6 md:px-12">
+    <section ref={containerRef} className="w-full bg-[#181818] py-16 md:py-24 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col items-center md:items-start">
         
         {/* Title */}
-        <h2 className="insight-title text-3xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-12 opacity-0 will-change-transform">
+        <h2 className="insight-title text-2xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-8 md:mb-12 opacity-0 will-change-transform">
           Insights & Inspiration
         </h2>
 
@@ -129,9 +129,9 @@ const Insights = () => {
         </div>
 
         {/* Bottom Button */}
-        <div className="w-full flex justify-center mt-20">
+        <div className="w-full flex justify-center mt-12 md:mt-20">
           <button 
-            className="insight-btn flex items-center gap-3 px-8 py-3 border border-white/50 text-white text-xs md:text-sm tracking-widest hover:bg-white hover:text-black transition-colors duration-300 opacity-0 will-change-transform hover:scale-105 active:scale-95"
+            className="insight-btn flex items-center gap-3 px-6 md:px-8 py-3 border border-white/50 text-white text-xs md:text-sm tracking-widest hover:bg-white hover:text-black transition-colors duration-300 opacity-0 will-change-transform hover:scale-105 active:scale-95"
           >
             View More
             <ChevronRight size={16} />

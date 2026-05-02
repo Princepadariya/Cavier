@@ -107,11 +107,11 @@ const Categories = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="w-full bg-[#181818] py-24 px-6 md:px-12">
+    <section ref={containerRef} className="w-full bg-[#181818] py-16 md:py-24 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col items-start">
         
         {/* Title */}
-        <h2 className="cat-title text-3xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-12 opacity-0 will-change-transform">
+        <h2 className="cat-title text-2xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-8 md:mb-12 opacity-0 will-change-transform">
           Crafted for Every Bath Space
         </h2>
 
@@ -119,9 +119,9 @@ const Categories = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full">
           
           {/* Card 1 */}
-          <div className="category-card group relative w-full aspect-[4/5] md:aspect-square lg:aspect-[4/5] overflow-hidden bg-black cursor-pointer opacity-0 will-change-transform perspective-1000">
+          <div className="category-card group relative w-full aspect-square sm:aspect-[4/5] md:aspect-square lg:aspect-[4/5] overflow-hidden bg-black cursor-pointer opacity-0 will-change-transform perspective-1000">
             {/* Editorial Number */}
-            <div className="absolute top-8 left-8 z-20 text-white/10 text-8xl font-bold font-outfit select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-4">
+            <div className="absolute top-6 sm:top-8 left-6 sm:left-8 z-20 text-white/10 text-6xl md:text-8xl font-bold font-outfit select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-4">
               01
             </div>
             
@@ -141,9 +141,9 @@ const Categories = () => {
           </div>
 
           {/* Card 2 */}
-          <div className="category-card group relative w-full aspect-[4/5] md:aspect-square lg:aspect-[4/5] overflow-hidden bg-black cursor-pointer opacity-0 will-change-transform perspective-1000">
+          <div className="category-card group relative w-full aspect-square sm:aspect-[4/5] md:aspect-square lg:aspect-[4/5] overflow-hidden bg-black cursor-pointer opacity-0 will-change-transform perspective-1000">
             {/* Editorial Number */}
-            <div className="absolute top-8 left-8 z-20 text-white/10 text-8xl font-bold font-outfit select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-4">
+            <div className="absolute top-6 sm:top-8 left-6 sm:left-8 z-20 text-white/10 text-6xl md:text-8xl font-bold font-outfit select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-4">
               02
             </div>
             

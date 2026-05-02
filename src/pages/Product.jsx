@@ -202,7 +202,7 @@ const Product = () => {
       </div>
 
       {/* Hero Section - Full Screen Product Showcase */}
-      <div ref={heroRef} className="relative h-[80vh] w-full overflow-hidden z-10">
+      <div ref={heroRef} className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden z-10">
         <div className="product-hero-img absolute inset-0 w-full h-full will-change-transform bg-black">
           <img 
             src="/img1.png" 
@@ -215,22 +215,22 @@ const Product = () => {
         
         {/* Overlay Text */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <h1 className="text-white text-6xl md:text-8xl font-light tracking-[0.5em] uppercase font-outfit opacity-20">
+          <h1 className="text-white text-4xl md:text-8xl font-light tracking-[0.3em] md:tracking-[0.5em] uppercase font-outfit opacity-20 text-center px-4">
             Precision
           </h1>
         </div>
       </div>
 
       {/* Filter Header */}
-      <section ref={filterRef} className="w-full bg-[#1F1F21] pt-12 px-6 md:px-12 lg:px-32">
+      <section ref={filterRef} className="w-full bg-[#1F1F21] pt-8 md:pt-12 px-4 sm:px-6 md:px-12 lg:px-32">
         <div className="relative flex items-center justify-between pb-6">
           <div className="filter-item flex items-center gap-2 text-white opacity-0 will-change-transform">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-70">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="opacity-70 md:w-5 md:h-5">
               <path d="M4 6h16M6 12h12M8 18h8" />
             </svg>
-            <span className="text-lg font-medium font-outfit">Filter</span>
+            <span className="text-base md:text-lg font-medium font-outfit hidden sm:inline">Filter</span>
           </div>
-          <h2 className="filter-item absolute left-1/2 -translate-x-1/2 text-white text-2xl md:text-3xl font-light tracking-wide font-outfit opacity-0 will-change-transform">Thames</h2>
+          <h2 className="filter-item absolute left-1/2 -translate-x-1/2 text-white text-xl md:text-3xl font-light tracking-wide font-outfit opacity-0 will-change-transform">Thames</h2>
           <div className="filter-item hidden md:flex items-center gap-2 text-white/70 text-xs md:text-sm opacity-0 will-change-transform">
             <span>Single Lever</span>
             <span className="text-white/30">|</span>
@@ -254,8 +254,8 @@ const Product = () => {
       </section>
 
       {/* Product Grid */}
-      <section ref={gridRef} className="w-full bg-[#1F1F21] py-8 px-6 md:px-12 lg:px-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section ref={gridRef} className="w-full bg-[#1F1F21] py-6 md:py-8 px-4 sm:px-6 md:px-12 lg:px-32">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {products.map((product) => (
             <div key={product.id} className="product-card flex flex-col opacity-0 will-change-transform">
               <div className="relative w-full aspect-square bg-[#181818] border border-white/10 rounded-sm overflow-hidden group">
@@ -284,12 +284,12 @@ const Product = () => {
                   </svg>
                 </button>
               </div>
-              <div className="text-center mt-4">
-                <h3 className="text-white text-sm md:text-base font-medium mb-1 line-clamp-1">
+              <div className="text-center mt-3 md:mt-4 px-1">
+                <h3 className="text-white text-xs md:text-base font-medium mb-1 line-clamp-1">
                   {product.name}
                 </h3>
-                <p className="text-white text-sm font-semibold mb-2">INR {product.price}</p>
-                <div className="flex justify-center gap-0.5 mb-4">
+                <p className="text-white text-xs md:text-sm font-semibold mb-1.5 md:mb-2">INR {product.price}</p>
+                <div className="flex justify-center gap-[2px] md:gap-0.5 mb-3 md:mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span key={star} className="text-yellow-400 text-xs">★</span>
                   ))}
@@ -297,9 +297,9 @@ const Product = () => {
               </div>
               <button 
                 onClick={() => addToCart({ ...product, quantity: 1 })}
-                className="w-full border border-white/20 text-white text-sm py-3 flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors"
+                className="w-full border border-white/20 text-white text-[10px] md:text-sm py-2.5 md:py-3 flex items-center justify-center gap-1.5 md:gap-2 hover:bg-white hover:text-black transition-colors"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="md:w-4 md:h-4">
                   <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
                 </svg>
                 <span>Add to cart</span>
@@ -310,7 +310,7 @@ const Product = () => {
       </section>
 
       {/* Pagination */}
-      <section className="w-full bg-[#1F1F21] py-10 px-6 md:px-12">
+      <section className="w-full bg-[#1F1F21] py-8 md:py-10 px-4 sm:px-6 md:px-12">
         <div ref={paginationRef} className="flex flex-col items-center gap-4 opacity-0 will-change-transform">
           <p className="text-white/60 text-sm">Page 1 of 6</p>
           <div className="flex items-center gap-2">
@@ -327,10 +327,10 @@ const Product = () => {
       </section>
 
       {/* Explore The Catalog */}
-      <section ref={catalogRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12">
-        <div className="flex items-center justify-between">
-          <h2 className="catalog-title text-3xl md:text-4xl font-light text-white tracking-wide font-outfit opacity-0 will-change-transform">Explore The catalog</h2>
-          <button className="catalog-btn flex items-center gap-3 text-white border border-white/30 px-8 py-3 text-sm hover:bg-white hover:text-black transition-colors opacity-0 will-change-transform">
+      <section ref={catalogRef} className="w-full bg-[#1F1F21] py-12 md:py-16 px-4 sm:px-6 md:px-12">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <h2 className="catalog-title text-2xl md:text-4xl font-light text-white tracking-wide font-outfit opacity-0 will-change-transform">Explore The catalog</h2>
+          <button className="catalog-btn flex items-center gap-2 md:gap-3 text-white border border-white/30 px-6 md:px-8 py-2.5 md:py-3 text-xs md:text-sm hover:bg-white hover:text-black transition-colors opacity-0 will-change-transform">
             <span>Download</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />

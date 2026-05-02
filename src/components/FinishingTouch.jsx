@@ -137,11 +137,11 @@ const FinishingTouch = () => {
 
         {/* ── Text block (Left on Desktop, Top Context on Mobile) ── */}
         <div
-          className="absolute lg:left-0 top-12 lg:top-0 h-auto lg:h-full z-20 flex flex-col justify-start lg:justify-center pointer-events-none flex-shrink-0"
+          className="relative lg:absolute lg:left-0 h-auto lg:h-full z-20 flex flex-col justify-start lg:justify-center pointer-events-none flex-shrink-0 pt-16 sm:pt-20 lg:pt-0 pb-8 lg:pb-0"
           style={{ width: metrics.textBlockW, paddingLeft: metrics.isMobile ? '24px' : '64px', paddingRight: metrics.isMobile ? '24px' : '0' }}
         >
           <div className="finishing-title pointer-events-auto opacity-0 will-change-transform">
-            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-3 lg:mb-5 leading-tight tracking-tight mt-6 lg:mt-0">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3 lg:mb-5 leading-tight tracking-tight mt-0">
               The Finishing<br className="hidden lg:block"/> Touch
             </h2>
             <p className="text-[#888] text-sm lg:text-base leading-relaxed mb-6 lg:mb-10 font-light lg:pr-8">
@@ -158,8 +158,8 @@ const FinishingTouch = () => {
 
         {/* ── Scrolling track (Right on Desktop, Centered Offset on Mobile) ── */}
         <div
-          className="absolute h-full z-10 flex items-end lg:items-center pb-24 lg:pb-0"
-          style={{ left: metrics.trackStart, top: 0, right: 0, overflow: 'hidden', paddingLeft: metrics.isMobile ? '24px' : '0' }}
+          className="relative lg:absolute flex-1 lg:h-full z-10 flex items-center lg:items-center pb-8 lg:pb-0 w-full"
+          style={{ left: metrics.isMobile ? 0 : metrics.trackStart, top: 0, overflow: 'hidden', paddingLeft: metrics.isMobile ? '24px' : '0' }}
         >
           <motion.div
             ref={trackRef}

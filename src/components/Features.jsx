@@ -108,7 +108,7 @@ const Features = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-48 md:py-56 px-6 md:px-12 bg-black flex justify-center items-center min-h-screen"
+      className="relative w-full py-16 sm:py-24 md:py-48 lg:py-56 px-4 sm:px-6 md:px-12 bg-black flex justify-center items-center min-h-[70vh] md:min-h-screen"
     >
       {/* ── 4-quadrant animated background ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -135,19 +135,19 @@ const Features = () => {
       </div>
 
       {/* ── Feature cards ── */}
-      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20 lg:gap-x-24 lg:gap-y-28">
+      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 sm:gap-y-16 lg:gap-x-24 lg:gap-y-28">
         {features.map((feature, index) => (
           <div
             key={index}
             className="feature-card flex flex-col items-center text-center opacity-0 will-change-transform"
           >
-            <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-6">
               <div className="feature-icon text-white will-change-transform opacity-0">{feature.icon}</div>
-              <h3 className="text-2xl md:text-[1.6rem] font-medium tracking-wide text-white">
+              <h3 className="text-xl sm:text-2xl md:text-[1.6rem] font-medium tracking-wide text-white">
                 {feature.title}
               </h3>
             </div>
-            <p className="text-[#a8a8a8] text-[0.95rem] md:text-base leading-relaxed md:leading-[1.8] max-w-sm">
+            <p className="text-[#a8a8a8] text-sm sm:text-[0.95rem] md:text-base leading-relaxed md:leading-[1.8] max-w-sm">
               {feature.description}
             </p>
           </div>

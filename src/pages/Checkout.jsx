@@ -68,7 +68,7 @@ const Checkout = () => {
 
       <main className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-32 py-12">
         {/* Top Section: Cart & Summary */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
           
           {/* Left Column: Dynamic Content */}
           <div className={`flex-1 ${step === 'otp' ? 'pr-0 lg:pr-12' : ''}`}>
@@ -80,44 +80,40 @@ const Checkout = () => {
                 <div className="flex flex-col gap-8">
                   {cartItems.map((item, index) => (
                     <div key={item.id} className="relative pb-8 border-b border-dashed border-white/20 last:border-b-0">
-                      <div className="flex flex-col md:flex-row gap-6">
+                      <div className="flex flex-row gap-4 md:gap-6">
                         {/* Thumbnail */}
-                        <div className="w-28 h-28 bg-black shrink-0 border border-white/5 rounded-sm overflow-hidden flex items-center justify-center p-3">
+                        <div className="w-24 h-24 md:w-28 md:h-28 bg-black shrink-0 border border-white/5 rounded-sm overflow-hidden flex items-center justify-center p-2 md:p-3">
                           <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                         </div>
                         
                         {/* Details */}
                         <div className="flex-1 flex flex-col justify-between">
-                          <div className="flex justify-between items-start gap-4">
-                            <div className="pr-12">
-                              <h3 className="text-[13px] font-bold leading-snug mb-3">{item.name}</h3>
+                          <div className="flex justify-between items-start gap-2 md:gap-4 w-full">
+                            <div className="pr-2 md:pr-12">
+                              <h3 className="text-[12px] md:text-[13px] font-bold leading-snug mb-2 md:mb-3">{item.name}</h3>
                               <p className="text-[10px] text-white/50 mb-1">Color / Finish : {item.finish}</p>
                               <p className="text-[10px] text-white/50">Total Height = {item.height}</p>
                             </div>
                             
-                            {/* Qty & Price Desktop */}
-                            <div className="flex flex-col items-end gap-6">
-                              <div className="flex items-center gap-12">
-                                {/* Quantity */}
-                                <div className="flex items-center border border-white/30 rounded-sm h-8">
-                                  <button onClick={() => updateQty(item.id, -1)} className="w-8 h-full flex items-center justify-center text-white/60 hover:text-white transition-colors text-xs">−</button>
-                                  <span className="w-8 h-full flex items-center justify-center text-white text-xs border-x border-white/30">{item.qty}</span>
-                                  <button onClick={() => updateQty(item.id, 1)} className="w-8 h-full flex items-center justify-center text-white/60 hover:text-white transition-colors text-xs">+</button>
-                                </div>
-                                
-                                {/* Price */}
-                                <div className="text-lg font-bold">
-                                  ₹{(item.price * item.qty).toFixed(2)}
-                                </div>
-                              </div>
-                              
-                              {/* Trash Icon */}
-                              <button onClick={() => removeItem(item.id)} className="text-white/40 hover:text-white transition-colors">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                  <polyline points="3 6 5 6 21 6"></polyline>
-                                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                </svg>
-                              </button>
+                            <button onClick={() => removeItem(item.id)} className="text-white/40 hover:text-white transition-colors shrink-0 mt-1">
+                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                              </svg>
+                            </button>
+                          </div>
+
+                          <div className="flex justify-between items-center mt-4 w-full">
+                            {/* Quantity */}
+                            <div className="flex items-center border border-white/30 rounded-sm h-7 md:h-8">
+                              <button onClick={() => updateQty(item.id, -1)} className="w-7 md:w-8 h-full flex items-center justify-center text-white/60 hover:text-white transition-colors text-xs">−</button>
+                              <span className="w-7 md:w-8 h-full flex items-center justify-center text-white text-xs border-x border-white/30">{item.qty}</span>
+                              <button onClick={() => updateQty(item.id, 1)} className="w-7 md:w-8 h-full flex items-center justify-center text-white/60 hover:text-white transition-colors text-xs">+</button>
+                            </div>
+                            
+                            {/* Price */}
+                            <div className="text-sm md:text-lg font-bold">
+                              ₹{(item.price * item.qty).toFixed(2)}
                             </div>
                           </div>
                         </div>
@@ -129,7 +125,7 @@ const Checkout = () => {
                   ))}
                 </div>
 
-                <div className="mt-12">
+                <div className="mt-6 md:mt-12">
                   <Link to="/product/1" className="inline-flex items-center gap-2 text-[13px] font-semibold text-white hover:text-white/80 transition-colors">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="15 18 9 12 15 6"></polyline>
@@ -252,7 +248,7 @@ const Checkout = () => {
                   </div>
                 )}
 
-                <div className="mt-32">
+                <div className="mt-12 md:mt-32">
                   <button onClick={() => setStep('cart')} className="inline-flex items-center gap-2 text-[13px] font-semibold text-white hover:text-white/80 transition-colors">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="15 18 9 12 15 6"></polyline>
@@ -295,13 +291,13 @@ const Checkout = () => {
 
               <div className="mb-8">
                 <label className="block text-sm font-semibold mb-3">Promo code</label>
-                <div className="flex gap-3">
+                <div className="flex gap-2 sm:gap-3">
                   <input 
                     type="text" 
                     placeholder="Enter Promo code" 
-                    className="flex-1 bg-transparent border border-white/20 rounded-sm px-4 py-2.5 text-sm focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/30"
+                    className="flex-1 w-full min-w-0 bg-transparent border border-white/20 rounded-sm px-3 sm:px-4 py-2.5 text-sm focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/30"
                   />
-                  <button className="bg-[#2A2A2A] hover:bg-[#333] border border-white/20 text-white rounded-sm px-6 py-2.5 text-sm font-semibold transition-colors">
+                  <button className="bg-[#2A2A2A] hover:bg-[#333] border border-white/20 text-white rounded-sm px-4 sm:px-6 py-2.5 text-sm font-semibold transition-colors shrink-0">
                     Apply
                   </button>
                 </div>
@@ -328,13 +324,13 @@ const Checkout = () => {
 
         {/* Similar Items Section */}
         {step === 'cart' && (
-          <div className="mt-32 mb-16">
-            <h2 className="text-4xl font-bold mb-12">Similar items</h2>
+          <div className="mt-20 md:mt-32 mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-10 md:mb-12">Similar items</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {similarItems.map(item => (
                 <div key={item.id} className="flex flex-col">
-                <div className="relative aspect-[4/5] bg-black border border-white/10 rounded-sm overflow-hidden p-8 flex items-center justify-center group mb-6">
+                <div className="relative aspect-[4/5] bg-black border border-white/10 rounded-sm overflow-hidden p-6 md:p-8 flex items-center justify-center group mb-6">
                   {/* Heart Icon */}
                   <button className="absolute top-6 right-6 text-white/40 hover:text-white z-10 transition-colors">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

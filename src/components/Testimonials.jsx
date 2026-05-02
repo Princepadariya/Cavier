@@ -138,12 +138,12 @@ const Testimonials = ({ bgClass = "bg-[#181818]" }) => {
   const progressPercent = ((currentIndex + 1) / testimonials.length) * 100;
 
   return (
-    <section ref={sectionRef} className={`w-full py-24 px-6 md:px-12 overflow-hidden relative perspective-1000 ${bgClass}`}>
+    <section ref={sectionRef} className={`w-full py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden relative perspective-1000 ${bgClass}`}>
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative z-10">
         
         {/* Left Side: Title & Info */}
         <div className="w-full lg:w-5/12 flex flex-col items-start pr-0 md:pr-10">
-          <h2 className="test-title text-4xl md:text-5xl lg:text-[3.2rem] font-medium text-white tracking-wide mb-10 leading-tight opacity-0 will-change-transform">
+          <h2 className="test-title text-3xl md:text-5xl lg:text-[3.2rem] font-medium text-white tracking-wide mb-8 md:mb-10 leading-tight opacity-0 will-change-transform">
             Experiences That Speak for Quality
           </h2>
           
@@ -157,7 +157,7 @@ const Testimonials = ({ bgClass = "bg-[#181818]" }) => {
         <div className="test-stack-container w-full lg:w-7/12 mt-16 lg:mt-0 opacity-0 will-change-transform perspective-[1500px]">
           
           {/* STACK WRAPPER */}
-          <div className="relative w-full max-w-[600px] mx-auto h-[380px] md:h-[340px]">
+          <div className="relative w-full max-w-[600px] mx-auto h-[420px] sm:h-[380px] md:h-[340px]">
             {testimonials.map((testimonial, i) => (
               <motion.div
                 key={testimonial.id}

@@ -96,17 +96,17 @@ const Contact = () => {
 
         <div className="w-full md:w-1/2 h-full bg-[#1F1F21] flex flex-col justify-center px-6 md:px-12 z-10">
           <div className="contact-content max-w-lg pt-20">
-            <h1 className="text-white text-5xl md:text-[64px] font-extralight tracking-tight leading-[1.1] mb-10 font-outfit will-change-transform">
+            <h1 className="text-white text-4xl md:text-[64px] font-extralight tracking-tight leading-[1.1] mb-6 md:mb-10 font-outfit will-change-transform">
               We're Here to<br />Assist You<br />Anytime
             </h1>
-            <p className="text-white/70 text-lg leading-[1.8] mb-10 font-outfit font-thin max-w-sm tracking-wider will-change-transform">
+            <p className="text-white/70 text-base md:text-lg leading-[1.8] mb-8 md:mb-10 font-outfit font-thin max-w-sm tracking-wider will-change-transform">
               At CAVIER, we value every connection. Whether you have a question
               about our products, need expert guidance, or are interested in
               partnering with us, our team is always ready to help.
             </p>
             <button 
               onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-              className="flex items-center space-x-4 px-10 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 rounded-none text-[12px] tracking-[0.4em] uppercase font-outfit font-extralight will-change-transform"
+              className="flex items-center space-x-3 md:space-x-4 px-6 py-3 md:px-10 md:py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 rounded-none text-[10px] md:text-[12px] tracking-[0.3em] md:tracking-[0.4em] uppercase font-outfit font-extralight will-change-transform"
             >
               <span>Scroll Down</span>
               <ChevronDown size={14} className="opacity-70" />
@@ -120,10 +120,10 @@ const Contact = () => {
       </div>
 
       {/* Contact Info & Form Section */}
-      <div className="w-full px-6 md:px-12 lg:px-32 py-24 bg-[#1F1F21]">
+      <div className="w-full px-6 md:px-12 lg:px-32 py-16 md:py-24 bg-[#1F1F21]">
         
         {/* Info Grid */}
-        <div ref={infoRef} className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-32 max-w-7xl mx-auto">
+        <div ref={infoRef} className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 mb-16 md:mb-32 max-w-7xl mx-auto">
           {[
             { t: 'Contact', v: '(91) 288 2730 052, 53' },
             { t: 'Fax', v: '(91) 288 2730 054' },
@@ -131,7 +131,7 @@ const Contact = () => {
             { t: 'Email', v: 'info@cavierindia.com' },
             { t: 'Trade Enquiry', v: '(91) 73839 33333' },
           ].map(c => (
-            <div key={c.t} className="info-card border border-white/20 p-8 flex flex-col items-center justify-center text-center will-change-transform">
+            <div key={c.t} className="info-card border border-white/20 p-6 md:p-8 flex flex-col items-center justify-center text-center will-change-transform">
               <h3 className="text-white text-sm font-outfit font-light mb-4 tracking-wide">{c.t}</h3>
               <p className="text-white/70 text-xs font-outfit tracking-wide">{c.v}</p>
             </div>
@@ -157,7 +157,7 @@ const Contact = () => {
               />
             </svg>
             
-            <form className="space-y-10 p-8 md:p-12 relative z-10" onSubmit={e => {
+            <form className="space-y-6 md:space-y-10 p-6 md:p-12 relative z-10" onSubmit={e => {
             e.preventDefault();
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData.entries());
@@ -165,7 +165,7 @@ const Contact = () => {
             alert('Thank you for contacting CAVIER! We will get back to you shortly.');
             e.target.reset();
           }}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {['Name', 'Email'].map(l => (
                 <div key={l} className="form-field flex flex-col will-change-transform">
                   <label className="text-white text-sm font-outfit font-light mb-3 tracking-wide">{l}</label>
@@ -173,7 +173,7 @@ const Contact = () => {
                 </div>
               ))}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               {['Contact', 'Designation'].map(l => (
                 <div key={l} className="form-field flex flex-col will-change-transform">
                   <label className="text-white text-sm font-outfit font-light mb-3 tracking-wide">{l}</label>
@@ -215,9 +215,9 @@ const Contact = () => {
       </div>
 
         {/* Map Section */}
-        <div ref={mapRef} className="max-w-7xl mx-auto pt-16 pb-24 border-t border-white/10">
-          <h2 className="map-title text-white text-4xl md:text-5xl font-outfit font-extralight tracking-tight mb-12 will-change-transform">Open In Map</h2>
-          <div className="map-img w-full h-[400px] md:h-[500px] bg-[#2a2a2a] relative overflow-hidden will-change-transform flex items-center justify-center border border-white/10 rounded-sm">
+        <div ref={mapRef} className="max-w-7xl mx-auto pt-16 pb-16 md:pb-24 border-t border-white/10">
+          <h2 className="map-title text-white text-4xl md:text-5xl font-outfit font-extralight tracking-tight mb-8 md:mb-12 will-change-transform">Open In Map</h2>
+          <div className="map-img w-full h-[350px] md:h-[500px] bg-[#2a2a2a] relative overflow-hidden will-change-transform flex items-center justify-center border border-white/10 rounded-sm">
             <div className="text-center px-6">
               <div className="text-white/20 text-6xl mb-6">📍</div>
               <h3 className="text-white text-xl md:text-2xl font-outfit font-light mb-3">CAVIER India Pvt. Ltd.</h3>
