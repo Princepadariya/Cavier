@@ -65,7 +65,7 @@ const About = () => {
   const allWords = bodyText.split(' ');
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#181818] py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 flex justify-center items-center">
+    <section ref={sectionRef} className="w-full bg-[#1F1F21] py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 flex justify-center items-center">
       <div className="about-wrapper max-w-4xl text-center opacity-0 will-change-transform">
         {/* Decorative gold line */}
         <div

@@ -107,7 +107,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="w-full bg-[#181818] py-16 md:py-24 px-4 sm:px-6 md:px-12">
+    <section ref={containerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col items-start">
         
         {/* Title */}
@@ -127,7 +127,7 @@ const Categories = () => {
             
             <div 
               className="category-bg absolute inset-[-20%] w-[140%] h-[140%] bg-cover bg-center will-change-transform transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
-              style={{ backgroundImage: "url('/fitting_category.png')" }}
+              style={{ backgroundImage: "url('/images/fitting_category.png')" }}
             ></div>
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
@@ -149,7 +149,7 @@ const Categories = () => {
             
             <div 
               className="category-bg absolute inset-[-20%] w-[140%] h-[140%] bg-cover bg-center will-change-transform transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
-              style={{ backgroundImage: "url('/accessories_category.png')" }}
+              style={{ backgroundImage: "url('/images/accessories_category.png')" }}
             ></div>
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>

@@ -3,20 +3,20 @@ import { ChevronRight } from 'lucide-react';
 import { animate, stagger } from 'animejs';
 
 const insights = [
-  { 
-    id: 1, 
-    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026', 
-    img: '/banner_bg.png' 
+  {
+    id: 1,
+    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026',
+    img: '/images/insight_1.jpg'
   },
-  { 
-    id: 2, 
-    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026', 
-    img: '/accessories_category.png' 
+  {
+    id: 2,
+    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026',
+    img: '/images/insight_2.jpg'
   },
-  { 
-    id: 3, 
-    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026', 
-    img: '/img3.png' 
+  {
+    id: 3,
+    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026',
+    img: '/images/insight_3.jpg'
   },
 ];
 
@@ -100,9 +100,9 @@ const Insights = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="w-full bg-[#181818] py-16 md:py-24 px-4 sm:px-6 md:px-12">
+    <section ref={containerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto flex flex-col items-center md:items-start">
-        
+
         {/* Title */}
         <h2 className="insight-title text-2xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-8 md:mb-12 opacity-0 will-change-transform">
           Insights & Inspiration
@@ -114,12 +114,12 @@ const Insights = () => {
             <div key={item.id} className="gsap-insight-card opacity-0 will-change-transform flex flex-col group cursor-pointer">
               {/* Image Box */}
               <div className="w-full aspect-square overflow-hidden bg-black mb-6">
-                <div 
+                <div
                   className="insight-image w-full h-full bg-cover bg-center transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110 will-change-transform origin-center"
                   style={{ backgroundImage: `url(${item.img})` }}
                 ></div>
               </div>
-              
+
               {/* Title */}
               <h3 className="text-white text-[0.95rem] md:text-base leading-relaxed tracking-wide font-light pr-4 group-hover:text-gray-300 transition-colors duration-300">
                 {item.title}
@@ -130,7 +130,7 @@ const Insights = () => {
 
         {/* Bottom Button */}
         <div className="w-full flex justify-center mt-12 md:mt-20">
-          <button 
+          <button
             className="insight-btn flex items-center gap-3 px-6 md:px-8 py-3 border border-white/50 text-white text-xs md:text-sm tracking-widest hover:bg-white hover:text-black transition-colors duration-300 opacity-0 will-change-transform hover:scale-105 active:scale-95"
           >
             View More

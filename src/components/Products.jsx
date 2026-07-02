@@ -8,17 +8,17 @@ import { useGSAP } from '@gsap/react';
 gsap.registerPlugin(ScrollTrigger);
 
 const cockProducts = [
-  { id: 1, title: 'SO 04 101 | Pillar Cock with Base', price: 'INR 1930', img: '/product1.png' },
-  { id: 2, title: 'SO 04 102 | Extended Basin Mixer',  price: 'INR 2450', img: '/product2.png' },
-  { id: 3, title: 'SO 04 103 | Minimalist Spout',      price: 'INR 1600', img: '/product3.png' },
-  { id: 4, title: 'SO 04 104 | Angular Bath Mixer',    price: 'INR 3120', img: '/product4.png' },
+  { id: 1, title: 'SO 04 101 | Pillar Cock with Base', price: 'INR 1930', img: '/images/product1.png' },
+  { id: 2, title: 'SO 04 102 | Extended Basin Mixer',  price: 'INR 2450', img: '/images/product2.png' },
+  { id: 3, title: 'SO 04 103 | Minimalist Spout',      price: 'INR 1600', img: '/images/product3.png' },
+  { id: 4, title: 'SO 04 104 | Angular Bath Mixer',    price: 'INR 3120', img: '/images/product4.png' },
 ];
 
 const accessoryProducts = [
-  { id: 1, title: 'SO 04 101 | Pillar Cock with Base', price: 'INR 1930', img: '/product1.png' },
-  { id: 2, title: 'SO 04 102 | Extended Basin Mixer',  price: 'INR 2450', img: '/product2.png' },
-  { id: 3, title: 'SO 04 103 | Minimalist Spout',      price: 'INR 1600', img: '/product3.png' },
-  { id: 4, title: 'SO 04 104 | Angular Bath Mixer',    price: 'INR 3120', img: '/product4.png' },
+  { id: 1, title: 'SO 04 101 | Pillar Cock with Base', price: 'INR 1930', img: '/images/product1.png' },
+  { id: 2, title: 'SO 04 102 | Extended Basin Mixer',  price: 'INR 2450', img: '/images/product2.png' },
+  { id: 3, title: 'SO 04 103 | Minimalist Spout',      price: 'INR 1600', img: '/images/product3.png' },
+  { id: 4, title: 'SO 04 104 | Angular Bath Mixer',    price: 'INR 3120', img: '/images/product4.png' },
 ];
 
 const ProductGrid = ({ title, products, gridIndex }) => {

@@ -5,13 +5,13 @@ import { animate, stagger, createSpring } from 'animejs';
 
 // 7 images total
 const collections = [
-  { id: 1, title: 'Premium',            img: '/img1.png' },
-  { id: 2, title: 'Intermediate',       img: '/img2.png' },
-  { id: 3, title: 'Allied & Concealed', img: '/img3.png' },
-  { id: 4, title: 'Golden Elegance',    img: '/img4.png' },
-  { id: 5, title: 'Vintage Copper',     img: '/img5.png' },
-  { id: 6, title: 'Minimalist White',   img: '/img6.png' },
-  { id: 7, title: 'Luxury Suite',       img: '/banner_bg.png' },
+  { id: 1, title: 'Premium', img: '/images/img1.png' },
+  { id: 2, title: 'Intermediate', img: '/images/img2.png' },
+  { id: 3, title: 'Allied & Concealed', img: '/images/img3.png' },
+  { id: 4, title: 'Golden Elegance', img: '/images/img4.png' },
+  { id: 5, title: 'Vintage Copper', img: '/images/img5.png' },
+  { id: 6, title: 'Minimalist White', img: '/images/img6.png' },
+  { id: 7, title: 'Luxury Suite', img: '/images/banner_bg.jpg' },
 ];
 
 const FinishingTouch = () => {
@@ -31,7 +31,7 @@ const FinishingTouch = () => {
     const handleResize = () => {
       const isMobile = window.innerWidth < 1024;
       const isSmall = window.innerWidth < 640;
-      
+
       const cardW = isSmall ? window.innerWidth * 0.75 : 320;
       const cardGap = isMobile ? 16 : 32;
       const cardStep = cardW + cardGap;
@@ -60,7 +60,7 @@ const FinishingTouch = () => {
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
-  
+
   const xRaw = useTransform(scrollYProgress, [0, 1], [0, -metrics.totalTranslate]);
   const x = useSpring(xRaw, { stiffness: 100, damping: 25, mass: 0.5 });
 
@@ -130,7 +130,7 @@ const FinishingTouch = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#1a1a1a]"
+      className="relative bg-[#1F1F21]"
       style={{ height: `calc(100vh + 100px)` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-start">
@@ -142,7 +142,7 @@ const FinishingTouch = () => {
         >
           <div className="finishing-title pointer-events-auto opacity-0 will-change-transform">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-3 lg:mb-5 leading-tight tracking-tight mt-0">
-              The Finishing<br className="hidden lg:block"/> Touch
+              The Finishing<br className="hidden lg:block" /> Touch
             </h2>
             <p className="text-[#888] text-sm lg:text-base leading-relaxed mb-6 lg:mb-10 font-light lg:pr-8">
               Precision lies in every detail. Explore our curated bath collections

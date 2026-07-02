@@ -4,6 +4,9 @@ import About from '../components/About';
 import Features from '../components/Features';
 import Categories from '../components/Categories';
 import FinishingTouch from '../components/FinishingTouch';
+import HealthFaucets from '../components/HealthFaucets';
+import OpalPrime from '../components/OpalPrime';
+import BathroomAccessories from '../components/BathroomAccessories';
 import Products from '../components/Products';
 
 import Banner from '../components/Banner';
@@ -15,7 +18,7 @@ const Home = () => {
   const [preloaderDone, setPreloaderDone] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-black w-full overflow-hidden">
+    <div className="relative min-h-screen bg-[#1F1F21] w-full overflow-hidden">
       {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
 
       <Hero />
@@ -23,6 +26,9 @@ const Home = () => {
       <Features />
       <Categories />
       <FinishingTouch />
+      <HealthFaucets />
+      <OpalPrime />
+      <BathroomAccessories />
       <Banner />
       <Insights />
       <Testimonials />

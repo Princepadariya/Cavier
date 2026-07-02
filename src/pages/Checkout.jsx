@@ -58,9 +58,9 @@ const Checkout = () => {
   const total = subtotal;
 
   const similarItems = [
-    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, img: '/img2.png' },
-    { id: 2, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, img: '/img2.png' },
-    { id: 3, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, img: '/img2.png' }
+    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, img: '/images/img2.png' },
+    { id: 2, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, img: '/images/img2.png' },
+    { id: 3, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, img: '/images/img2.png' }
   ];
 
   return (

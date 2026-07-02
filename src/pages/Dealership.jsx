@@ -150,7 +150,7 @@ const Dealership = () => {
           <div className="radar-circle w-[1px] h-[1px] rounded-full border border-white/10 animate-radar-pulse delay-700" />
         </div>
 
-        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/img3.png')" }} />
+        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/img3.png')" }} />
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
           <div className="dealer-content flex flex-col items-center">

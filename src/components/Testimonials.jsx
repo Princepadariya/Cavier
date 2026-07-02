@@ -36,7 +36,7 @@ const testimonials = [
   }
 ];
 
-const Testimonials = ({ bgClass = "bg-[#181818]" }) => {
+const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sectionRef = useRef(null);
 

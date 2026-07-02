@@ -108,25 +108,25 @@ const Features = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 sm:py-24 md:py-48 lg:py-56 px-4 sm:px-6 md:px-12 bg-black flex justify-center items-center min-h-[70vh] md:min-h-screen"
+      className="relative w-full py-16 sm:py-24 md:py-48 lg:py-56 px-4 sm:px-6 md:px-12 bg-[#1F1F21] flex justify-center items-center min-h-[70vh] md:min-h-screen"
     >
       {/* ── 4-quadrant animated background ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div 
           className={`quad-tl ${quadStyle}`} 
-          style={{ top: 0, left: 0, transform: 'translate(-100%, -100%)', backgroundImage: "url('/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 0%' }} 
+          style={{ top: 0, left: 0, transform: 'translate(-100%, -100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 0%' }} 
         />
         <div 
           className={`quad-tr ${quadStyle}`} 
-          style={{ top: 0, right: 0, transform: 'translate(100%, -100%)', backgroundImage: "url('/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 0%' }} 
+          style={{ top: 0, right: 0, transform: 'translate(100%, -100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 0%' }} 
         />
         <div 
           className={`quad-bl ${quadStyle}`} 
-          style={{ bottom: 0, left: 0, transform: 'translate(-100%, 100%)', backgroundImage: "url('/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 100%' }} 
+          style={{ bottom: 0, left: 0, transform: 'translate(-100%, 100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 100%' }} 
         />
         <div 
           className={`quad-br ${quadStyle}`} 
-          style={{ bottom: 0, right: 0, transform: 'translate(100%, 100%)', backgroundImage: "url('/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 100%' }} 
+          style={{ bottom: 0, right: 0, transform: 'translate(100%, 100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 100%' }} 
         />
         <div
           className="quad-overlay absolute inset-0 bg-black/60 opacity-0"

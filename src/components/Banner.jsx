@@ -95,23 +95,26 @@ const Banner = () => {
   const line2 = 'Your Way';
 
   return (
-    <section ref={containerRef} className="relative w-full overflow-hidden h-[75vh] md:h-[85vh] lg:h-[95vh] bg-black">
+    <section ref={containerRef} className="relative w-full overflow-hidden h-[75vh] md:h-[85vh] lg:h-[95vh] bg-[#1F1F21]">
       {/* Background Image */}
       <div
         ref={bgRef}
         className="absolute inset-[-15%] w-[130%] h-[130%] bg-cover bg-center will-change-transform"
-        style={{ backgroundImage: "url('/banner_bg.png')" }}
+        style={{ backgroundImage: "url('/images/banner_bg.jpg')" }}
       />
-      
+
       {/* Dark overlay */}
-      <div className="banner-overlay absolute inset-0 bg-black/20 pointer-events-none opacity-0" />
+      <div
+        className="banner-overlay absolute inset-0 bg-black/20 bg-cover bg-center pointer-events-none opacity-0"
+        style={{ backgroundImage: "url('/images/banner_bg.jpg')" }}
+      />
 
       {/* Cursive text with character-by-character reveal */}
       <div ref={textRef} className="absolute bottom-8 left-4 md:bottom-12 md:left-16 z-10 will-change-transform pr-4">
         <p
           className="text-white leading-tight"
           style={{
-            fontFamily: "'Great Vibes', cursive",
+            fontFamily: "'Brittany Signature', 'Dancing Script', 'Great Vibes', cursive",
             fontSize: 'clamp(2.5rem, 8vw, 6rem)',
             fontWeight: 400,
             lineHeight: 1.2,

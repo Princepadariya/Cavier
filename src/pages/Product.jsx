@@ -13,12 +13,12 @@ const Product = () => {
   const { addToCart } = useCart();
 
   const products = [
-    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/img2.png' },
-    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/img2.png' },
-    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/img2.png' },
-    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/img2.png' },
-    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/img2.png' },
-    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/img2.png' },
+    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/img2.png' },
+    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/img2.png' },
+    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/img2.png' },
+    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/img2.png' },
+    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/img2.png' },
+    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/img2.png' },
   ];
 
   // Hero: Laser-Scan Reveal
@@ -205,7 +205,7 @@ const Product = () => {
       <div ref={heroRef} className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden z-10">
         <div className="product-hero-img absolute inset-0 w-full h-full will-change-transform bg-black">
           <img 
-            src="/img1.png" 
+            src="/images/img1.png" 
             alt="Cavier Premium Bath Fittings" 
             className="w-full h-full object-cover opacity-80"
           />

@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Brittany Signature — commercial font. Drop the font file(s) into
+   public/fonts/ (paths below) for this to render. */
+@font-face {
+  font-family: 'Brittany Signature';
+  src: url('/fonts/BrittanySignature.woff2') format('woff2'),
+       url('/fonts/BrittanySignature.woff') format('woff'),
+       url('/fonts/BrittanySignature.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer utilities {
   .glass-card {
     @apply bg-black/40 backdrop-blur-md border border-white/10;

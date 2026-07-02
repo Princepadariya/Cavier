@@ -289,7 +289,7 @@ const About = () => {
 
           {/* Panel 2: The Raw Material (Image) */}
           <div className="z-panel absolute w-[65vw] md:w-[45vw] aspect-[4/5] md:aspect-square overflow-hidden rounded-sm border border-white/5 shadow-2xl">
-            <img src="/img5.png" alt="Raw Brass" className="w-full h-full object-cover scale-110" />
+            <img src="/images/img5.png" alt="Raw Brass" className="w-full h-full object-cover scale-110" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-center justify-center">
               <h2 className="text-white text-3xl md:text-4xl font-light tracking-[0.5em] uppercase mt-40">Pure Ingot</h2>
             </div>
@@ -307,7 +307,7 @@ const About = () => {
 
           {/* Panel 4: The Final Form (Image) */}
           <div className="z-panel absolute w-[75vw] md:w-[50vw] aspect-[4/3] md:aspect-video overflow-hidden rounded-sm border border-white/10 shadow-[0_0_100px_rgba(212,175,55,0.1)]">
-            <img src="/img6.png" alt="Finished Product" className="w-full h-full object-cover" />
+            <img src="/images/img6.png" alt="Finished Product" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12 text-left">
               <div className="max-w-md">
                 <span className="text-[#d4af37] uppercase tracking-[0.4em] text-[10px] md:text-xs mb-4 block">Present Day</span>
@@ -337,10 +337,10 @@ const About = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 w-full">
           {[
-            { img: '/fitting_category.png', label: 'Shower' },
-            { img: '/accessories_category.png', label: 'Bathroom Accessory' },
-            { img: '/img1.png', label: 'Wallness' },
-            { img: '/img2.png', label: 'Sanitary Ware' },
+            { img: '/images/fitting_category.png', label: 'Shower' },
+            { img: '/images/accessories_category.png', label: 'Bathroom Accessory' },
+            { img: '/images/img1.png', label: 'Wallness' },
+            { img: '/images/img2.png', label: 'Sanitary Ware' },
           ].map((c) => (
             <div key={c.label} className="cat-card group relative w-full aspect-[4/3] overflow-hidden rounded-lg cursor-pointer will-change-transform">
               <img src={c.img} alt={c.label} className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105" />
@@ -393,7 +393,7 @@ const About = () => {
             </button>
           </div>
           <div className="craft-img w-full md:w-[55%] aspect-[4/5] md:aspect-[3/4] overflow-hidden rounded-lg will-change-transform">
-            <img src="/img3.png" alt="Crafted Bath Space" className="w-full h-full object-cover" />
+            <img src="/images/img3.png" alt="Crafted Bath Space" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -432,7 +432,7 @@ const About = () => {
             </div>
           ))}
           <div className="found-card relative overflow-hidden rounded-sm min-h-[260px] will-change-transform">
-            <img src="/img4.png" alt="Cavier Excellence" className="w-full h-full object-cover" />
+            <img src="/images/img4.png" alt="Cavier Excellence" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -441,7 +441,7 @@ const About = () => {
       <section ref={engRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
           <div className="eng-img w-full md:w-[45%] will-change-transform">
-            <img src="/img6.png" alt="Engineered Perfection" className="w-full h-auto object-contain" />
+            <img src="/images/img6.png" alt="Engineered Perfection" className="w-full h-auto object-contain" />
           </div>
           <div className="w-full md:w-[55%] flex flex-col justify-center">
             <span className="eng-text text-[#a3a3a3] text-xs tracking-[0.3em] uppercase mb-6 font-light will-change-transform">Materiality</span>
@@ -487,7 +487,7 @@ const About = () => {
             </button>
           </div>
           <div className="dealer-img w-full md:w-[55%] overflow-hidden rounded-lg will-change-transform">
-            <img src="/img5.png" alt="Cavier Authorised Dealer Showroom" className="w-full h-full object-cover" />
+            <img src="/images/img5.png" alt="Cavier Authorised Dealer Showroom" className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -499,9 +499,9 @@ const About = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0 w-full">
           {[
-            { name: 'Varna Ajudiya', img: '/team_varna.png' },
-            { name: 'Rakesh Ajudiya', img: '/team_rakesh.png' },
-            { name: 'Bhautik Ajudiya', img: '/team_bhautik.png' },
+            { name: 'Varna Ajudiya', img: '/images/team_varna.png' },
+            { name: 'Rakesh Ajudiya', img: '/images/team_rakesh.png' },
+            { name: 'Bhautik Ajudiya', img: '/images/team_bhautik.png' },
           ].map((m) => (
             <div key={m.name} className="team-member group relative flex flex-col will-change-transform overflow-hidden">
               <div className="relative w-full aspect-[4/5] overflow-hidden">

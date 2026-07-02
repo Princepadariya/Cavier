@@ -114,7 +114,7 @@ const Contact = () => {
           </div>
         </div>
         <div className="hidden md:block w-1/2 h-full relative">
-          <div className="contact-hero-img absolute inset-0 bg-cover bg-center will-change-transform" style={{ backgroundImage: 'url("/contact-bg.png")' }} />
+          <div className="contact-hero-img absolute inset-0 bg-cover bg-center will-change-transform" style={{ backgroundImage: 'url("/images/contact-bg.png")' }} />
           <div className="absolute inset-0 bg-[#EFECE8] mix-blend-multiply opacity-20" />
         </div>
       </div>

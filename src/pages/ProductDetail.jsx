@@ -165,7 +165,7 @@ const ProductDetail = () => {
 
   const currentFinishObj = finishes.find(f => f.name === selectedFinish) || finishes[3];
 
-  const thumbs = ['/img2.png', '/img2.png', '/img2.png', '/img2.png'];
+  const thumbs = ['/images/img2.png', '/images/img2.png', '/images/img2.png', '/images/img2.png'];
 
   return (
     <div className="w-full bg-[#1F1F21] min-h-screen transition-colors duration-1000"
@@ -202,7 +202,7 @@ const ProductDetail = () => {
                   {/* Layer 1: Main Body */}
                   <div className="relative w-[80%] h-[80%] flex items-center justify-center">
                     <img
-                      src="/img2.png"
+                      src="/images/img2.png"
                       alt="Body"
                       className={`absolute w-full h-full object-contain transition-all duration-1000 
                         ${isPrecisionMode ? 'saturate-150 contrast-125' : ''}`}
@@ -223,7 +223,7 @@ const ProductDetail = () => {
                   {/* Layer 2: Top/Handle (Visible only in precision mode) */}
                   {isPrecisionMode && (
                     <img
-                      src="/img2.png"
+                      src="/images/img2.png"
                       alt="Handle"
                       className="absolute w-[80%] h-[80%] object-contain contrast-125"
                       style={{
@@ -353,7 +353,7 @@ const ProductDetail = () => {
                     finish: 'Dark Anodized Aluminium',
                     height: '180mm',
                     price: 2000,
-                    img: '/img2.png',
+                    img: '/images/img2.png',
                   })}
                   className="flex-1 max-w-[340px] border border-white/30 rounded-full text-white text-xs md:text-[13px] py-3 md:py-3 px-2 flex items-center justify-center gap-1.5 md:gap-2 hover:bg-white hover:text-black transition-colors uppercase tracking-wide md:tracking-wider font-medium"
                 >
@@ -389,7 +389,7 @@ const ProductDetail = () => {
       <section ref={reviewRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12">
         <div className="review-item flex items-center gap-4 mb-6 will-change-transform">
           <div className="w-12 h-12 rounded-full bg-[#333] overflow-hidden border border-white/20">
-            <img src="/team_rakesh.png" alt="Yash Patel" className="w-full h-full object-cover" />
+            <img src="/images/team_rakesh.png" alt="Yash Patel" className="w-full h-full object-cover" />
           </div>
           <h3 className="text-white text-lg font-semibold font-outfit">Yash Patel</h3>
         </div>
@@ -416,7 +416,7 @@ const ProductDetail = () => {
                   {/* Technical Ghost Layer (Exploded View) */}
                   <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-20 transition-all duration-700 pointer-events-none scale-100 group-hover:scale-125 blur-[2px]">
                     <img
-                      src="/img2.png"
+                      src="/images/img2.png"
                       alt=""
                       className="w-full h-full object-contain p-8 invert brightness-200"
                     />
@@ -425,7 +425,7 @@ const ProductDetail = () => {
                   {/* Main Image Layer */}
                   <div className="w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 relative z-10">
                     <img
-                      src="/img2.png"
+                      src="/images/img2.png"
                       alt="Similar Item"
                       className="w-full h-full object-contain p-8 transform group-hover:translate-y-[-15px] transition-transform duration-700"
                     />
@@ -449,7 +449,7 @@ const ProductDetail = () => {
                   finish: 'Chrome',
                   height: 'N/A',
                   price: 1930,
-                  img: '/img2.png',
+                  img: '/images/img2.png',
                 })}
                 className="w-full border border-white/20 rounded-sm text-white text-sm py-3 flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors"
               >

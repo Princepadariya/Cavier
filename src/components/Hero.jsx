@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import heroBg from "./hero-bg.jpeg";
+
+const heroBg = "/images/hero-bg.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
