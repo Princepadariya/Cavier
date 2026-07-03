@@ -14,6 +14,96 @@
   font-display: swap;
 }
 
+/* ─── Halyard Micro (main headings) ───
+   Commercial font. Drop the files into public/fonts/ using these exact names
+   (woff2 preferred; woff/ttf are optional fallbacks). */
+@font-face {
+  font-family: 'Halyard Micro';
+  src: url('/fonts/HalyardMicro-Light.woff2') format('woff2'),
+       url('/fonts/HalyardMicro-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Micro';
+  src: url('/fonts/HalyardMicro-Regular.woff2') format('woff2'),
+       url('/fonts/HalyardMicro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Micro';
+  src: url('/fonts/HalyardMicro-Medium.woff2') format('woff2'),
+       url('/fonts/HalyardMicro-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Micro';
+  src: url('/fonts/HalyardMicro-SemiBold.woff2') format('woff2'),
+       url('/fonts/HalyardMicro-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Micro';
+  src: url('/fonts/HalyardMicro-Bold.woff2') format('woff2'),
+       url('/fonts/HalyardMicro-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Halyard Text (body / descriptions) ─── */
+@font-face {
+  font-family: 'Halyard Text';
+  src: url('/fonts/HalyardText-Light.woff2') format('woff2'),
+       url('/fonts/HalyardText-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Text';
+  src: url('/fonts/HalyardText-Regular.woff2') format('woff2'),
+       url('/fonts/HalyardText-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Text';
+  src: url('/fonts/HalyardText-Medium.woff2') format('woff2'),
+       url('/fonts/HalyardText-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Halyard Text';
+  src: url('/fonts/HalyardText-SemiBold.woff2') format('woff2'),
+       url('/fonts/HalyardText-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Global application ───
+   Body/descriptions → Halyard Text. Headings (and the project's `font-outfit`
+   heading class) → Halyard Micro. */
+@layer base {
+  body {
+    font-family: 'Halyard Text', 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Halyard Micro', 'Inter', sans-serif;
+  }
+}
+
 @layer utilities {
   .glass-card {
     @apply bg-black/40 backdrop-blur-md border border-white/10;
@@ -87,5 +177,17 @@ body {
   .animate-laser-trace {
     stroke-dasharray: 1000;
     animation: laser-trace 3s linear infinite;
+  }
+
+  @keyframes heartbeat {
+    0%   { transform: scale(1); }
+    14%  { transform: scale(1.12); }
+    28%  { transform: scale(1); }
+    42%  { transform: scale(1.12); }
+    70%  { transform: scale(1); }
+  }
+
+  .animate-heartbeat {
+    animation: heartbeat 1.3s ease-in-out infinite;
   }
 }

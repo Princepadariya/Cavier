@@ -9,7 +9,7 @@ const collections = [
   { id: 2, title: 'Intermediate', img: '/images/img2.png' },
   { id: 3, title: 'Allied & Concealed', img: '/images/img3.png' },
   { id: 4, title: 'Golden Elegance', img: '/images/img4.png' },
-  { id: 5, title: 'Vintage Copper', img: '/images/img5.png' },
+  { id: 5, title: 'Vintage Copper', img: '/images/img5.jpg' },
   { id: 6, title: 'Minimalist White', img: '/images/img6.png' },
   { id: 7, title: 'Luxury Suite', img: '/images/banner_bg.jpg' },
 ];

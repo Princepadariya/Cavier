@@ -202,23 +202,16 @@ const Product = () => {
       </div>
 
       {/* Hero Section - Full Screen Product Showcase */}
-      <div ref={heroRef} className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden z-10">
+      <div ref={heroRef} className="relative h-screen w-full overflow-hidden z-10">
         <div className="product-hero-img absolute inset-0 w-full h-full will-change-transform bg-black">
-          <img 
-            src="/images/img1.png" 
-            alt="Cavier Premium Bath Fittings" 
+          <img
+            src="/images/product_page_banner.png"
+            alt="Cavier Premium Bath Fittings"
             className="w-full h-full object-cover opacity-80"
           />
         </div>
         {/* The Laser Scan Line */}
         <div className="laser-scan-line absolute top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-white to-transparent shadow-[0_0_15px_rgba(255,255,255,1)] z-20 pointer-events-none" />
-        
-        {/* Overlay Text */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <h1 className="text-white text-4xl md:text-8xl font-light tracking-[0.3em] md:tracking-[0.5em] uppercase font-outfit opacity-20 text-center px-4">
-            Precision
-          </h1>
-        </div>
       </div>
 
       {/* Filter Header */}
@@ -262,18 +255,18 @@ const Product = () => {
                 <Link to={`/product/${product.id}`} className="block w-full h-full relative">
                   {/* Technical Ghost Layer (Exploded View) */}
                   <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-20 transition-all duration-700 pointer-events-none scale-100 group-hover:scale-125 blur-[2px]">
-                    <img 
-                      src={product.image} 
-                      alt="" 
+                    <img
+                      src={product.image}
+                      alt=""
                       className="w-full h-full object-contain p-8 invert brightness-200"
                     />
                   </div>
-                  
+
                   {/* Main Image Layer */}
                   <div className="w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 relative z-10">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
+                    <img
+                      src={product.image}
+                      alt={product.name}
                       className="w-full h-full object-contain p-8 transform group-hover:translate-y-[-15px] transition-transform duration-700"
                     />
                   </div>
@@ -295,7 +288,7 @@ const Product = () => {
                   ))}
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => addToCart({ ...product, quantity: 1 })}
                 className="w-full border border-white/20 text-white text-[10px] md:text-sm py-2.5 md:py-3 flex items-center justify-center gap-1.5 md:gap-2 hover:bg-white hover:text-black transition-colors"
               >
@@ -327,7 +320,7 @@ const Product = () => {
       </section>
 
       {/* Explore The Catalog */}
-      <section ref={catalogRef} className="w-full bg-[#1F1F21] py-12 md:py-16 px-4 sm:px-6 md:px-12">
+      <section ref={catalogRef} className="w-full bg-[#1F1F21] py-12 md:py-16 px-4 sm:px-6 md:px-12 lg:px-32">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <h2 className="catalog-title text-2xl md:text-4xl font-light text-white tracking-wide font-outfit opacity-0 will-change-transform">Explore The catalog</h2>
           <button className="catalog-btn flex items-center gap-2 md:gap-3 text-white border border-white/30 px-6 md:px-8 py-2.5 md:py-3 text-xs md:text-sm hover:bg-white hover:text-black transition-colors opacity-0 will-change-transform">

@@ -74,7 +74,7 @@ function App() {
         <Route path="/dealership" element={<Dealership />} />
       </Routes>
       {/* We only render Footer here. If certain pages shouldn't have it, we could conditionally hide it. */}
-      {location.pathname !== '/checkout' && <Footer key={location.pathname} />}
+      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={['/about', '/product'].includes(location.pathname) ? 'light' : 'dark'} />}
     </div>
   );
 }
