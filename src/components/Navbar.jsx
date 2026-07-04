@@ -89,7 +89,7 @@ const Navbar = ({ variant = 'default' }) => {
         className={`logo-text absolute left-1/2 transform -translate-x-1/2 ${isContact ? 'mix-blend-difference' : ''}`}
       >
         <Link to="/" className="gsap-nav-logo opacity-0 block will-change-transform">
-          <img src="/images/cavier_logo.png" alt="Cavier" className="h-14 md:h-28 w-auto object-contain" />
+          <img src="/images/cavier_logo.png" alt="Cavier" className="h-16 md:h-36 w-auto object-contain" />
         </Link>
       </div>
 

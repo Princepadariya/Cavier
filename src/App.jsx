@@ -16,6 +16,7 @@ import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
 import Dealership from './pages/Dealership';
+import Blog from './pages/Blog';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,9 +73,10 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/dealership" element={<Dealership />} />
+        <Route path="/blog" element={<Blog />} />
       </Routes>
       {/* We only render Footer here. If certain pages shouldn't have it, we could conditionally hide it. */}
-      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={['/about', '/product'].includes(location.pathname) ? 'light' : 'dark'} />}
+      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={(['/about', '/dealership', '/contact', '/blog'].includes(location.pathname) || location.pathname.startsWith('/product')) ? 'light' : 'dark'} />}
     </div>
   );
 }

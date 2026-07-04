@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { animate, stagger, createSpring } from 'animejs';
-import { useCart } from '../context/CartContext';
+import { Heart } from 'lucide-react';
 
 const Product = () => {
   const heroRef = useRef(null);
@@ -10,15 +10,14 @@ const Product = () => {
   const gridRef = useRef(null);
   const paginationRef = useRef(null);
   const catalogRef = useRef(null);
-  const { addToCart } = useCart();
 
   const products = [
-    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/img2.png' },
-    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/img2.png' },
-    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/img2.png' },
-    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/img2.png' },
-    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/img2.png' },
-    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/img2.png' },
+    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/Health%20faucets.png' },
+    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/Health%20faucets_2.png' },
+    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/Health%20faucets_3.png' },
+    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/Health%20faucets_4.png' },
+    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/Health%20faucets.png' },
+    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/Health%20faucets_2.png' },
   ];
 
   // Hero: Laser-Scan Reveal
@@ -248,55 +247,36 @@ const Product = () => {
 
       {/* Product Grid */}
       <section ref={gridRef} className="w-full bg-[#1F1F21] py-6 md:py-8 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-14">
           {products.map((product) => (
-            <div key={product.id} className="product-card flex flex-col opacity-0 will-change-transform">
-              <div className="relative w-full aspect-square bg-[#181818] border border-white/10 rounded-sm overflow-hidden group">
+            <div key={product.id} className="product-card flex flex-col group cursor-pointer opacity-0 will-change-transform">
+              {/* Image Box */}
+              <div className="relative w-full aspect-[4/5] bg-[#1F1F21] rounded-2xl border border-[#FFFFFF]
+                              mb-4 sm:mb-5 overflow-hidden flex items-center justify-center p-6 sm:p-10
+                              transition-all duration-300
+                              group-hover:border-[#FFFFFF]
+                              group-hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
                 <Link to={`/product/${product.id}`} className="block w-full h-full relative">
-                  {/* Technical Ghost Layer (Exploded View) */}
-                  <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-20 transition-all duration-700 pointer-events-none scale-100 group-hover:scale-125 blur-[2px]">
-                    <img
-                      src={product.image}
-                      alt=""
-                      className="w-full h-full object-contain p-8 invert brightness-200"
-                    />
-                  </div>
-
-                  {/* Main Image Layer */}
-                  <div className="w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 relative z-10">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-contain p-8 transform group-hover:translate-y-[-15px] transition-transform duration-700"
-                    />
-                  </div>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-contain transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.08] will-change-transform"
+                  />
                 </Link>
-                <button className="absolute top-4 right-4 z-10 text-white/50 hover:text-white transition-colors" onClick={(e) => e.stopPropagation()}>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                  </svg>
+                <button className="absolute top-4 right-4 z-10 text-white/60 hover:text-white transition-colors" onClick={(e) => e.stopPropagation()}>
+                  <Heart size={18} />
                 </button>
               </div>
-              <div className="text-center mt-3 md:mt-4 px-1">
-                <h3 className="text-white text-xs md:text-base font-medium mb-1 line-clamp-1">
+
+              {/* Details */}
+              <div className="flex flex-col items-center text-center px-1">
+                <h3 className="text-white text-xs sm:text-sm md:text-base tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
                   {product.name}
                 </h3>
-                <p className="text-white text-xs md:text-sm font-semibold mb-1.5 md:mb-2">INR {product.price}</p>
-                <div className="flex justify-center gap-[2px] md:gap-0.5 mb-3 md:mb-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <span key={star} className="text-yellow-400 text-xs">★</span>
-                  ))}
-                </div>
+                <p className="text-white text-sm sm:text-base font-semibold tracking-widest">
+                  INR {product.price}
+                </p>
               </div>
-              <button
-                onClick={() => addToCart({ ...product, quantity: 1 })}
-                className="w-full border border-white/20 text-white text-[10px] md:text-sm py-2.5 md:py-3 flex items-center justify-center gap-1.5 md:gap-2 hover:bg-white hover:text-black transition-colors"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="md:w-4 md:h-4">
-                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
-                </svg>
-                <span>Add to cart</span>
-              </button>
             </div>
           ))}
         </div>

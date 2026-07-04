@@ -150,26 +150,26 @@ const Dealership = () => {
           <div className="radar-circle w-[1px] h-[1px] rounded-full border border-white/10 animate-radar-pulse delay-700" />
         </div>
 
-        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/img3.png')" }} />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/Dealership_hero_banner.png')" }} />
+        <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
           <div className="dealer-content flex flex-col items-center">
-            <span className="text-[#a3a3a3] text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">Global Partnership</span>
-            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-light tracking-wide leading-[1.15] mb-8 font-outfit will-change-transform">Define The Future<br />Of Luxury With Us</h1>
-            <p className="text-[#a3a3a3] max-w-2xl text-sm md:text-base leading-relaxed font-light mb-12 will-change-transform">Join an elite network of architectural ambassadors bringing precision-engineered elegance to the world's most exclusive interiors.</p>
+            <span className="text-white/70 text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">Partnership Opportunity</span>
+            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-light tracking-wide leading-[1.15] mb-8 font-outfit will-change-transform">Grow Your Business<br />with CAVIER</h1>
+            <p className="text-white/80 max-w-2xl text-sm md:text-base leading-relaxed font-light mb-12 will-change-transform">Define the future of luxury bathrooms through a synthesis of precision engineering, architectural innovation, and timeless design.</p>
             <button className="flex items-center space-x-3 text-white border border-white/30 px-6 py-3 text-sm hover:bg-white hover:text-black transition-all duration-500 will-change-transform group">
-              <span>Explore Potential</span><ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
+              <span>Scroll Down</span><ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Philosophy */}
-      <section ref={philRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12">
+      <section ref={philRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <span className="phil-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase block mb-10 font-light will-change-transform">The Philosophy</span>
         <div className="flex flex-col md:flex-row gap-12 md:gap-20">
           <div className="phil-quote w-full md:w-[50%] will-change-transform">
-            <p className="text-white text-2xl md:text-3xl lg:text-[2rem] font-light leading-snug tracking-wide font-outfit">We believe in the power of enduring partnerships. Our network of dealers are more than distributors; they are ambassadors of high-end architectural living.</p>
+            <p className="text-white text-2xl md:text-3xl lg:text-[2rem] font-light leading-snug tracking-wide font-text">We believe in the power of enduring partnerships. Our network of dealers are more than distributors; they are ambassadors of high-end architectural living.</p>
           </div>
           <div className="phil-desc w-full md:w-[50%] flex items-end will-change-transform">
             <p className="text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light">Building a CAVIER partnership means investing in a legacy of excellence. We invite entrepreneurs and distributors who share our obsession with detail and quality to join an ecosystem built for long-term growth and market leadership in the premium segment.</p>
@@ -178,19 +178,19 @@ const Dealership = () => {
       </section>
 
       {/* Value Propositions */}
-      <section ref={valRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12">
+      <section ref={valRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="text-center mb-12 md:mb-16"><span className="val-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Value Propositions</span></div>
         <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10">
           {[
-            { icon: '✦', title: 'Premium Product\nRange', desc: 'Meticulously crafted fittings that set new standards in architectural bathroom design.' },
-            { icon: '⊛', title: 'Strong Brand\nIdentity', desc: 'A minimalist, luxury brand presence that resonates with architects and designers globally.' },
-            { icon: '↗', title: 'Business\nOpportunities', desc: 'Competitive margins and strategic growth plans for high-performing regional partners.' },
-            { icon: '⚙', title: 'Marketing\nSupport', desc: 'Global campaigns and local marketing toolkits designed to drive high-intent traffic.' },
-            { icon: '⊕', title: 'Reliable Supply\nChain', desc: 'Streamlined logistics and inventory management ensuring consistent product availability.' },
-            { icon: '★', title: 'Exclusive\nTerritories', desc: 'Protected regional distribution rights to ensure your market investment yields high returns.' },
+            { icon: '/images/Icon.svg', title: 'Premium Product\nRange', desc: 'Meticulously crafted fittings that set new standards in architectural bathroom design.' },
+            { icon: '/images/Icon_2.svg', title: 'Strong Brand\nIdentity', desc: 'A minimalist, luxury brand presence that resonates with architects and designers globally.' },
+            { icon: '/images/Icon_3.svg', title: 'Business\nOpportunities', desc: 'Competitive margins and strategic growth plans for high-performing regional partners.' },
+            { icon: '/images/Icon_4.svg', title: 'Marketing\nSupport', desc: 'Global campaigns and local marketing toolkits designed to drive high-intent traffic.' },
+            { icon: '/images/Icon_2.svg', title: 'Reliable Supply\nChain', desc: 'Streamlined logistics and inventory management ensuring consistent product availability.' },
+            { icon: '/images/Icon_3.svg', title: 'Exclusive\nTerritories', desc: 'Protected regional distribution rights to ensure your market investment yields high returns.' },
           ].map((c, i) => (
             <div key={i} className={`val-card border-white/10 p-8 md:p-10 flex flex-col min-h-[240px] md:min-h-[280px] will-change-transform border-b md:border-r ${i % 3 === 2 ? 'md:border-r-0' : ''} ${i >= 3 ? 'md:border-b-0' : ''} ${i === 5 ? 'border-b-0' : ''}`}>
-              <span className="text-white/40 text-2xl mb-6 md:mb-8">{c.icon}</span>
+              <img src={c.icon} alt="" className="w-5 h-5 md:w-6 md:h-6 mb-6 md:mb-8 opacity-80" />
               <h3 className="text-white text-sm md:text-base font-semibold tracking-wide mb-3 md:mb-4 font-outfit uppercase leading-snug whitespace-pre-line">{c.title}</h3>
               <p className="text-[#a3a3a3] text-xs md:text-sm leading-relaxed font-light mt-auto">{c.desc}</p>
             </div>
@@ -199,38 +199,39 @@ const Dealership = () => {
       </section>
 
       {/* Path To Partnership */}
-      <section ref={pathRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12">
+      <section ref={pathRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="path-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-16 font-outfit text-center will-change-transform">The Path To Partnership</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {/* Connecting line through the middle of the boxes */}
+          <div className="absolute top-10 md:top-12 left-0 right-0 h-px bg-white/15 z-0" />
           {[
             { n: '01', t: 'Inquiry', d: 'Submit your interest via our digital portal.' },
             { n: '02', t: 'Review', d: 'Our team evaluates market compatibility and potential.' },
             { n: '03', t: 'Connect', d: 'Direct dialogue to align on goals and vision.' },
             { n: '04', t: 'Start', d: 'Onboarding, setup, and global launch.' },
           ].map((s, i) => (
-            <div key={s.n} className="path-step flex flex-col items-center text-center will-change-transform">
-              <div className={`w-20 h-20 md:w-24 md:h-24 ${i === 3 ? 'bg-gradient-to-br from-[#888] to-[#444]' : 'border border-white/20'} rounded-sm flex items-center justify-center mb-6`}>
+            <div key={s.n} className="path-step relative z-10 flex flex-col items-center text-center will-change-transform">
+              <div className={`w-20 h-20 md:w-24 md:h-24 ${i === 3 ? 'bg-gradient-to-br from-[#888] to-[#444]' : 'bg-[#1c1c1e] border border-white/20'} rounded-sm flex items-center justify-center mb-6`}>
                 <span className="text-white text-2xl md:text-3xl font-light font-outfit">{s.n}</span>
               </div>
               <h3 className="text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3">{s.t}</h3>
-              <p className="text-[#a3a3a3] text-[11px] md:text-xs leading-relaxed font-light uppercase tracking-wide">{s.d}</p>
+              <p className="text-[#a3a3a3] text-[11px] md:text-xs leading-[1.8] font-light uppercase tracking-wide max-w-[230px] mx-auto">{s.d}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Candidate Profiles */}
-      <section ref={candRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 relative z-10">
-        <div className="text-center mb-12 md:mb-16"><span className="cand-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Ideal Partners</span></div>
+      <section ref={candRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32 relative z-10">
+        <div className="text-center mb-12 md:mb-16"><span className="cand-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Candidate Profiles</span></div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
-            { t: 'Luxury Showrooms', d: 'Establishments catering to high-end residential markets with an emphasis on curated, bespoke interior collections.' },
-            { t: 'Strategic Distributors', d: 'Partners with robust logistical networks and deep relationships within the architectural and design communities.' },
+            { t: 'Retail Showroom Details', d: 'Establishments catering to the luxury residential market with a focus on interior design and bespoke fittings.' },
+            { t: 'Regional Distributors', d: 'Established partners with logistics capabilities and a network of sub-dealers in high-growth metropolitan areas.' },
           ].map(c => (
-            <div key={c.t} className="cand-card border border-white/10 p-8 md:p-10 min-h-[240px] md:min-h-[300px] flex flex-col justify-end will-change-transform transition-all duration-500 hover:border-white/30 hover:bg-white/[0.02] group">
+            <div key={c.t} className="cand-card border border-white/10 p-16 min-h-[220px] flex flex-col justify-start will-change-transform transition-all duration-500 hover:border-white/30 hover:bg-white/[0.02] group">
               <h3 className="text-white text-3xl md:text-4xl font-light tracking-wide mb-6 font-outfit group-hover:text-white transition-colors">{c.t}</h3>
               <p className="text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light group-hover:text-[#d1d1d1] transition-colors">{c.d}</p>
-              <div className="w-full h-[1px] bg-white/5 mt-8 group-hover:bg-white/20 transition-colors" />
             </div>
           ))}
         </div>
@@ -257,38 +258,38 @@ const Dealership = () => {
               {row.map(label => (
                 <div key={label} className="form-field will-change-transform">
                   <label className="text-white text-sm font-medium block mb-3">{label}</label>
-                  <input name={label.replace('*', '').toLowerCase().replace(' ', '_')} required type="text" className="w-full bg-transparent border border-white/20 text-white px-4 py-3 text-sm outline-none focus:border-white/60 transition-colors" />
+                  <input name={label.replace('*', '').toLowerCase().replace(' ', '_')} required type="text" className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors" />
                 </div>
               ))}
             </div>
           ))}
           <div className="form-field will-change-transform">
             <label className="text-white text-sm font-medium block mb-3">Comment*</label>
-            <textarea name="comment" required rows={5} className="w-full bg-transparent border border-white/20 text-white px-4 py-3 text-sm outline-none focus:border-white/60 transition-colors resize-none" />
+            <textarea name="comment" required rows={5} className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors resize-none" />
           </div>
           <div className="flex justify-center mt-4">
-            <button type="submit" className="form-btn text-white border border-white/30 px-8 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition-colors will-change-transform">Contact Now</button>
+            <button type="submit" className="form-btn text-white border border-white px-8 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition-colors will-change-transform">Contact Now</button>
           </div>
         </form>
       </section>
 
       {/* What We Offer */}
-      <section ref={offerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12">
+      <section ref={offerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20">
-          <div className="w-full md:w-[25%]">
-            <h2 className="offer-title text-4xl md:text-5xl font-light text-white tracking-wide leading-[1.15] font-outfit will-change-transform">What We<br />Offer</h2>
-            <div className="offer-title w-12 h-[3px] bg-white mt-6 will-change-transform" />
+          <div className="w-full md:w-[360px] md:flex-shrink-0">
+            <h2 className="offer-title text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.1] font-outfit max-w-[220px] will-change-transform">What We Offer</h2>
+            <div className="offer-title w-12 h-[2px] bg-white mt-6 will-change-transform" />
           </div>
-          <div className="w-full md:w-[75%] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-20 md:gap-y-16">
+          <div className="w-full md:w-[75%] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-16 md:gap-y-16">
             {[
               { s: 'Support I', t: 'Product Training', d: 'In-depth technical workshops for your team on installation, maintenance, and material science.' },
               { s: 'Support II', t: 'Showroom Guidance', d: 'Architectural layout support to ensure the CAVIER experience is perfectly translated in your space.' },
               { s: 'Support III', t: 'Marketing Material', d: 'Premium catalogs, physical finish swatches, and high-fidelity digital assets for your showroom.' },
               { s: 'Support IV', t: 'Dedicated Support', d: 'A direct line to our regional partnership managers for day-to-day operational excellence.' },
             ].map(c => (
-              <div key={c.s} className="offer-item will-change-transform">
-                <span className="text-[#a3a3a3] text-xs tracking-[0.2em] uppercase block mb-3 font-light">{c.s}</span>
-                <h3 className="text-white text-lg md:text-xl font-semibold mb-3 font-outfit">{c.t}</h3>
+              <div key={c.s} className="offer-item will-change-transform max-w-[260px]">
+                <span className="text-[#a3a3a3] text-[11px] tracking-[0.25em] uppercase block mb-3 font-light">{c.s}</span>
+                <h3 className="text-white text-lg md:text-xl font-medium mb-3 font-outfit">{c.t}</h3>
                 <p className="text-[#a3a3a3] text-sm leading-relaxed font-light">{c.d}</p>
               </div>
             ))}

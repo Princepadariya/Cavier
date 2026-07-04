@@ -29,11 +29,6 @@ const ProductDetail = () => {
   const reviewRef = useRef(null);
   const similarRef = useRef(null);
 
-  // Precision Mode State
-  const [isPrecisionMode, setIsPrecisionMode] = useState(false);
-  const precisionContainerRef = useRef(null);
-  const calloutsRef = useRef(null);
-
   // Material Morph State
   const [selectedFinish, setSelectedFinish] = useState('Chrome');
   const [isMorphing, setIsMorphing] = useState(false);
@@ -165,7 +160,7 @@ const ProductDetail = () => {
 
   const currentFinishObj = finishes.find(f => f.name === selectedFinish) || finishes[3];
 
-  const thumbs = ['/images/img2.png', '/images/img2.png', '/images/img2.png', '/images/img2.png'];
+  const thumbs = ['/images/product_2.png', '/images/product_3.png', '/images/product_4.png', '/images/product.png'];
 
   return (
     <div className="w-full bg-[#1F1F21] min-h-screen transition-colors duration-1000"
@@ -176,159 +171,71 @@ const ProductDetail = () => {
 
 
       {/* Product Detail + Key Features — single unified section */}
-      <section ref={detailRef} className="w-full bg-[#1F1F21] pt-24 pb-16 px-6 md:px-12">
+      <section ref={detailRef} className="w-full bg-[#1F1F21] pt-32 md:pt-40 pb-16 px-6 md:px-12 lg:px-32">
         <div>
 
           {/* ── Two-column grid: Image | Info ── */}
-          <div className="flex flex-col md:flex-row gap-10 md:gap-20 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch pt-8 md:pt-12">
 
             {/* ── Left: Image + Thumbnails ── */}
-            <div className="detail-img w-full md:w-[36%] will-change-transform relative">
-              <div
-                ref={precisionContainerRef}
-                className={`relative w-full aspect-square rounded-sm overflow-hidden transition-all duration-700 ease-in-out border
-                  ${isPrecisionMode ? 'bg-[#0a111a] border-cyan-500/30 shadow-[0_0_50px_rgba(6,182,212,0.1)]' : 'bg-[#181818] border-white/10'}`}
-              >
-                {/* Blueprint Grid Background (visible in precision mode) */}
-                <div className={`absolute inset-0 opacity-20 pointer-events-none transition-opacity duration-700 ${isPrecisionMode ? 'opacity-40' : 'opacity-0'}`}
-                  style={{
-                    backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.2) 1px, transparent 1px)`,
-                    backgroundSize: '20px 20px'
-                  }}
-                />
+            <div className="detail-img w-full will-change-transform relative">
+              <div className="relative w-full aspect-[5/4] rounded-sm overflow-hidden p-6 md:p-10" style={{ border: '0.5px solid #FFFFFF' }}>
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img
+                    src="/images/product.png"
+                    alt="Product"
+                    className="absolute w-full h-full object-contain"
+                    style={{ filter: currentFinishObj.filter }}
+                  />
 
-                {/* Exploded Layers */}
-                <div className="relative w-full h-full p-8 flex items-center justify-center">
-                  {/* Layer 1: Main Body */}
-                  <div className="relative w-[80%] h-[80%] flex items-center justify-center">
-                    <img
-                      src="/images/img2.png"
-                      alt="Body"
-                      className={`absolute w-full h-full object-contain transition-all duration-1000 
-                        ${isPrecisionMode ? 'saturate-150 contrast-125' : ''}`}
-                      style={{
-                        zIndex: 10,
-                        filter: `${currentFinishObj.filter} ${isPrecisionMode ? 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.5))' : ''}`,
-                        clipPath: isPrecisionMode ? 'polygon(0 40%, 100% 40%, 100% 100%, 0 100%)' : 'none',
-                      }}
-                    />
-
-                    {/* Light Sweep Effect Overlay */}
-                    <div
-                      className={`absolute inset-0 z-30 pointer-events-none transition-all duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12
-                        ${isMorphing ? 'translate-x-[200%] opacity-100' : '-translate-x-[200%] opacity-0'}`}
-                    />
-                  </div>
-
-                  {/* Layer 2: Top/Handle (Visible only in precision mode) */}
-                  {isPrecisionMode && (
-                    <img
-                      src="/images/img2.png"
-                      alt="Handle"
-                      className="absolute w-[80%] h-[80%] object-contain contrast-125"
-                      style={{
-                        zIndex: 15,
-                        transform: 'translateY(-40px) translateX(20px)',
-                        filter: `${currentFinishObj.filter} drop-shadow(0 0 15px rgba(6, 182, 212, 0.8))`,
-                        clipPath: 'polygon(0 0, 100% 0, 100% 40%, 0 40%)',
-                      }}
-                    />
-                  )}
-
-                  {/* Technical Callouts (Lines and Text) */}
+                  {/* Light Sweep Effect Overlay (finish change) */}
                   <div
-                    ref={calloutsRef}
-                    className={`absolute inset-0 z-20 pointer-events-none transition-opacity duration-500 ${isPrecisionMode ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    {/* Callout 1: Handle */}
-                    <div className="absolute top-[25%] right-[2%] md:right-[5%] flex items-center gap-1 md:gap-2">
-                      <div className="h-[1px] w-6 md:w-12 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                      <div className="text-[7px] md:text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-1.5 md:px-2 py-1 border border-cyan-500/20">
-                        Precision Handle<br />Control System
-                      </div>
-                    </div>
-                    {/* Callout 2: Body */}
-                    <div className="absolute bottom-[30%] left-[2%] md:left-[5%] flex items-center gap-1 md:gap-2">
-                      <div className="text-[7px] md:text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-1.5 md:px-2 py-1 border border-cyan-500/20 text-right">
-                        Solid Brass Ingot<br />Forged Body
-                      </div>
-                      <div className="h-[1px] w-6 md:w-12 bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                    </div>
-                    {/* Callout 3: Aerator */}
-                    <div className="absolute bottom-[15%] right-[10%] md:right-[15%] flex flex-col items-start">
-                      <div className="h-6 md:h-8 w-[1px] bg-cyan-400 shadow-[0_0_8px_rgba(6,182,212,0.8)] ml-4" />
-                      <div className="text-[7px] md:text-[9px] text-cyan-300 font-mono uppercase tracking-tighter bg-black/40 px-1.5 md:px-2 py-1 border border-cyan-500/20">
-                        Honeycomb<br />Flow Regulator
-                      </div>
-                    </div>
-                  </div>
+                    className={`absolute inset-0 z-30 pointer-events-none transition-all duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12
+                      ${isMorphing ? 'translate-x-[200%] opacity-100' : '-translate-x-[200%] opacity-0'}`}
+                  />
                 </div>
-
-                {/* Precision Mode Indicator with Scanning Effect */}
-                {isPrecisionMode && (
-                  <div className="absolute top-4 left-4 flex flex-col gap-1">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_10px_rgba(6,182,212,1)]" />
-                      <span className="text-[10px] text-cyan-400 font-mono uppercase tracking-widest">Scanning...</span>
-                    </div>
-                    <div className="text-[8px] text-cyan-500/50 font-mono">
-                      LAT: 28.6139° N | LONG: 77.2090° E
-                    </div>
-                  </div>
-                )}
               </div>
 
-              {/* Precision Mode Toggle */}
-              <button
-                onClick={() => setIsPrecisionMode(!isPrecisionMode)}
-                className={`absolute top-4 right-4 z-30 px-3 py-1.5 rounded-full border text-[10px] uppercase tracking-widest font-bold transition-all duration-300 flex items-center gap-2
-                  ${isPrecisionMode ? 'bg-cyan-500 text-black border-cyan-400' : 'bg-black/50 text-white border-white/20 hover:border-white/50'}`}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></svg>
-                {isPrecisionMode ? 'Exit Tech Mode' : 'Precision Engineering'}
-              </button>
-
               {/* Thumbnail strip */}
-              <div className="flex gap-2 md:gap-4 mt-4 w-full">
+              <div className="flex justify-between mt-5 w-full">
                 {thumbs.map((src, i) => (
                   <button
                     key={i}
-                    className={`flex-1 aspect-square bg-[#181818] border rounded-sm overflow-hidden flex-shrink-0
-                      ${i === 0 ? 'border-white/40' : 'border-white/10 hover:border-white/25'}
-                      transition-colors duration-200`}
+                    className="w-24 md:w-32 aspect-[4/3] rounded-sm overflow-hidden flex-shrink-0 transition-colors duration-200"
+                    style={{ border: '0.5px solid #FFFFFF' }}
                   >
-                    <img src={src} alt={`Thumb ${i + 1}`} className="w-full h-full object-contain p-1.5" />
+                    <img src={src} alt={`Thumb ${i + 1}`} className="w-full h-full object-contain p-2" />
                   </button>
                 ))}
               </div>
             </div>
 
             {/* ── Right: Product Info ── */}
-            <div className="w-full md:w-[58%] flex flex-col">
-              <h1 className="detail-info text-white text-2xl md:text-[1.75rem] lg:text-[2rem] font-bold leading-tight font-outfit mb-3 will-change-transform">
-                Upper Parts Kit for S/L Concealed<br className="hidden md:block" />Basin Mixer | VL 10 202
+            <div className="w-full flex flex-col py-4 md:py-2">
+              <h1 className="detail-info text-white text-2xl md:text-3xl lg:text-[2rem] font-medium leading-[1.4] md:leading-[1.4] font-outfit mb-4 will-change-transform">
+                Upper Parts Kit for S/L Concealed Basin Mixer | VL 10 202
               </h1>
-              <p className="detail-info text-[#a3a3a3] text-[11px] md:text-xs leading-relaxed font-light mb-3 max-w-md will-change-transform">
+              <p className="detail-info text-white/70 text-sm md:text-base leading-relaxed font-light mb-4 max-w-md will-change-transform">
                 Fully Brass Faucets made out of Brass Ingots. Flow rate: 13.5 LPM at 3 bar pressure. Total Spout Length = 180mm. Sturdy brass aerator housing.
               </p>
-              <div className="detail-info flex gap-0.5 mb-5 will-change-transform">
-                {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-yellow-400 text-xs">★</span>)}
+              <div className="detail-info flex gap-1 mb-6 will-change-transform">
+                {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-white text-xl">★</span>)}
               </div>
 
-              <h2 className="detail-info text-white text-lg md:text-xl font-bold font-outfit mb-10 will-change-transform">
+              <h2 className="detail-info text-white text-xl md:text-2xl font-normal font-outfit mb-10 will-change-transform">
                 Code :- FR 09- 202
               </h2>
 
               {/* ── Finishing ── */}
-              <div className="detail-info mb-10 will-change-transform">
-                <h3 className="text-white text-lg md:text-xl font-bold font-outfit mb-5">Finishing</h3>
+              <div className="detail-info mb-16 mt-auto will-change-transform">
+                <h3 className="text-white text-xl md:text-2xl font-bold font-outfit mb-5">Finishing</h3>
                 <div className="flex flex-wrap gap-3 md:gap-4">
                   {finishes.map(f => (
                     <button
                       key={f.name}
                       title={f.name}
                       onClick={() => handleFinishChange(f)}
-                      className={`w-[45%] sm:w-20 h-12 rounded-md border transition-all duration-300 relative overflow-hidden group
+                      className={`w-[45%] sm:w-24 h-14 rounded-sm border transition-all duration-300 relative overflow-hidden group
                         ${selectedFinish === f.name ? 'border-white scale-105 md:scale-110 shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'border-white/15 hover:border-white/40'}`}
                       style={{ backgroundColor: f.color }}
                     >
@@ -340,43 +247,20 @@ const ProductDetail = () => {
               </div>
 
               {/* ── Price ── */}
-              <h3 className="detail-info text-white text-lg md:text-xl font-bold font-outfit mb-8 will-change-transform">
+              <h3 className="detail-info text-white text-xl md:text-2xl font-bold font-outfit will-change-transform">
                 MRP :- ₹ 2000
               </h3>
 
-              {/* ── Actions ── */}
-              <div className="detail-info flex items-center gap-2 md:gap-3 will-change-transform">
-                <button
-                  onClick={() => openCart({
-                    id: 'VL 10 202',
-                    name: 'Upper Parts Kit for S/L Concealed Basin Mixer | VL 10 202',
-                    finish: 'Dark Anodized Aluminium',
-                    height: '180mm',
-                    price: 2000,
-                    img: '/images/img2.png',
-                  })}
-                  className="flex-1 max-w-[340px] border border-white/30 rounded-full text-white text-xs md:text-[13px] py-3 md:py-3 px-2 flex items-center justify-center gap-1.5 md:gap-2 hover:bg-white hover:text-black transition-colors uppercase tracking-wide md:tracking-wider font-medium"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" /></svg>
-                  <span>Add to cart</span>
-                </button>
-                <button className="w-10 h-10 md:w-11 md:h-11 border border-white/30 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors shrink-0">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="md:w-[18px] md:h-[18px]"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-                </button>
-                <button className="w-10 h-10 md:w-11 md:h-11 border border-white/30 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/10 transition-colors shrink-0">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="md:w-[18px] md:h-[18px]"><path d="M16 10a4 4 0 01-8 0M3 6h18M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" /></svg>
-                </button>
-              </div>
             </div>
           </div>
 
           {/* ── Key Features — same container, below the grid ── */}
           <div ref={featRef} className="mt-14">
-            <h2 className="feat-title text-white text-lg md:text-xl font-semibold font-outfit mb-6 will-change-transform">Key Features</h2>
-            <ul className="flex flex-col gap-4 text-white text-sm md:text-base font-light">
+            <h2 className="feat-title text-white text-2xl md:text-3xl font-semibold font-outfit mb-6 will-change-transform">Key Features</h2>
+            <ul className="flex flex-col gap-7 text-white text-xl md:text-2xl font-light">
               {['10 Years Warranty for defects against craftsmanship', 'Dynamic Color Options', 'Imported bought out parts', '1,00,000 Life cycle tested spindles', 'Passed 120 hours anti-corrosion finish test'].map(f => (
-                <li key={f} className="feat-item flex items-start gap-3 will-change-transform">
-                  <span className="text-white/50 mt-0.5">•</span><span>{f}</span>
+                <li key={f} className="feat-item flex items-center gap-3 will-change-transform">
+                  <span className="text-white text-lg leading-none">•</span><span>{f}</span>
                 </li>
               ))}
             </ul>
@@ -386,76 +270,52 @@ const ProductDetail = () => {
       </section>
 
       {/* User Review */}
-      <section ref={reviewRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12">
-        <div className="review-item flex items-center gap-4 mb-6 will-change-transform">
-          <div className="w-12 h-12 rounded-full bg-[#333] overflow-hidden border border-white/20">
+      <section ref={reviewRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12 lg:px-32">
+        <div className="review-item flex items-center gap-5 mb-6 will-change-transform">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#333] overflow-hidden border border-white/20">
             <img src="/images/team_rakesh.png" alt="Yash Patel" className="w-full h-full object-cover" />
           </div>
-          <h3 className="text-white text-lg font-semibold font-outfit">Yash Patel</h3>
+          <h3 className="text-white text-xl md:text-2xl font-semibold font-outfit">Yash Patel</h3>
         </div>
-        <textarea placeholder="Enter Your Opinion" className="review-item w-full bg-[#2a2a2c] border border-white/20 rounded-sm text-white text-sm px-5 py-4 h-28 resize-none outline-none focus:border-white/40 transition-colors placeholder:text-white/30 mb-6 will-change-transform" />
+        <textarea placeholder="Enter Your Opinion" className="review-item w-full bg-transparent border border-[#ffffff] rounded-sm text-white text-base md:text-lg px-5 py-4 h-28 resize-none outline-none focus:border-white transition-colors placeholder:text-white/30 mb-6 will-change-transform" />
         <div className="review-item flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 will-change-transform">
-          <button className="flex items-center justify-center gap-2 border border-white/30 rounded-full text-white text-xs px-5 py-3 sm:py-2.5 hover:bg-white/10 transition-colors">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" /></svg>
+          <button className="flex items-center justify-center gap-2 border border-white rounded-full text-white text-sm md:text-base px-7 py-3.5 hover:bg-white hover:text-black transition-colors">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" /></svg>
             <span>Add a photo</span>
           </button>
-          <button className="flex items-center justify-center gap-2 border border-white/30 rounded-full text-white text-xs px-5 py-3 sm:py-2.5 hover:bg-white/10 transition-colors">
+          <button className="flex items-center justify-center gap-2 border border-white rounded-full text-white text-sm md:text-base px-7 py-3.5 hover:bg-white hover:text-black transition-colors">
             <span>Share your content</span>
           </button>
         </div>
       </section>
 
       {/* Similar Items */}
-      <section ref={similarRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12">
+      <section ref={similarRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12 lg:px-32">
         <h2 className="sim-title text-white text-3xl md:text-4xl font-light tracking-wide font-outfit mb-10 will-change-transform">Similar items</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[1, 2, 3].map(item => (
-            <div key={item} className="sim-card flex flex-col opacity-0 will-change-transform">
-              <div className="relative w-full aspect-square bg-[#181818] border border-white/10 rounded-sm overflow-hidden group">
+            <div key={item} className="sim-card flex flex-col group cursor-pointer opacity-0 will-change-transform">
+              {/* Image Box */}
+              <div className="relative w-full aspect-[4/5] bg-[#1F1F21] rounded-2xl border border-[#FFFFFF]
+                              mb-4 sm:mb-5 overflow-hidden flex items-center justify-center p-6 sm:p-10
+                              transition-all duration-300
+                              group-hover:border-[#FFFFFF]
+                              group-hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
                 <Link to={`/product/${item}`} className="block w-full h-full relative">
-                  {/* Technical Ghost Layer (Exploded View) */}
-                  <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-20 transition-all duration-700 pointer-events-none scale-100 group-hover:scale-125 blur-[2px]">
-                    <img
-                      src="/images/img2.png"
-                      alt=""
-                      className="w-full h-full object-contain p-8 invert brightness-200"
-                    />
-                  </div>
-
-                  {/* Main Image Layer */}
-                  <div className="w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 relative z-10">
-                    <img
-                      src="/images/img2.png"
-                      alt="Similar Item"
-                      className="w-full h-full object-contain p-8 transform group-hover:translate-y-[-15px] transition-transform duration-700"
-                    />
-                  </div>
+                  <img
+                    src="/images/img2.png"
+                    alt="Similar Item"
+                    className="w-full h-full object-contain transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.08] will-change-transform"
+                  />
                 </Link>
-                <button className="absolute top-4 right-4 z-10 text-white/50 hover:text-white transition-colors">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                <button className="absolute top-4 right-4 z-10 text-white/60 hover:text-white transition-colors">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
                 </button>
               </div>
-              <div className="text-center mt-4">
-                <h3 className="text-white text-sm md:text-base font-medium mb-1">SO 04 101 | Pillar Cock with Base</h3>
-                <p className="text-white text-sm font-semibold mb-2">INR 1930</p>
-                <div className="flex justify-center gap-0.5 mb-4">
-                  {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-yellow-400 text-xs">★</span>)}
-                </div>
+              <div className="flex flex-col items-center text-center px-1">
+                <h3 className="text-white text-xs sm:text-sm md:text-base tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">SO 04 101 | Pillar Cock with Base</h3>
+                <p className="text-white text-sm sm:text-base font-semibold tracking-widest">INR 1930</p>
               </div>
-              <button
-                onClick={() => openCart({
-                  id: `SIM-${item}`,
-                  name: 'SO 04 101 | Pillar Cock with Base',
-                  finish: 'Chrome',
-                  height: 'N/A',
-                  price: 1930,
-                  img: '/images/img2.png',
-                })}
-                className="w-full border border-white/20 rounded-sm text-white text-sm py-3 flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" /></svg>
-                <span>Add to cart</span>
-              </button>
             </div>
           ))}
         </div>
