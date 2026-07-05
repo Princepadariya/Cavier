@@ -49,12 +49,18 @@ const Dealership = () => {
     const quote = el.querySelectorAll('.phil-quote');
     const desc = el.querySelectorAll('.phil-desc');
     return [
-      { targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
-        anim: { opacity: [0,1], translateY: [20,0], duration: 1000, ease: 'outQuart' } },
-      { targets: [...quote], from: { opacity: '0', transform: 'translateX(-50px)' },
-        anim: { opacity: [0,1], translateX: [-50,0], duration: 1400, delay: 200, ease: 'outExpo' } },
-      { targets: [...desc], from: { opacity: '0', transform: 'translateX(50px)' },
-        anim: { opacity: [0,1], translateX: [50,0], duration: 1400, delay: 400, ease: 'outExpo' } },
+      {
+        targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
+        anim: { opacity: [0, 1], translateY: [20, 0], duration: 1000, ease: 'outQuart' }
+      },
+      {
+        targets: [...quote], from: { opacity: '0', transform: 'translateX(-50px)' },
+        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 1400, delay: 200, ease: 'outExpo' }
+      },
+      {
+        targets: [...desc], from: { opacity: '0', transform: 'translateX(50px)' },
+        anim: { opacity: [0, 1], translateX: [50, 0], duration: 1400, delay: 400, ease: 'outExpo' }
+      },
     ];
   });
 
@@ -63,11 +69,17 @@ const Dealership = () => {
     const label = el.querySelectorAll('.val-label');
     const cards = el.querySelectorAll('.val-card');
     return [
-      { targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
-        anim: { opacity: [0,1], translateY: [20,0], duration: 1000, ease: 'outQuart' } },
-      { targets: [...cards], from: { opacity: '0', transform: 'translateY(60px) scale(0.9)' },
-        anim: { opacity: [0,1], translateY: [60,0], scale: [0.9,1],
-          duration: 1200, delay: stagger(80, { start: 300 }), ease: 'outQuart' } },
+      {
+        targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
+        anim: { opacity: [0, 1], translateY: [20, 0], duration: 1000, ease: 'outQuart' }
+      },
+      {
+        targets: [...cards], from: { opacity: '0', transform: 'translateY(60px) scale(0.9)' },
+        anim: {
+          opacity: [0, 1], translateY: [60, 0], scale: [0.9, 1],
+          duration: 1200, delay: stagger(80, { start: 300 }), ease: 'outQuart'
+        }
+      },
     ];
   });
 
@@ -76,11 +88,17 @@ const Dealership = () => {
     const title = el.querySelectorAll('.path-title');
     const steps = el.querySelectorAll('.path-step');
     return [
-      { targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0,1], translateY: [40,0], duration: 1200, ease: 'outQuart' } },
-      { targets: [...steps], from: { opacity: '0', transform: 'translateY(50px) scale(0.85)' },
-        anim: { opacity: [0,1], translateY: [50,0], scale: [0.85,1],
-          duration: 1200, delay: stagger(120, { start: 300 }), ease: 'outBack' } },
+      {
+        targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+      },
+      {
+        targets: [...steps], from: { opacity: '0', transform: 'translateY(50px) scale(0.85)' },
+        anim: {
+          opacity: [0, 1], translateY: [50, 0], scale: [0.85, 1],
+          duration: 1200, delay: stagger(120, { start: 300 }), ease: 'outBack'
+        }
+      },
     ];
   });
 
@@ -89,11 +107,17 @@ const Dealership = () => {
     const label = el.querySelectorAll('.cand-label');
     const cards = el.querySelectorAll('.cand-card');
     return [
-      { targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
-        anim: { opacity: [0,1], translateY: [20,0], duration: 1000, ease: 'outQuart' } },
-      { targets: [...cards], from: { opacity: '0', transform: 'translateY(50px)' },
-        anim: { opacity: [0,1], translateY: [50,0],
-          duration: 1200, delay: stagger(150, { start: 300 }), ease: 'outQuart' } },
+      {
+        targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
+        anim: { opacity: [0, 1], translateY: [20, 0], duration: 1000, ease: 'outQuart' }
+      },
+      {
+        targets: [...cards], from: { opacity: '0', transform: 'translateY(50px)' },
+        anim: {
+          opacity: [0, 1], translateY: [50, 0],
+          duration: 1200, delay: stagger(150, { start: 300 }), ease: 'outQuart'
+        }
+      },
     ];
   });
 
@@ -103,13 +127,21 @@ const Dealership = () => {
     const fields = el.querySelectorAll('.form-field');
     const btn = el.querySelectorAll('.form-btn');
     return [
-      { targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0,1], translateY: [40,0], duration: 1200, ease: 'outQuart' } },
-      { targets: [...fields], from: { opacity: '0', transform: 'translateY(30px)' },
-        anim: { opacity: [0,1], translateY: [30,0],
-          duration: 1000, delay: stagger(60, { start: 300 }), ease: 'outQuart' } },
-      { targets: [...btn], from: { opacity: '0', transform: 'translateY(20px) scale(0.9)' },
-        anim: { opacity: [0,1], translateY: [20,0], scale: [0.9,1], duration: 1000, delay: 800, ease: 'outBack' } },
+      {
+        targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+      },
+      {
+        targets: [...fields], from: { opacity: '0', transform: 'translateY(30px)' },
+        anim: {
+          opacity: [0, 1], translateY: [30, 0],
+          duration: 1000, delay: stagger(60, { start: 300 }), ease: 'outQuart'
+        }
+      },
+      {
+        targets: [...btn], from: { opacity: '0', transform: 'translateY(20px) scale(0.9)' },
+        anim: { opacity: [0, 1], translateY: [20, 0], scale: [0.9, 1], duration: 1000, delay: 800, ease: 'outBack' }
+      },
     ];
   });
 
@@ -118,11 +150,17 @@ const Dealership = () => {
     const title = el.querySelectorAll('.offer-title');
     const items = el.querySelectorAll('.offer-item');
     return [
-      { targets: [...title], from: { opacity: '0', transform: 'translateX(-40px)' },
-        anim: { opacity: [0,1], translateX: [-40,0], duration: 1400, ease: 'outExpo' } },
-      { targets: [...items], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0,1], translateY: [40,0],
-          duration: 1200, delay: stagger(100, { start: 400 }), ease: 'outQuart' } },
+      {
+        targets: [...title], from: { opacity: '0', transform: 'translateX(-40px)' },
+        anim: { opacity: [0, 1], translateX: [-40, 0], duration: 1400, ease: 'outExpo' }
+      },
+      {
+        targets: [...items], from: { opacity: '0', transform: 'translateY(40px)' },
+        anim: {
+          opacity: [0, 1], translateY: [40, 0],
+          duration: 1200, delay: stagger(100, { start: 400 }), ease: 'outQuart'
+        }
+      },
     ];
   });
 

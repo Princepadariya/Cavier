@@ -39,6 +39,33 @@ const testimonials = [
 const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sectionRef = useRef(null);
+  const containerRef = useRef(null);
+
+  // Scroll-driven logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const scrollableDistance = rect.height - window.innerHeight;
+      const scrolled = -rect.top;
+      
+      if (scrolled < 0) {
+        setCurrentIndex(0);
+      } else if (scrolled > scrollableDistance) {
+        setCurrentIndex(testimonials.length - 1);
+      } else {
+        const progress = scrolled / scrollableDistance;
+        const index = Math.min(
+          testimonials.length - 1,
+          Math.floor(progress * testimonials.length)
+        );
+        setCurrentIndex(index);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Anime.js scroll-triggered entrance animations
   useEffect(() => {
@@ -103,16 +130,7 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    // Auto-advance the testimonials every 4 seconds for slow, luxurious reading
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Calculate positioning for 3D stacked cards
+  // Calculate positioning for 3D horizontal carousel
   const getCardAnimation = (index, current) => {
     const total = testimonials.length;
     let diff = index - current;
@@ -120,33 +138,34 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
     if (diff < 0) diff += total;
 
     // ACTIVE CARD - Front and center
-    if (diff === 0) return { y: 0, scale: 1, zIndex: 50, opacity: 1, rotateX: 0, originY: 'bottom' };
-    
-    // SECOND CARD - Slightly behind and lower
-    if (diff === 1) return { y: 30, scale: 0.94, zIndex: 40, opacity: 0.6, rotateX: 0, originY: 'bottom' };
-    
-    // THIRD CARD - Further behind
-    if (diff === 2) return { y: 60, scale: 0.88, zIndex: 30, opacity: 0.3, rotateX: 0, originY: 'bottom' };
-    
-    // EXITED CARD - Tossed up and forwarded, fading out
-    if (diff === total - 1) return { y: -100, scale: 1.05, zIndex: 60, opacity: 0, rotateX: -10, originY: 'bottom' };
-    
-    // HIDDEN CARDS
-    return { y: 80, scale: 0.8, zIndex: 10, opacity: 0, rotateX: 0 };
+    if (diff === 0) return { x: 0, y: 0, scale: 1, zIndex: 50, opacity: 1 };
+
+    // RIGHT CARD - Next
+    if (diff === 1) return { x: "12%", y: 0, scale: 0.9, zIndex: 40, opacity: 0.6 };
+
+    // LEFT CARD - Previous
+    if (diff === total - 1) return { x: "-12%", y: 0, scale: 0.9, zIndex: 40, opacity: 0.6 };
+
+    // EXITED CARD - Hidden on left
+    if (diff === total - 2) return { x: "-40%", y: 0, scale: 0.7, zIndex: 30, opacity: 0 };
+
+    // UPCOMING CARDS - Hidden on right
+    return { x: "40%", y: 0, scale: 0.7, zIndex: 30, opacity: 0 };
   }
 
   const progressPercent = ((currentIndex + 1) / testimonials.length) * 100;
 
   return (
-    <section ref={sectionRef} className={`w-full py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden relative perspective-1000 ${bgClass}`}>
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative z-10">
-        
+    <div ref={containerRef} className={`w-full relative ${bgClass}`} style={{ height: `${testimonials.length * 80}vh` }}>
+      <section ref={sectionRef} className="sticky top-0 w-full h-screen py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
+        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative z-10">
+
         {/* Left Side: Title & Info */}
         <div className="w-full lg:w-5/12 flex flex-col items-start pr-0 md:pr-10">
-          <h2 className="test-title text-3xl md:text-5xl lg:text-[3.2rem] font-medium text-white tracking-wide mb-8 md:mb-10 leading-tight opacity-0 will-change-transform">
+          <h2 className="test-title text-3xl md:text-5xl lg:text-[3.2rem] font-medium text-white tracking-wide mb-8 md:mb-10 leading-[1.4] opacity-0 will-change-transform">
             Experiences That Speak for Quality
           </h2>
-          
+
           <button className="test-btn flex items-center gap-3 px-8 py-3.5 border border-white/50 text-white text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-300 opacity-0 will-change-transform">
             Explore Products
             <ChevronRight size={16} />
@@ -155,22 +174,22 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
 
         {/* Right Side: 3D Stacked Card Engine */}
         <div className="test-stack-container w-full lg:w-7/12 mt-16 lg:mt-0 opacity-0 will-change-transform perspective-[1500px]">
-          
+
           {/* STACK WRAPPER */}
           <div className="relative w-full max-w-[600px] mx-auto h-[420px] sm:h-[380px] md:h-[340px]">
             {testimonials.map((testimonial, i) => (
               <motion.div
                 key={testimonial.id}
                 animate={getCardAnimation(i, currentIndex)}
-                transition={{ 
-                  duration: 0.8, 
+                transition={{
+                  duration: 0.8,
                   ease: [0.19, 1, 0.22, 1]
                 }}
                 className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#1e1e1e] border border-white/10 rounded-[1.5rem] p-8 md:p-12 shadow-2xl flex flex-col"
               >
                 {/* Background Watermark Quote */}
                 <Quote size={120} className="absolute right-6 top-6 text-white/5" strokeWidth={1} />
-                
+
                 {/* Content */}
                 <div className="relative z-10 flex-grow flex flex-col">
                   <h3 className="text-white text-xl md:text-2xl font-light tracking-wide mb-1">
@@ -198,7 +217,7 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
           {/* Animated Progress Bar */}
           <div className="w-full max-w-[600px] mx-auto flex justify-center mt-12 md:mt-16 z-20 relative px-4">
             <div className="w-full md:w-[85%] h-[2px] bg-white/20 relative overflow-hidden rounded-full">
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 h-full bg-white"
                 initial={{ width: 0 }}
                 animate={{ width: `${progressPercent}%` }}
@@ -209,7 +228,8 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
         </div>
 
       </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
