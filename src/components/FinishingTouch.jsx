@@ -167,10 +167,10 @@ const FinishingTouch = () => {
             });
           }
 
-          // Cards settle into their zigzag resting position (alternating up/down)
+          // Cards settle into their resting position
           animate(cards, {
             opacity: [0, 1],
-            translateY: [300, (_el, i) => zigzagY(i)],
+            translateY: [300, (_el, i) => metrics.isMobile ? 0 : zigzagY(i)],
             rotate: [(_el, i) => 8 + i * 3, 0],
             scale: [0.8, 1],
             duration: 1400,
