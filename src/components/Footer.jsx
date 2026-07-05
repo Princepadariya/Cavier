@@ -155,6 +155,7 @@ const Footer = ({ variant = 'dark' }) => {
               <li><Link to="/about" className={`transition-colors ${t.link}`}>About</Link></li>
               <li><Link to="/dealership" className={`transition-colors ${t.link}`}>Dealership</Link></li>
               <li><Link to="/contact" className={`transition-colors ${t.link}`}>Contact</Link></li>
+              <li><Link to="/blog" className={`transition-colors ${t.link}`}>Blog</Link></li>
             </ul>
           </div>
 
@@ -233,10 +234,10 @@ const Footer = ({ variant = 'dark' }) => {
         )}
 
         {/* LOWER SECTION: big logo + (product image / address) */}
-        <div className="flex flex-row justify-between items-end gap-6 relative">
+        <div className={`${isLight ? 'flex flex-col-reverse md:flex-row items-start md:items-end' : 'flex flex-row items-end'} justify-between gap-6 relative`}>
 
           {/* Massive Scroll-Linked Logo — gradient filled via PNG mask */}
-          <div className="w-[64%] md:w-[70%] overflow-hidden pt-4 pb-2">
+          <div className={`${isLight ? 'w-full md:w-[70%]' : 'w-[64%] md:w-[70%]'} overflow-hidden pt-4 pb-2`}>
             <div
               ref={bigTextRef}
               role="img"
@@ -260,7 +261,7 @@ const Footer = ({ variant = 'dark' }) => {
 
           {isLight ? (
             /* Light: address + phone + social next to logo */
-            <div className={`gsap-footer-address opacity-0 will-change-transform w-[36%] md:w-[30%] flex flex-col items-end text-right gap-4 text-[13px] md:text-sm ${t.text} pb-4`}>
+            <div className={`gsap-footer-address opacity-0 will-change-transform w-full md:w-[30%] flex flex-col items-start text-left md:items-end md:text-right gap-4 text-[13px] md:text-sm ${t.text} pb-4`}>
               <div className="leading-[1.8]">
                 <p>01, Vision Industrial Park</p>
                 <p>Changa, Lalpur Road</p>

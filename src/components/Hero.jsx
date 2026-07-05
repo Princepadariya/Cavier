@@ -1,16 +1,30 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-const heroBg = "/images/hero-bg.jpeg";
+// Mobile uses hero-bg.jpg; desktop (≥768px) uses hero-bg_desktop.png
+const HERO_BG_MOBILE = "/images/hero-bg.jpg";
+const HERO_BG_DESKTOP = "/images/hero-bg_desktop.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const containerRef = useRef(null);
   const bgRef = useRef(null);
+
+  const [hero, setHero] = useState({ bg: HERO_BG_DESKTOP, pos: "center bottom" });
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setHero(mq.matches
+      ? { bg: HERO_BG_MOBILE, pos: "center 70%" }
+      : { bg: HERO_BG_DESKTOP, pos: "center bottom" });
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   useGSAP(() => {
     // 6. Hero Section: 3D Depth Parallax
@@ -46,9 +60,10 @@ export default function Hero() {
       {/* Background with GSAP ScrollTrigger Parallax */}
       <div
         ref={bgRef}
-        className="absolute inset-[-5%] w-[110%] h-[110%] bg-cover bg-center will-change-transform"
+        className="absolute inset-[-5%] w-[110%] h-[110%] bg-cover will-change-transform"
         style={{
-          backgroundImage: `url(${heroBg})`,
+          backgroundImage: `url(${hero.bg})`,
+          backgroundPosition: hero.pos,
         }}
       />
 
@@ -59,7 +74,7 @@ export default function Hero() {
       <motion.div
         initial={{ x: "0%" }}
         animate={{ x: "-100%" }}
-        transition={{ duration: 2.2, ease: [0.76, 0, 0.24, 1] }} 
+        transition={{ duration: 2.2, ease: [0.76, 0, 0.24, 1] }}
         className="absolute left-0 top-0 h-full w-1/2 bg-black z-20 pointer-events-none"
       />
 
@@ -90,7 +105,7 @@ export default function Hero() {
         </p>
 
         {/* Rule 8. Buttons: Use Motion: hover scale: 1 -> 1.05 tap scale: 0.95 */}
-        <motion.button 
+        <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="mt-6 sm:mt-8 px-5 sm:px-6 py-2.5 sm:py-3 border border-white hover:bg-white hover:text-black transition uppercase text-xs sm:text-sm tracking-widest pointer-events-auto"

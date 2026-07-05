@@ -82,6 +82,10 @@ const Navbar = ({ variant = 'default' }) => {
           Contact
           <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
         </Link>
+        <Link to="/blog" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
+          Blog
+          <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+        </Link>
       </div>
 
       {/* Center Brand */}
@@ -169,6 +173,7 @@ const Navbar = ({ variant = 'default' }) => {
                 { to: '/product', label: 'Product' },
                 { to: '/#category', label: 'Category' },
                 { to: '/contact', label: 'Contact' },
+                { to: '/blog', label: 'Blog' },
               ].map((link, i) => (
                 <motion.div
                   key={link.to}

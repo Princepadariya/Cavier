@@ -18,7 +18,7 @@ const Home = () => {
   const [preloaderDone, setPreloaderDone] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-[#1F1F21] w-full overflow-hidden">
+    <div className="relative min-h-screen bg-[#1F1F21] w-full overflow-x-clip">
       {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
 
       <Hero />

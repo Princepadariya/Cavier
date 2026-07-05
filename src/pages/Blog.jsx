@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { animate, stagger, createSpring } from 'animejs';
 import { ChevronDown } from 'lucide-react';
 
@@ -99,7 +100,7 @@ const Blog = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {posts.map((p, i) => (
-            <div key={i} className="blog-card group cursor-pointer flex flex-col will-change-transform">
+            <Link to={`/blog/${i + 1}`} key={i} className="blog-card group cursor-pointer flex flex-col will-change-transform">
               <div className="w-full aspect-square overflow-hidden rounded-sm mb-5">
                 <img
                   src={p.img}
@@ -110,7 +111,7 @@ const Blog = () => {
               <h3 className="text-white text-base md:text-lg font-light leading-relaxed group-hover:text-[#a3a3a3] transition-colors">
                 {p.title}
               </h3>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

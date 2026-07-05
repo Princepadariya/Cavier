@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { animate, stagger, createSpring } from 'animejs';
+import { animate, stagger } from 'animejs';
 
 // 7 images total
 const collections = [
@@ -24,7 +24,8 @@ const FinishingTouch = () => {
     cardGap: 32,
     totalTranslate: 320 * 4,
     textBlockW: 420,
-    trackStart: 500
+    trackStart: 500,
+    isMobile: false,
   });
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const FinishingTouch = () => {
         totalTranslate,
         textBlockW,
         trackStart,
-        isMobile
+        isMobile,
       });
     };
 
@@ -55,14 +56,15 @@ const FinishingTouch = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Framer Motion: horizontal scroll scrub (keep — Anime.js can't do scroll-linked transforms)
+  // Framer Motion: horizontal scroll scrub — the sticky inner stays pinned while
+  // the section's extra height is scrolled through, driving the track horizontally.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start start', 'end end'],
   });
 
   const xRaw = useTransform(scrollYProgress, [0, 1], [0, -metrics.totalTranslate]);
-  const x = useSpring(xRaw, { stiffness: 100, damping: 25, mass: 0.5 });
+  const x = useSpring(xRaw, { stiffness: 120, damping: 30, mass: 0.5 });
 
   // Anime.js: Scroll-triggered card cascade + title reveal
   useEffect(() => {
@@ -88,7 +90,6 @@ const FinishingTouch = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Title sweeps in with spring
           if (title) {
             animate(title, {
               opacity: [0, 1],
@@ -98,7 +99,6 @@ const FinishingTouch = () => {
             });
           }
 
-          // Cards cascade in like a card deck being dealt
           animate(cards, {
             opacity: [0, 1],
             translateY: [300, 0],
@@ -109,7 +109,6 @@ const FinishingTouch = () => {
             ease: 'outQuart',
           });
 
-          // Inner images zoom from 1.25 to 1 (cinematic)
           animate(innerBgs, {
             scale: [1.25, 1],
             duration: 1800,
@@ -131,7 +130,7 @@ const FinishingTouch = () => {
     <section
       ref={sectionRef}
       className="relative bg-[#1F1F21]"
-      style={{ height: `calc(100vh + 100px)` }}
+      style={{ height: `calc(100vh + ${metrics.totalTranslate}px)` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-start">
 
