@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Brittany Signature — commercial font. Drop the font file(s) into
-   public/fonts/ (paths below) for this to render. */
+/* Brittany Signature — commercial font. */
 @font-face {
   font-family: 'Brittany Signature';
-  src: url('/fonts/BrittanySignature.woff2') format('woff2'),
+  src: url('/fonts/BrittanySignature.otf') format('opentype'),
+       url('/fonts/BrittanySignature.woff2') format('woff2'),
        url('/fonts/BrittanySignature.woff') format('woff'),
        url('/fonts/BrittanySignature.ttf') format('truetype');
   font-weight: 400;
@@ -15,79 +15,50 @@
 }
 
 /* ─── Halyard Micro (main headings) ───
-   Commercial font. Drop the files into public/fonts/ using these exact names
-   (woff2 preferred; woff/ttf are optional fallbacks). */
+   Only the Regular weight file has been supplied so far, so this single face
+   is declared across the full weight range (100–900) and used for every
+   heading weight until dedicated Light/Medium/SemiBold/Bold files arrive.
+   When those are added, give each its own @font-face with an exact
+   font-weight (matching the pattern used for Regular below) — an exact
+   weight match always wins over this range face, so nothing else changes. */
 @font-face {
   font-family: 'Halyard Micro';
-  src: url('/fonts/HalyardMicro-Light.woff2') format('woff2'),
-       url('/fonts/HalyardMicro-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Halyard Micro';
-  src: url('/fonts/HalyardMicro-Regular.woff2') format('woff2'),
+  src: url('/fonts/HalyardMicro-Regular.otf') format('opentype'),
+       url('/fonts/HalyardMicro-Regular.woff2') format('woff2'),
        url('/fonts/HalyardMicro-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Halyard Micro';
-  src: url('/fonts/HalyardMicro-Medium.woff2') format('woff2'),
-       url('/fonts/HalyardMicro-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Halyard Micro';
-  src: url('/fonts/HalyardMicro-SemiBold.woff2') format('woff2'),
-       url('/fonts/HalyardMicro-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Halyard Micro';
-  src: url('/fonts/HalyardMicro-Bold.woff2') format('woff2'),
-       url('/fonts/HalyardMicro-Bold.ttf') format('truetype');
-  font-weight: 700;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
-/* ─── Halyard Text (body / descriptions) ─── */
+/* ─── Halyard Text (body / descriptions) ───
+   The Regular file covers every weight EXCEPT 300 — that gap is filled by the
+   dedicated Light face below. (An exact-weight face isn't reliably preferred
+   over an overlapping range face by browsers, so the ranges are split instead
+   of relying on match priority.) */
 @font-face {
   font-family: 'Halyard Text';
-  src: url('/fonts/HalyardText-Light.woff2') format('woff2'),
-       url('/fonts/HalyardText-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Halyard Text';
-  src: url('/fonts/HalyardText-Regular.woff2') format('woff2'),
+  src: url('/fonts/HalyardText-Regular.otf') format('opentype'),
+       url('/fonts/HalyardText-Regular.woff2') format('woff2'),
        url('/fonts/HalyardText-Regular.ttf') format('truetype');
-  font-weight: 400;
+  font-weight: 100 299;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Halyard Text';
-  src: url('/fonts/HalyardText-Medium.woff2') format('woff2'),
-       url('/fonts/HalyardText-Medium.ttf') format('truetype');
-  font-weight: 500;
+  src: url('/fonts/HalyardText-Regular.otf') format('opentype'),
+       url('/fonts/HalyardText-Regular.woff2') format('woff2'),
+       url('/fonts/HalyardText-Regular.ttf') format('truetype');
+  font-weight: 301 900;
   font-style: normal;
   font-display: swap;
 }
+/* Real Light weight file — the only face declared for exactly 300. */
 @font-face {
   font-family: 'Halyard Text';
-  src: url('/fonts/HalyardText-SemiBold.woff2') format('woff2'),
-       url('/fonts/HalyardText-SemiBold.ttf') format('truetype');
-  font-weight: 600;
+  src: url('/fonts/HalyardText-Light.otf') format('opentype');
+  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }

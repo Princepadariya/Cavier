@@ -100,7 +100,7 @@ const Blog = () => {
         <h2 className="blog-sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 md:mb-16 font-outfit will-change-transform">
           Insights &amp; Inspiration
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
           {posts.map((p, i) => (
             <Link to={`/blog/${i + 1}`} key={i} className="blog-card group cursor-pointer flex flex-col will-change-transform">
               <div className="w-full aspect-square overflow-hidden rounded-sm mb-5">

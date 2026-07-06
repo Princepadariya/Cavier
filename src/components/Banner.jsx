@@ -16,25 +16,28 @@ const Banner = () => {
       {/* Cursive text */}
       <div className="absolute bottom-8 left-4 md:bottom-12 md:left-16 z-10 pr-4">
         <p
-          className="text-white leading-tight"
+          className="text-white"
           style={{
-            fontFamily: "'Brittany Signature', 'Dancing Script', 'Great Vibes', cursive",
-            fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+            fontFamily: "'Brittany Signature', 'Yellowtail', 'Dancing Script', 'Great Vibes', cursive",
+            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
             fontWeight: 400,
-            lineHeight: 1.2,
+            lineHeight: 1.8,
             letterSpacing: '0.02em',
             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
+            maxWidth: '800px',
           }}
         >
-          {line1.split('').map((char, i) => (
-            <span key={`l1-${i}`} className="inline-block" style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
-              {char === ' ' ? '\u00A0' : char}
+          {line1.split(' ').map((word, i) => (
+            <span key={`l1-${i}`} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
+              {word}
+              {i < line1.split(' ').length - 1 ? '\u00A0' : ''}
             </span>
           ))}
-          <br />
-          {line2.split('').map((char, i) => (
-            <span key={`l2-${i}`} className="inline-block" style={{ whiteSpace: char === ' ' ? 'pre' : 'normal' }}>
-              {char === ' ' ? '\u00A0' : char}
+          {line2 && <br />}
+          {line2.split(' ').map((word, i) => (
+            <span key={`l2-${i}`} className="inline-block" style={{ whiteSpace: 'nowrap' }}>
+              {word}
+              {i < line2.split(' ').length - 1 ? '\u00A0' : ''}
             </span>
           ))}
         </p>

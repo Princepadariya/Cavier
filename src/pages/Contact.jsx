@@ -108,28 +108,28 @@ const Contact = () => {
 
 
       {/* Hero Section */}
-      <div ref={heroRef} className="relative h-screen w-full flex flex-col md:flex-row overflow-hidden">
+      <div ref={heroRef} className="relative min-h-screen md:h-screen w-full flex flex-col md:flex-row overflow-hidden bg-[#1F1F21]">
 
-        <div className="w-full md:w-1/2 h-full bg-[#1F1F21] flex flex-col justify-center px-6 md:px-12 lg:px-32 z-10">
-          <div className="contact-content max-w-lg pt-20">
+        <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-32 pt-28 pb-12 md:py-0 z-10">
+          <div className="contact-content max-w-lg">
             <h1 className="text-white text-4xl md:text-[64px] font-extralight tracking-tight leading-[1.1] mb-6 md:mb-10 font-outfit will-change-transform">
               We're Here to Assist You Anytime
             </h1>
-            <p className="text-white/70 text-base md:text-lg leading-[1.8] mb-8 md:mb-10 font-text font-thin max-w-sm tracking-wider will-change-transform">
+            <p className="text-[#7E7E7E] text-base md:text-lg leading-[1.8] mb-8 md:mb-10 font-text font-thin tracking-wider will-change-transform">
               At CAVIER, we value every connection. Whether you have a question
               about our products, need expert guidance, or are interested in
               partnering with us, our team is always ready to help.
             </p>
             <button
               onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-              className="flex items-center space-x-3 md:space-x-4 px-6 py-3 md:px-10 md:py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-all duration-500 rounded-none text-[10px] md:text-[12px] tracking-[0.3em] md:tracking-[0.4em] uppercase font-outfit font-extralight will-change-transform"
+              className="flex items-center w-fit space-x-3 md:space-x-4 px-4 py-3 md:px-6 md:py-4 border border-white text-white hover:bg-white hover:text-black transition-all duration-500 rounded-none text-[10px] md:text-[12px] uppercase font-outfit font-extralight will-change-transform"
             >
               <span>Scroll Down</span>
               <ChevronDown size={14} className="opacity-70" />
             </button>
           </div>
         </div>
-        <div className="hidden md:block w-1/2 h-full relative">
+        <div className="w-full md:w-1/2 h-[45vh] md:h-full relative overflow-hidden">
           <div className="contact-hero-img absolute inset-0 bg-cover bg-center will-change-transform" style={{ backgroundImage: 'url("/images/contact-bg.png")' }} />
           <div className="absolute inset-0 bg-[#EFECE8] mix-blend-multiply opacity-20" />
         </div>
@@ -141,16 +141,20 @@ const Contact = () => {
         {/* Info Grid */}
         <div ref={infoRef} className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 mb-16 md:mb-32 max-w-7xl mx-auto">
           {[
-            { t: 'Contact', v: '(91) 288 2730 052, 53' },
-            { t: 'Fax', v: '(91) 288 2730 054' },
-            { t: 'Service Related', v: '(91) 96876 20054.' },
-            { t: 'Email', v: 'info@cavierindia.com' },
-            { t: 'Trade Enquiry', v: '(91) 73839 33333' },
+            { t: 'Contact', v: '(91) 288 2730 052, 53', href: 'tel:+912882730052' },
+            { t: 'Fax', v: '(91) 288 2730 054', href: 'tel:+912882730054' },
+            { t: 'Service Related', v: '(91) 96876 20054.', href: 'tel:+919687620054' },
+            { t: 'Email', v: 'info@cavierindia.com', href: 'mailto:info@cavierindia.com' },
+            { t: 'Trade Enquiry', v: '(91) 73839 33333', href: 'tel:+917383933333' },
           ].map(c => (
-            <div key={c.t} className="info-card border border-white py-6 md:py-8 px-3 md:px-4 flex flex-col items-center justify-center text-center will-change-transform">
-              <h3 className="text-white text-base md:text-lg font-outfit font-light mb-4 tracking-wide">{c.t}</h3>
-              <p className="text-white/70 text-sm md:text-base font-text tracking-wide">{c.v}</p>
-            </div>
+            <a
+              key={c.t}
+              href={c.href}
+              className="info-card border border-white py-6 md:py-8 px-3 md:px-4 flex flex-col items-center justify-center text-center will-change-transform hover:bg-white hover:text-black transition-colors duration-300 group"
+            >
+              <h3 className="text-white group-hover:text-black text-base md:text-lg font-outfit font-light mb-4 tracking-wide transition-colors duration-300">{c.t}</h3>
+              <p className="text-white group-hover:text-black text-sm md:text-base font-text tracking-wide transition-colors duration-300">{c.v}</p>
+            </a>
           ))}
         </div>
 

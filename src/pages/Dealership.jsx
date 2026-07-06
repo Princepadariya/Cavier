@@ -218,7 +218,7 @@ const Dealership = () => {
       </section>
 
       {/* Value Propositions */}
-      <section ref={valRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={valRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="text-center mb-12 md:mb-16"><span className="val-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Value Propositions</span></div>
         <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10">
           {[
@@ -239,11 +239,9 @@ const Dealership = () => {
       </section>
 
       {/* Path To Partnership */}
-      <section ref={pathRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={pathRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="path-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-16 font-outfit text-center will-change-transform">The Path To Partnership</h2>
         <div className="relative grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {/* Connecting line through the middle of the boxes */}
-          <div className="absolute top-10 md:top-12 left-0 right-0 h-px bg-white/15 z-0" />
           {[
             { n: '01', t: 'Inquiry', d: 'Submit your interest via our digital portal.' },
             { n: '02', t: 'Review', d: 'Our team evaluates market compatibility and potential.' },
@@ -251,7 +249,12 @@ const Dealership = () => {
             { n: '04', t: 'Start', d: 'Onboarding, setup, and global launch.' },
           ].map((s, i) => (
             <div key={s.n} className="path-step relative z-10 flex flex-col items-center text-center will-change-transform">
-              <div className={`w-20 h-20 md:w-24 md:h-24 ${i === 3 ? 'bg-gradient-to-br from-[#888] to-[#444]' : 'bg-[#1c1c1e] border border-white/20'} rounded-sm flex items-center justify-center mb-6`}>
+              {/* Desktop Line - Spans all 4 columns from the first item */}
+              {i === 0 && <div className="hidden md:block absolute top-12 left-0 w-[calc(400%+4.5rem)] h-px bg-white/15 z-[-1]" />}
+              {/* Mobile Lines - Spans 2 columns from the first item of each row */}
+              {(i === 0 || i === 2) && <div className="md:hidden absolute top-10 left-0 w-[calc(200%+1rem)] h-px bg-white/15 z-[-1]" />}
+
+              <div className={`relative z-10 w-20 h-20 md:w-24 md:h-24 ${i === 3 ? 'bg-gradient-to-br from-[#888] to-[#444]' : 'bg-[#1c1c1e] border border-white/20'} rounded-sm flex items-center justify-center mb-6`}>
                 <span className="text-white text-2xl md:text-3xl font-light font-outfit">{s.n}</span>
               </div>
               <h3 className="text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3">{s.t}</h3>
@@ -262,14 +265,14 @@ const Dealership = () => {
       </section>
 
       {/* Candidate Profiles */}
-      <section ref={candRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32 relative z-10">
+      <section ref={candRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32 relative z-10">
         <div className="text-center mb-12 md:mb-16"><span className="cand-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Candidate Profiles</span></div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
             { t: 'Retail Showroom Details', d: 'Establishments catering to the luxury residential market with a focus on interior design and bespoke fittings.' },
             { t: 'Regional Distributors', d: 'Established partners with logistics capabilities and a network of sub-dealers in high-growth metropolitan areas.' },
           ].map(c => (
-            <div key={c.t} className="cand-card border border-white/10 p-16 min-h-[220px] flex flex-col justify-start will-change-transform transition-all duration-500 hover:border-white/30 hover:bg-white/[0.02] group">
+            <div key={c.t} className="cand-card border border-white/10 p-8 md:p-16 min-h-[220px] flex flex-col justify-start will-change-transform transition-all duration-500 hover:border-white/30 hover:bg-white/[0.02] group">
               <h3 className="text-white text-3xl md:text-4xl font-light tracking-wide mb-6 font-outfit group-hover:text-white transition-colors">{c.t}</h3>
               <p className="text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light group-hover:text-[#d1d1d1] transition-colors">{c.d}</p>
             </div>
@@ -278,7 +281,7 @@ const Dealership = () => {
       </section>
 
       {/* Project Form */}
-      <section ref={formRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={formRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="form-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-10 md:mb-14 font-outfit text-center will-change-transform">Project Form</h2>
         <form className="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto" onSubmit={e => {
           e.preventDefault();
@@ -314,7 +317,7 @@ const Dealership = () => {
       </section>
 
       {/* What We Offer */}
-      <section ref={offerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={offerRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20">
           <div className="w-full md:w-[360px] md:flex-shrink-0">
             <h2 className="offer-title text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.1] font-outfit max-w-[220px] will-change-transform">What We Offer</h2>

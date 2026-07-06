@@ -19,7 +19,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="relative h-[100dvh] md:h-screen overflow-hidden text-white">
+    <div className="relative h-[100svh] md:h-screen overflow-hidden text-white">
 
       {/* Background */}
       <div

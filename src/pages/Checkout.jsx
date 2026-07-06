@@ -90,7 +90,7 @@ const Checkout = () => {
                         <div className="flex-1 flex flex-col justify-between">
                           <div className="flex justify-between items-start gap-2 md:gap-4 w-full">
                             <div className="pr-2 md:pr-12">
-                              <h3 className="text-[12px] md:text-[13px] font-bold leading-snug mb-2 md:mb-3">{item.name}</h3>
+                              <h3 className="font-outfit text-[12px] md:text-[13px] font-bold leading-snug mb-2 md:mb-3">{item.name}</h3>
                               <p className="text-[10px] text-white/50 mb-1">Color / Finish : {item.finish}</p>
                               <p className="text-[10px] text-white/50">Total Height = {item.height}</p>
                             </div>
@@ -112,7 +112,7 @@ const Checkout = () => {
                             </div>
                             
                             {/* Price */}
-                            <div className="text-sm md:text-lg font-bold">
+                            <div className="font-outfit text-sm md:text-lg font-bold">
                               ₹{(item.price * item.qty).toFixed(2)}
                             </div>
                           </div>
@@ -341,8 +341,8 @@ const Checkout = () => {
                 </div>
                 
                 <div className="text-center flex flex-col items-center">
-                  <h3 className="text-sm font-semibold mb-2">{item.name}</h3>
-                  <p className="text-[13px] font-bold mb-3">INR {item.price}</p>
+                  <h3 className="font-outfit text-sm font-semibold mb-2">{item.name}</h3>
+                  <p className="font-outfit text-[13px] font-bold mb-3">INR {item.price}</p>
                   
                   {/* Stars */}
                   <div className="flex gap-1 text-white mb-6">

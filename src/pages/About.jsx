@@ -302,7 +302,7 @@ const About = () => {
       </section>
 
       {/* CAVIER in Numbers */}
-      <section ref={numRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={numRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="sec-title text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide mb-12 font-outfit will-change-transform">
           CAVIER in Numbers
         </h2>
@@ -322,7 +322,7 @@ const About = () => {
       </section>
 
       {/* Crafted for Every Bath Space */}
-      <section ref={craftRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={craftRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-center">
           <div className="craft-text w-full md:w-[45%] flex flex-col justify-center will-change-transform">
             <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-8 font-outfit">
@@ -347,7 +347,7 @@ const About = () => {
       </section>
 
       {/* The Foundation of Our Excellence */}
-      <section ref={foundRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={foundRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 font-outfit will-change-transform">
           The Foundation of Our Excellence
         </h2>
@@ -374,7 +374,7 @@ const About = () => {
       </section>
 
       {/* Engineered Perfection */}
-      <section ref={engRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={engRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
           <div className="eng-img w-full md:w-[45%] will-change-transform">
             <img src="/images/img6.png" alt="Engineered Perfection" className="w-full h-auto object-contain" />
@@ -403,7 +403,7 @@ const About = () => {
       </section>
 
       {/* Cavier Authorised Dealer Showroom */}
-      <section ref={dealerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:pl-12 md:pr-0 lg:pl-32">
+      <section ref={dealerRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:pl-12 md:pr-0 lg:pl-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-stretch">
           <div className="dealer-text w-full md:w-[40%] flex flex-col justify-center will-change-transform">
             <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-8 font-outfit">
@@ -429,7 +429,7 @@ const About = () => {
       </section>
 
       {/* Meet Our Team */}
-      <section ref={teamRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
+      <section ref={teamRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <h2 className="sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 font-outfit will-change-transform">
           Meet Our Team
         </h2>

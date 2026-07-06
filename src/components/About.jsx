@@ -27,7 +27,7 @@ const About = () => {
           animate(wrapper, {
             opacity: [0, 1],
             translateY: [50, 0],
-            duration: 1200,
+            duration: 700,
             ease: 'outExpo',
           });
 
@@ -35,8 +35,8 @@ const About = () => {
           animate(line, {
             scaleX: [0, 1],
             opacity: [0, 1],
-            duration: 800,
-            delay: 400,
+            duration: 500,
+            delay: 150,
             ease: 'inOutQuart',
           });
 
@@ -44,15 +44,15 @@ const About = () => {
           animate(words, {
             opacity: [0, 1],
             translateY: [20, 0],
-            duration: 900,
-            delay: stagger(35, { start: 500 }),
+            duration: 600,
+            delay: stagger(12, { start: 150 }),
             ease: 'outQuart',
           });
         } else {
           reset();
         }
       },
-      { threshold: 0.2, rootMargin: '0px 0px -80px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 0px 0px' }
     );
 
     observer.observe(el);
@@ -73,7 +73,7 @@ const About = () => {
           style={{ background: 'linear-gradient(90deg, transparent, #c9a227, transparent)', transformOrigin: 'center' }}
         />
 
-        <p className="text-lg md:text-2xl lg:text-3xl leading-relaxed md:leading-relaxed lg:leading-[1.7] font-light tracking-wide">
+        <p className="text-xl md:text-3xl lg:text-4xl leading-normal md:leading-normal lg:leading-[1.4] font-light tracking-wide">
           <span className="about-word text-white font-semibold will-change-transform inline-block opacity-0">
             {highlightText}&nbsp;
           </span>

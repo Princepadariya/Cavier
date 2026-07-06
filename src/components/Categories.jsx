@@ -28,7 +28,7 @@ const Categories = () => {
           animate(title, {
             opacity: [0, 1],
             translateY: [40, 0],
-            duration: 1000,
+            duration: 600,
             ease: 'outExpo',
           });
 
@@ -38,15 +38,15 @@ const Categories = () => {
             translateY: [100, 0],
             scale: [0.88, 1],
             rotate: [3, 0],
-            duration: 1400,
-            delay: stagger(200, { start: 300 }),
+            duration: 700,
+            delay: stagger(80, { start: 100 }),
             ease: 'outQuart',
           });
         } else {
           reset();
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 0px 0px' }
     );
 
     observer.observe(el);

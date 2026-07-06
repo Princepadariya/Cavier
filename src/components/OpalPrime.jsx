@@ -38,10 +38,10 @@ const OpalPrime = () => {
 
               {/* Details */}
               <div className="flex flex-col items-center text-center px-1">
-                <h3 className="text-gray-300 text-[10px] sm:text-xs md:text-sm tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
+                <h3 className="font-outfit text-gray-300 text-[10px] sm:text-xs md:text-sm tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
                   {product.title}
                 </h3>
-                <p className="text-white text-xs sm:text-sm font-semibold tracking-widest">
+                <p className="font-outfit text-white text-xs sm:text-sm font-semibold tracking-widest">
                   {product.price}
                 </p>
               </div>

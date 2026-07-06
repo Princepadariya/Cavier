@@ -55,12 +55,10 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
     if (!el) return;
 
     const title = el.querySelector('.test-title');
-    const btn = el.querySelector('.test-btn');
     const stack = el.querySelector('.test-stack-container');
 
     const reset = () => {
       if (title) { title.style.opacity = '0'; title.style.transform = 'translateY(50px)'; }
-      if (btn) { btn.style.opacity = '0'; btn.style.transform = 'translateY(30px) scale(0.9)'; }
       if (stack) { stack.style.opacity = '0'; stack.style.transform = 'translateY(60px) scale(0.92)'; }
     };
     reset();
@@ -75,18 +73,6 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
               translateY: [50, 0],
               duration: 1400,
               ease: createSpring({ stiffness: 80, damping: 14, mass: 1 }),
-            });
-          }
-
-          // Button slides up with slight scale
-          if (btn) {
-            animate(btn, {
-              opacity: [0, 1],
-              translateY: [30, 0],
-              scale: [0.9, 1],
-              duration: 1000,
-              delay: 400,
-              ease: 'outQuart',
             });
           }
 
@@ -137,78 +123,79 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
 
   return (
     <div ref={containerRef} className={`w-full relative ${bgClass}`}>
-      <section ref={sectionRef} className="w-full py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
-        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative z-10">
+      <section ref={sectionRef} className="w-full pt-0 pb-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
+        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 relative z-10">
 
-        {/* Left Side: Title & Info */}
-        <div className="w-full lg:w-5/12 flex flex-col items-start pr-0 md:pr-10">
-          <h2 className="test-title text-3xl md:text-5xl lg:text-[3.2rem] font-medium text-white tracking-wide mb-8 md:mb-10 leading-[1.4] opacity-0 will-change-transform">
-            Experiences That Speak for Quality
-          </h2>
+          {/* Left Side: Title & Info */}
+          <div className="w-full lg:w-5/12 flex flex-col items-start pr-0 md:pr-10">
+            <h2 className="test-title text-2xl md:text-4xl lg:text-[2.4rem] font-medium text-white tracking-wide mb-6 sm:mb-8 md:mb-10 leading-[1.5] md:leading-[1.5] lg:leading-[1.5] opacity-0 will-change-transform">
+              Experiences That Speak for Quality
+            </h2>
 
-          <button className="test-btn flex items-center gap-3 px-8 py-3.5 border border-white/50 text-white text-xs tracking-widest hover:bg-white hover:text-black transition-all duration-300 opacity-0 will-change-transform">
-            Explore Products
-            <ChevronRight size={16} />
-          </button>
-        </div>
-
-        {/* Right Side: 3D Stacked Card Engine */}
-        <div className="test-stack-container w-full lg:w-7/12 mt-16 lg:mt-0 opacity-0 will-change-transform perspective-[1500px]">
-
-          {/* STACK WRAPPER */}
-          <div className="relative w-full max-w-[600px] mx-auto h-[420px] sm:h-[380px] md:h-[340px]">
-            {testimonials.map((testimonial, i) => (
-              <motion.div
-                key={testimonial.id}
-                animate={getCardAnimation(i, currentIndex)}
-                transition={{
-                  duration: 1.1,
-                  ease: [0.19, 1, 0.22, 1]
-                }}
-                className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#1e1e1e] border border-white/60 rounded-[1.5rem] p-8 md:p-12 shadow-2xl flex flex-col"
-              >
-                {/* Background Watermark Quote */}
-                <Quote size={120} className="absolute right-6 top-6 text-white/5" strokeWidth={1} />
-
-                {/* Content */}
-                <div className="relative z-10 flex-grow flex flex-col">
-                  <h3 className="text-white text-xl md:text-2xl font-light tracking-wide mb-1">
-                    {testimonial.name}
-                  </h3>
-                  <p className="text-[#a0a0a0] italic text-xs md:text-sm mb-6 md:mb-8 font-light flex items-center gap-2">
-                    <span className="w-4 h-[1px] bg-white/30"></span>
-                    {testimonial.role}
-                  </p>
-
-                  <p className="text-white text-sm md:text-base leading-relaxed italic mb-8 font-light opacity-90 line-clamp-4">
-                    "{testimonial.text}"
-                  </p>
-
-                  <div className="mt-auto flex gap-1.5 text-[#eab308]">
-                    {[...Array(5)].map((_, idx) => (
-                      <Star key={idx} fill="currentColor" size={14} strokeWidth={0} />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            <button className="flex items-center gap-2 sm:gap-3 px-3.5 py-2 sm:px-5 sm:py-3.5 border border-white text-white text-xs sm:text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+              Explore Products
+              <ChevronRight size={14} className="sm:hidden" />
+              <ChevronRight size={16} className="hidden sm:block" />
+            </button>
           </div>
 
-          {/* Animated Progress Bar */}
-          <div className="w-full max-w-[600px] mx-auto flex justify-center mt-12 md:mt-16 z-20 relative px-4">
-            <div className="w-full md:w-[85%] h-[2px] bg-white/20 relative overflow-hidden rounded-full">
-              <motion.div
-                key={currentIndex}
-                className="absolute top-0 left-0 h-full bg-white"
-                initial={{ width: '0%' }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 4, ease: "linear" }}
-              />
+          {/* Right Side: 3D Stacked Card Engine */}
+          <div className="test-stack-container w-full lg:w-7/12 mt-0 lg:mt-0 px-6 sm:px-0 opacity-0 will-change-transform perspective-[1500px]">
+
+            {/* STACK WRAPPER */}
+            <div className="relative w-full max-w-[600px] mx-auto h-[320px] sm:h-[380px] md:h-[340px]">
+              {testimonials.map((testimonial, i) => (
+                <motion.div
+                  key={testimonial.id}
+                  animate={getCardAnimation(i, currentIndex)}
+                  transition={{
+                    duration: 1.1,
+                    ease: [0.19, 1, 0.22, 1]
+                  }}
+                  className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#1e1e1e] border border-white/60 rounded-[1.5rem] p-8 md:p-12 shadow-2xl flex flex-col"
+                >
+                  {/* Background Watermark Quote */}
+                  <Quote size={120} className="absolute right-6 top-6 text-white/5" strokeWidth={1} />
+
+                  {/* Content */}
+                  <div className="relative z-10 flex-grow flex flex-col">
+                    <h3 className="text-white text-xl md:text-2xl font-light tracking-wide mb-1">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-[#a0a0a0] italic text-xs md:text-sm mb-6 md:mb-8 font-light flex items-center gap-2">
+                      <span className="w-4 h-[1px] bg-white/30"></span>
+                      {testimonial.role}
+                    </p>
+
+                    <p className="text-white text-sm md:text-base leading-relaxed italic mb-8 font-light opacity-90 line-clamp-4">
+                      "{testimonial.text}"
+                    </p>
+
+                    <div className="mt-auto flex gap-1.5 text-[#eab308]">
+                      {[...Array(5)].map((_, idx) => (
+                        <Star key={idx} fill="currentColor" size={14} strokeWidth={0} />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Animated Progress Bar */}
+            <div className="w-full max-w-[600px] mx-auto flex justify-center mt-12 md:mt-16 z-20 relative px-4">
+              <div className="w-full md:w-[85%] h-[2px] bg-white/20 relative overflow-hidden rounded-full">
+                <motion.div
+                  key={currentIndex}
+                  className="absolute top-0 left-0 h-full bg-white"
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 4, ease: "linear" }}
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
+        </div>
       </section>
     </div>
   );

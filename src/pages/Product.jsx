@@ -3,18 +3,18 @@ import { Link } from 'react-router-dom';
 
 const Product = () => {
   const products = [
-    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/Health%20faucets.png' },
-    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/Health%20faucets_2.png' },
-    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/Health%20faucets_3.png' },
-    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/Health%20faucets_4.png' },
-    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/Health%20faucets.png' },
-    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/Health%20faucets_2.png' },
-    { id: 7, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/Health%20faucets.png' },
-    { id: 8, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/Health%20faucets_2.png' },
-    { id: 9, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/Health%20faucets_3.png' },
-    { id: 10, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/Health%20faucets_4.png' },
-    { id: 11, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/Health%20faucets.png' },
-    { id: 12, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/Health%20faucets_2.png' },
+    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/productt.png' },
+    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/productt_2.png' },
+    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/productt_3.png' },
+    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/productt_4.png' },
+    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/productt_5.png' },
+    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/productt_6.png' },
+    { id: 7, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/productt.png' },
+    { id: 8, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/productt_2.png' },
+    { id: 9, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/productt_3.png' },
+    { id: 10, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/productt_4.png' },
+    { id: 11, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/productt_5.png' },
+    { id: 12, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/productt_6.png' },
   ];
 
   return (
@@ -34,11 +34,11 @@ const Product = () => {
       {/* Filter Bar */}
       <section className="w-full bg-[#1F1F21] pt-8 md:pt-12 px-4 sm:px-6 md:px-12 lg:px-32">
         <div className="w-full h-[1px] bg-white/10" />
-        <div className="flex items-center justify-start md:justify-between py-5 overflow-x-auto no-scrollbar space-x-6 md:space-x-0">
+        <div className="flex items-center justify-between gap-3 sm:gap-6 py-5 overflow-x-auto no-scrollbar">
           {['Price', 'Color Finishes', 'Category', 'Shape'].map((filter) => (
-            <button key={filter} className="flex-shrink-0 flex items-center gap-2 text-white text-sm font-medium whitespace-nowrap hover:text-white/70 transition-colors md:pr-4 last:pr-0">
+            <button key={filter} className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 text-white text-xs sm:text-sm font-medium whitespace-nowrap hover:text-white/70 transition-colors">
               <span>{filter}</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="10" height="10" className="sm:w-3 sm:h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M6 9l6 6 6-6" />
               </svg>
             </button>
@@ -49,7 +49,7 @@ const Product = () => {
 
       {/* Product Grid */}
       <section className="w-full bg-[#1F1F21] py-6 md:py-8 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-14">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-14 sm:gap-y-20">
           {products.map((product) => (
             <div key={product.id} className="flex flex-col group cursor-pointer">
               {/* Image Box */}
@@ -69,10 +69,10 @@ const Product = () => {
 
               {/* Details */}
               <div className="flex flex-col items-center text-center px-1">
-                <h3 className="text-white text-xs sm:text-sm md:text-base tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
+                <h3 className="font-outfit text-white text-sm sm:text-base md:text-lg tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
                   {product.name}
                 </h3>
-                <p className="text-white text-sm sm:text-base font-semibold tracking-widest">
+                <p className="font-text text-white text-base sm:text-lg font-normal tracking-widest">
                   INR {product.price}
                 </p>
               </div>

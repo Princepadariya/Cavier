@@ -10,7 +10,7 @@ const faucets = [
 
 const HealthFaucets = () => {
   return (
-    <section className="w-full bg-[#1F1F21] pt-0 pb-16 md:pb-24 px-4 sm:px-6 md:px-12">
+    <section className="w-full bg-[#1F1F21] pt-10 md:pt-0 pb-16 md:pb-24 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <h2 className="faucet-title text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-8 md:mb-12">
@@ -38,10 +38,10 @@ const HealthFaucets = () => {
 
               {/* Details */}
               <div className="flex flex-col items-center text-center px-1">
-                <h3 className="text-gray-300 text-[10px] sm:text-xs md:text-sm tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
+                <h3 className="font-outfit text-gray-300 text-[10px] sm:text-xs md:text-sm tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">
                   {product.title}
                 </h3>
-                <p className="text-white text-xs sm:text-sm font-semibold tracking-widest">
+                <p className="font-outfit text-white text-xs sm:text-sm font-semibold tracking-widest">
                   {product.price}
                 </p>
               </div>

@@ -165,7 +165,7 @@ const ProductDetail = () => {
 
             {/* ── Left: Image + Thumbnails ── */}
             <div className="detail-img w-full will-change-transform relative">
-              <div className="relative w-full aspect-[5/4] rounded-sm overflow-hidden p-6 md:p-10" style={{ border: '0.5px solid #FFFFFF' }}>
+              <div className="relative w-full aspect-[9/8] rounded-sm overflow-hidden p-6 md:p-10" style={{ border: '0.5px solid #FFFFFF' }}>
                 <div className="relative w-full h-full flex items-center justify-center">
                   <img
                     src="/images/product.png"
@@ -183,11 +183,11 @@ const ProductDetail = () => {
               </div>
 
               {/* Thumbnail strip */}
-              <div className="flex justify-between mt-5 w-full">
+              <div className="flex gap-2 sm:gap-0 sm:justify-between mt-5 w-full">
                 {thumbs.map((src, i) => (
                   <button
                     key={i}
-                    className="w-24 md:w-32 aspect-[4/3] rounded-sm overflow-hidden flex-shrink-0 transition-colors duration-200"
+                    className="flex-1 sm:flex-initial sm:w-24 md:w-32 aspect-[4/3] rounded-sm overflow-hidden min-w-0 sm:flex-shrink-0 transition-colors duration-200"
                     style={{ border: '0.5px solid #FFFFFF' }}
                   >
                     <img src={src} alt={`Thumb ${i + 1}`} className="w-full h-full object-contain p-2" />
@@ -201,20 +201,20 @@ const ProductDetail = () => {
               <h1 className="detail-info text-white text-2xl md:text-3xl lg:text-[2rem] font-medium leading-[1.4] md:leading-[1.4] font-outfit mb-4 will-change-transform">
                 Upper Parts Kit for S/L Concealed Basin Mixer | VL 10 202
               </h1>
-              <p className="detail-info text-white/70 text-sm md:text-base leading-relaxed font-light mb-4 max-w-md will-change-transform">
+              <p className="detail-info text-white text-sm md:text-base leading-relaxed font-light mb-4 max-w-md will-change-transform">
                 Fully Brass Faucets made out of Brass Ingots. Flow rate: 13.5 LPM at 3 bar pressure. Total Spout Length = 180mm. Sturdy brass aerator housing.
               </p>
               <div className="detail-info flex gap-1 mb-6 will-change-transform">
                 {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-white text-xl">★</span>)}
               </div>
 
-              <h2 className="detail-info text-white text-xl md:text-2xl font-normal font-outfit mb-10 will-change-transform">
+              <h2 className="detail-info text-white text-2xl md:text-3xl font-normal font-outfit mb-10 will-change-transform">
                 Code :- FR 09- 202
               </h2>
 
               {/* ── Finishing ── */}
               <div className="detail-info mb-16 mt-auto will-change-transform">
-                <h3 className="text-white text-xl md:text-2xl font-bold font-outfit mb-5">Finishing</h3>
+                <h3 className="text-white text-2xl md:text-3xl font-bold font-outfit mb-5">Finishing</h3>
                 <div className="flex flex-wrap gap-3 md:gap-4">
                   {finishes.map(f => (
                     <button
@@ -233,9 +233,25 @@ const ProductDetail = () => {
               </div>
 
               {/* ── Price ── */}
-              <h3 className="detail-info text-white text-xl md:text-2xl font-bold font-outfit will-change-transform">
+              <h3 className="detail-info text-white text-2xl md:text-3xl font-bold font-outfit mb-6 will-change-transform">
                 MRP :- ₹ 2000
               </h3>
+
+              {/* ── Buy Now ── */}
+              <button
+                onClick={() => openCart({
+                  id: 'VL 10 202',
+                  name: 'Upper Parts Kit for S/L Concealed Basin Mixer | VL 10 202',
+                  finish: selectedFinish,
+                  height: '180mm',
+                  price: 2000,
+                  img: '/images/product.png',
+                })}
+                className="detail-info flex items-center justify-center gap-2 w-full border border-white text-white rounded-full py-2 text-sm md:text-base font-medium tracking-wide hover:bg-white hover:text-black transition-colors will-change-transform"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" /></svg>
+                <span>Buy now</span>
+              </button>
 
             </div>
           </div>
@@ -243,10 +259,10 @@ const ProductDetail = () => {
           {/* ── Key Features — same container, below the grid ── */}
           <div ref={featRef} className="mt-14">
             <h2 className="feat-title text-white text-2xl md:text-3xl font-semibold font-outfit mb-6 will-change-transform">Key Features</h2>
-            <ul className="flex flex-col gap-7 text-white text-xl md:text-2xl font-light">
+            <ul className="flex flex-col gap-7 text-white text-2xl md:text-3xl font-light">
               {['10 Years Warranty for defects against craftsmanship', 'Dynamic Color Options', 'Imported bought out parts', '1,00,000 Life cycle tested spindles', 'Passed 120 hours anti-corrosion finish test'].map(f => (
-                <li key={f} className="feat-item flex items-center gap-3 will-change-transform">
-                  <span className="text-white text-lg leading-none">•</span><span>{f}</span>
+                <li key={f} className="feat-item flex items-start sm:items-center gap-3 will-change-transform">
+                  <span className="text-white text-lg leading-none mt-2 sm:mt-0">•</span><span>{f}</span>
                 </li>
               ))}
             </ul>
@@ -256,9 +272,9 @@ const ProductDetail = () => {
       </section>
 
       {/* Similar Items */}
-      <section ref={similarRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12 lg:px-32">
+      <section ref={similarRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-16 px-6 md:px-12 lg:px-32">
         <h2 className="sim-title text-white text-3xl md:text-4xl font-light tracking-wide font-outfit mb-10 will-change-transform">Similar items</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-14 sm:gap-y-6">
           {[1, 2, 3].map(item => (
             <div key={item} className="sim-card flex flex-col group cursor-pointer opacity-0 will-change-transform">
               {/* Image Box */}
@@ -276,8 +292,8 @@ const ProductDetail = () => {
                 </Link>
               </div>
               <div className="flex flex-col items-center text-center px-1">
-                <h3 className="text-white text-xs sm:text-sm md:text-base tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">SO 04 101 | Pillar Cock with Base</h3>
-                <p className="text-white text-sm sm:text-base font-semibold tracking-widest">INR 1930</p>
+                <h3 className="font-outfit text-white text-sm sm:text-base md:text-lg tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">SO 04 101 | Pillar Cock with Base</h3>
+                <p className="font-text text-white text-base sm:text-lg font-normal tracking-widest">INR 1930</p>
               </div>
             </div>
           ))}
