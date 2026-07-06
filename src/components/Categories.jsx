@@ -1,32 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { animate, stagger } from 'animejs';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Categories = () => {
   const containerRef = useRef(null);
-
-  // GSAP: Keep the parallax scrub on background images (Anime.js can't scrub)
-  useGSAP(() => {
-    gsap.utils.toArray('.category-bg').forEach((bg) => {
-      gsap.fromTo(bg,
-        { y: '-15%' },
-        {
-          y: '15%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: bg.parentElement,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          }
-        }
-      );
-    });
-  }, { scope: containerRef });
 
   // Anime.js: Scroll-triggered card entrance with 3D emergence effect
   useEffect(() => {
@@ -126,7 +102,7 @@ const Categories = () => {
             </div>
             
             <div 
-              className="category-bg absolute inset-[-20%] w-[140%] h-[140%] bg-cover bg-center will-change-transform transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
+              className="category-bg absolute inset-0 w-full h-full bg-cover bg-center will-change-transform transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
               style={{ backgroundImage: "url('/images/fitting_category.png')" }}
             ></div>
             
@@ -148,7 +124,7 @@ const Categories = () => {
             </div>
             
             <div 
-              className="category-bg absolute inset-[-20%] w-[140%] h-[140%] bg-cover bg-center will-change-transform transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
+              className="category-bg absolute inset-0 w-full h-full bg-cover bg-center will-change-transform transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
               style={{ backgroundImage: "url('/images/accessories_category.png')" }}
             ></div>
             

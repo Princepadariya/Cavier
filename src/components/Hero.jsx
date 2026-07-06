@@ -1,19 +1,11 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
 // Mobile uses hero-bg.jpg; desktop (≥768px) uses hero-bg_desktop.png
 const HERO_BG_MOBILE = "/images/hero-bg.jpg";
 const HERO_BG_DESKTOP = "/images/hero-bg_desktop.png";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function Hero() {
-  const containerRef = useRef(null);
-  const bgRef = useRef(null);
-
   const [hero, setHero] = useState({ bg: HERO_BG_DESKTOP, pos: "center bottom" });
 
   useEffect(() => {
@@ -26,41 +18,12 @@ export default function Hero() {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  useGSAP(() => {
-    // 6. Hero Section: 3D Depth Parallax
-    // Background moves slower (20%) while foreground moves faster
-    gsap.to(bgRef.current, {
-      y: 150,
-      scale: 1.15,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      }
-    });
-
-    gsap.to(".hero-text-content", {
-      y: -100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      }
-    });
-
-  }, { scope: containerRef });
-
   return (
-    <div ref={containerRef} className="relative h-[100dvh] md:h-screen overflow-hidden text-white">
+    <div className="relative h-[100dvh] md:h-screen overflow-hidden text-white">
 
-      {/* Background with GSAP ScrollTrigger Parallax */}
+      {/* Background */}
       <div
-        ref={bgRef}
-        className="absolute inset-[-5%] w-[110%] h-[110%] bg-cover will-change-transform"
+        className="absolute inset-0 w-full h-full bg-cover"
         style={{
           backgroundImage: `url(${hero.bg})`,
           backgroundPosition: hero.pos,

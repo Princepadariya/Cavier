@@ -16,31 +16,31 @@ const Footer = ({ variant = 'dark' }) => {
   // Theme tokens
   const t = isLight
     ? {
-        bg: 'bg-[#F9F9F9]',
-        heading: 'text-black',
-        link: 'text-neutral-700 hover:text-black',
-        text: 'text-neutral-700',
-        strong: 'text-black',
-        line: 'bg-black/15',
-        iconBorder: 'border-black/20',
-        iconHover: 'hover:bg-black hover:border-black hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)]',
-        icon: 'text-black group-hover:text-white',
-        copy: 'text-neutral-600',
-        logoGradient: 'linear-gradient(to bottom, #111111 0%, #333333 100%)',
-      }
+      bg: 'bg-[#F9F9F9]',
+      heading: 'text-black',
+      link: 'text-neutral-700 hover:text-black',
+      text: 'text-neutral-700',
+      strong: 'text-black',
+      line: 'bg-black/15',
+      iconBorder: 'border-black/20',
+      iconHover: 'hover:bg-black hover:border-black hover:shadow-[0_6px_20px_rgba(0,0,0,0.2)]',
+      icon: 'text-black group-hover:text-white',
+      copy: 'text-neutral-600',
+      logoGradient: 'linear-gradient(to bottom, #111111 0%, #333333 100%)',
+    }
     : {
-        bg: 'bg-[#1F1F21]',
-        heading: 'text-white',
-        link: 'text-white hover:text-white',
-        text: 'text-white',
-        strong: 'text-white',
-        line: 'bg-white/20',
-        iconBorder: 'border-white/20',
-        iconHover: 'hover:bg-white hover:border-white hover:shadow-[0_6px_20px_rgba(255,255,255,0.25)]',
-        icon: 'text-white group-hover:text-black',
-        copy: 'text-white',
-        logoGradient: 'linear-gradient(to bottom, #FFFFFF 0%, #999999 100%)',
-      };
+      bg: 'bg-[#1F1F21]',
+      heading: 'text-white',
+      link: 'text-white hover:text-white',
+      text: 'text-white',
+      strong: 'text-white',
+      line: 'bg-white/20',
+      iconBorder: 'border-white/20',
+      iconHover: 'hover:bg-white hover:border-white hover:shadow-[0_6px_20px_rgba(255,255,255,0.25)]',
+      icon: 'text-white group-hover:text-black',
+      copy: 'text-white',
+      logoGradient: 'linear-gradient(to bottom, #FFFFFF 0%, #999999 100%)',
+    };
 
   // GSAP: Keep the massive scroll-linked parallax text (needs scrub)
   useGSAP(() => {
@@ -92,8 +92,8 @@ const Footer = ({ variant = 'dark' }) => {
             opacity: [0, 1],
             translateY: [50, 0],
             translateX: [(_el, i) => -20 + i * 5, 0],
-            duration: 1200,
-            delay: stagger(100, { start: 200 }),
+            duration: 600,
+            delay: stagger(50, { start: 50 }),
             ease: 'outQuart',
           });
 
@@ -102,8 +102,8 @@ const Footer = ({ variant = 'dark' }) => {
             animate(address, {
               opacity: [0, 1],
               translateX: [30, 0],
-              duration: 1200,
-              delay: 600,
+              duration: 600,
+              delay: 150,
               ease: 'outExpo',
             });
           }
@@ -113,8 +113,8 @@ const Footer = ({ variant = 'dark' }) => {
             animate(socialIcons, {
               opacity: [0, 1],
               scale: [0.5, 1],
-              duration: 800,
-              delay: stagger(80, { start: 800 }),
+              duration: 500,
+              delay: stagger(50, { start: 200 }),
               ease: 'outBack',
             });
           }
@@ -123,13 +123,13 @@ const Footer = ({ variant = 'dark' }) => {
           if (line) {
             animate(line, {
               scaleX: [0, 1],
-              duration: 1000,
-              delay: 400,
+              duration: 500,
+              delay: 100,
               ease: 'inOutQuart',
             });
           }
-        } else {
-          reset();
+
+          observer.disconnect();
         }
       },
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
@@ -227,6 +227,9 @@ const Footer = ({ variant = 'dark' }) => {
             </div>
           )}
         </div>
+
+        {/* Full-bleed divider — breaks out of the footer's own padding so it spans edge to edge */}
+        <div className="h-0.5 bg-black mb-12 md:mb-16 -mx-4 sm:-mx-6 md:-mx-12 lg:-mx-32" />
 
         {/* Corporate Office label — right aligned (dark only) */}
         {!isLight && (

@@ -14,7 +14,7 @@ function useReveal(ref) {
       if (e.isIntersecting) {
         animate(items, {
           opacity: [0, 1], translateY: [40, 0],
-          duration: 1100, delay: stagger(60, { start: 100 }), ease: 'outQuart',
+          duration: 600, delay: stagger(50, { start: 50 }), ease: 'outQuart',
         });
         obs.disconnect();
       }
@@ -59,9 +59,9 @@ const BlogDetail = () => {
     setTimeout(() => {
       animate(items, {
         opacity: [0, 1], translateY: [40, 0],
-        duration: 1200, delay: stagger(120, { start: 200 }), ease: 'outQuart',
+        duration: 600, delay: stagger(60, { start: 50 }), ease: 'outQuart',
       });
-    }, 150);
+    }, 50);
   }, []);
 
   return (
@@ -101,7 +101,7 @@ const BlogDetail = () => {
 
           {/* ── Feature image ── */}
           <div className="w-full aspect-[16/10] overflow-hidden rounded-sm my-12 md:my-16">
-            <img src="/images/img5.jpg" alt="Luxury bathroom" className="w-full h-full object-cover" />
+            <img src="/images/Bath Fitting_blog.jpg" alt="Luxury bathroom" className="w-full h-full object-cover" />
           </div>
 
           {/* ── Sections (second half) ── */}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -24,15 +24,17 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   const location = useLocation();
   const isContactOrAbout = location.pathname === '/contact';
+  const lenisRef = useRef(null);
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 3.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.6,
+      wheelMultiplier: 1,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
     lenis.on('scroll', (e) => {
       ScrollTrigger.update();
@@ -55,6 +57,7 @@ function App() {
     gsap.ticker.lagSmoothing(0, 0);
 
     return () => {
+      lenisRef.current = null;
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
@@ -62,7 +65,11 @@ function App() {
 
   // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [location.pathname]);
 
   return (
@@ -83,7 +90,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetail />} />
       </Routes>
       {/* We only render Footer here. If certain pages shouldn't have it, we could conditionally hide it. */}
-      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={(['/about', '/dealership', '/contact'].includes(location.pathname) || location.pathname.startsWith('/product') || location.pathname.startsWith('/blog')) ? 'light' : 'dark'} />}
+      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={(['/', '/about', '/dealership', '/contact'].includes(location.pathname) || location.pathname.startsWith('/product') || location.pathname.startsWith('/blog')) ? 'light' : 'dark'} />}
     </div>
   );
 }

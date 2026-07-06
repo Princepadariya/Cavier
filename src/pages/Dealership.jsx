@@ -11,8 +11,10 @@ function useSection(ref, buildConfigs) {
       targets.forEach(t => Object.assign(t.style, from)));
     reset();
     const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) configs.forEach(c => animate(c.targets, c.anim));
-      else reset();
+      if (e.isIntersecting) {
+        configs.forEach(c => animate(c.targets, c.anim));
+        obs.disconnect();
+      }
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     obs.observe(el);
     return () => obs.disconnect();
@@ -37,10 +39,10 @@ const Dealership = () => {
     setTimeout(() => {
       animate(items, {
         opacity: [0, 1], translateY: [50, 0],
-        duration: 1400, delay: stagger(130, { start: 500 }),
+        duration: 700, delay: stagger(60, { start: 100 }),
         ease: createSpring({ stiffness: 80, damping: 14, mass: 1 }),
       });
-    }, 200);
+    }, 50);
   }, []);
 
   // Philosophy: quote slide + description fade
@@ -51,15 +53,15 @@ const Dealership = () => {
     return [
       {
         targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
-        anim: { opacity: [0, 1], translateY: [20, 0], duration: 1000, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [20, 0], duration: 500, ease: 'outQuart' }
       },
       {
         targets: [...quote], from: { opacity: '0', transform: 'translateX(-50px)' },
-        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 1400, delay: 200, ease: 'outExpo' }
+        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 600, delay: 80, ease: 'outExpo' }
       },
       {
         targets: [...desc], from: { opacity: '0', transform: 'translateX(50px)' },
-        anim: { opacity: [0, 1], translateX: [50, 0], duration: 1400, delay: 400, ease: 'outExpo' }
+        anim: { opacity: [0, 1], translateX: [50, 0], duration: 600, delay: 150, ease: 'outExpo' }
       },
     ];
   });
@@ -71,13 +73,13 @@ const Dealership = () => {
     return [
       {
         targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
-        anim: { opacity: [0, 1], translateY: [20, 0], duration: 1000, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [20, 0], duration: 500, ease: 'outQuart' }
       },
       {
         targets: [...cards], from: { opacity: '0', transform: 'translateY(60px) scale(0.9)' },
         anim: {
           opacity: [0, 1], translateY: [60, 0], scale: [0.9, 1],
-          duration: 1200, delay: stagger(80, { start: 300 }), ease: 'outQuart'
+          duration: 600, delay: stagger(60, { start: 100 }), ease: 'outQuart'
         }
       },
     ];
@@ -90,13 +92,13 @@ const Dealership = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...steps], from: { opacity: '0', transform: 'translateY(50px) scale(0.85)' },
         anim: {
           opacity: [0, 1], translateY: [50, 0], scale: [0.85, 1],
-          duration: 1200, delay: stagger(120, { start: 300 }), ease: 'outBack'
+          duration: 600, delay: stagger(70, { start: 100 }), ease: 'outBack'
         }
       },
     ];
@@ -109,13 +111,13 @@ const Dealership = () => {
     return [
       {
         targets: [...label], from: { opacity: '0', transform: 'translateY(20px)' },
-        anim: { opacity: [0, 1], translateY: [20, 0], duration: 1000, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [20, 0], duration: 500, ease: 'outQuart' }
       },
       {
         targets: [...cards], from: { opacity: '0', transform: 'translateY(50px)' },
         anim: {
           opacity: [0, 1], translateY: [50, 0],
-          duration: 1200, delay: stagger(150, { start: 300 }), ease: 'outQuart'
+          duration: 600, delay: stagger(80, { start: 100 }), ease: 'outQuart'
         }
       },
     ];
@@ -129,18 +131,18 @@ const Dealership = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...fields], from: { opacity: '0', transform: 'translateY(30px)' },
         anim: {
           opacity: [0, 1], translateY: [30, 0],
-          duration: 1000, delay: stagger(60, { start: 300 }), ease: 'outQuart'
+          duration: 500, delay: stagger(40, { start: 100 }), ease: 'outQuart'
         }
       },
       {
         targets: [...btn], from: { opacity: '0', transform: 'translateY(20px) scale(0.9)' },
-        anim: { opacity: [0, 1], translateY: [20, 0], scale: [0.9, 1], duration: 1000, delay: 800, ease: 'outBack' }
+        anim: { opacity: [0, 1], translateY: [20, 0], scale: [0.9, 1], duration: 500, delay: 250, ease: 'outBack' }
       },
     ];
   });
@@ -152,13 +154,13 @@ const Dealership = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateX(-40px)' },
-        anim: { opacity: [0, 1], translateX: [-40, 0], duration: 1400, ease: 'outExpo' }
+        anim: { opacity: [0, 1], translateX: [-40, 0], duration: 600, ease: 'outExpo' }
       },
       {
         targets: [...items], from: { opacity: '0', transform: 'translateY(40px)' },
         anim: {
           opacity: [0, 1], translateY: [40, 0],
-          duration: 1200, delay: stagger(100, { start: 400 }), ease: 'outQuart'
+          duration: 600, delay: stagger(60, { start: 100 }), ease: 'outQuart'
         }
       },
     ];

@@ -41,30 +41,12 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
 
-  // Scroll-driven logic
+  // Auto-advance carousel
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const scrollableDistance = rect.height - window.innerHeight;
-      const scrolled = -rect.top;
-      
-      if (scrolled < 0) {
-        setCurrentIndex(0);
-      } else if (scrolled > scrollableDistance) {
-        setCurrentIndex(testimonials.length - 1);
-      } else {
-        const progress = scrolled / scrollableDistance;
-        const index = Math.min(
-          testimonials.length - 1,
-          Math.floor(progress * testimonials.length)
-        );
-        setCurrentIndex(index);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   // Anime.js scroll-triggered entrance animations
@@ -153,11 +135,9 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
     return { x: "40%", y: 0, scale: 0.7, zIndex: 30, opacity: 0 };
   }
 
-  const progressPercent = ((currentIndex + 1) / testimonials.length) * 100;
-
   return (
-    <div ref={containerRef} className={`w-full relative ${bgClass}`} style={{ height: `${testimonials.length * 80}vh` }}>
-      <section ref={sectionRef} className="sticky top-0 w-full h-screen py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
+    <div ref={containerRef} className={`w-full relative ${bgClass}`}>
+      <section ref={sectionRef} className="w-full py-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
         <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24 relative z-10">
 
         {/* Left Side: Title & Info */}
@@ -182,10 +162,10 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
                 key={testimonial.id}
                 animate={getCardAnimation(i, currentIndex)}
                 transition={{
-                  duration: 0.8,
+                  duration: 1.1,
                   ease: [0.19, 1, 0.22, 1]
                 }}
-                className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#1e1e1e] border border-white/10 rounded-[1.5rem] p-8 md:p-12 shadow-2xl flex flex-col"
+                className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#1e1e1e] border border-white/60 rounded-[1.5rem] p-8 md:p-12 shadow-2xl flex flex-col"
               >
                 {/* Background Watermark Quote */}
                 <Quote size={120} className="absolute right-6 top-6 text-white/5" strokeWidth={1} />
@@ -218,10 +198,11 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
           <div className="w-full max-w-[600px] mx-auto flex justify-center mt-12 md:mt-16 z-20 relative px-4">
             <div className="w-full md:w-[85%] h-[2px] bg-white/20 relative overflow-hidden rounded-full">
               <motion.div
+                key={currentIndex}
                 className="absolute top-0 left-0 h-full bg-white"
-                initial={{ width: 0 }}
-                animate={{ width: `${progressPercent}%` }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                initial={{ width: '0%' }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 4, ease: "linear" }}
               />
             </div>
           </div>

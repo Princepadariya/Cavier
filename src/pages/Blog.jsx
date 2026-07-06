@@ -13,8 +13,10 @@ function useSection(ref, buildConfigs) {
       targets.forEach(t => Object.assign(t.style, from)));
     reset();
     const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) configs.forEach(c => animate(c.targets, c.anim));
-      else reset();
+      if (e.isIntersecting) {
+        configs.forEach(c => animate(c.targets, c.anim));
+        obs.disconnect();
+      }
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     obs.observe(el);
     return () => obs.disconnect();
@@ -43,10 +45,10 @@ const Blog = () => {
     setTimeout(() => {
       animate(items, {
         opacity: [0, 1], translateY: [50, 0],
-        duration: 1400, delay: stagger(130, { start: 500 }),
+        duration: 700, delay: stagger(60, { start: 100 }),
         ease: createSpring({ stiffness: 80, damping: 14, mass: 1 }),
       });
-    }, 200);
+    }, 50);
   }, []);
 
   // Insights grid: title + card stagger
@@ -56,13 +58,13 @@ const Blog = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...cards], from: { opacity: '0', transform: 'translateY(60px) scale(0.95)' },
         anim: {
           opacity: [0, 1], translateY: [60, 0], scale: [0.95, 1],
-          duration: 1300, delay: stagger(100, { start: 300 }), ease: 'outQuart'
+          duration: 600, delay: stagger(60, { start: 100 }), ease: 'outQuart'
         }
       },
     ];
@@ -79,7 +81,7 @@ const Blog = () => {
           <div className="radar-circle w-[1px] h-[1px] rounded-full border border-white/10 animate-radar-pulse delay-700" />
         </div>
 
-        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/Dealership_hero_banner.png')" }} />
+        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/blog_hero_banner.png')" }} />
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
           <div className="blog-content flex flex-col items-center">

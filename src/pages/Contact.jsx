@@ -39,14 +39,14 @@ const Contact = () => {
     setTimeout(() => {
       animate(items, {
         opacity: [0, 1], translateY: [40, 0],
-        duration: 1400, delay: stagger(120, { start: 400 }),
+        duration: 700, delay: stagger(60, { start: 100 }),
         ease: createSpring({ stiffness: 80, damping: 14, mass: 1 }),
       });
       if (img) animate(img, {
         opacity: [0, 1], scale: [1.08, 1],
-        duration: 2000, delay: 300, ease: 'outQuart',
+        duration: 800, delay: 100, ease: 'outQuart',
       });
-    }, 200);
+    }, 50);
   }, []);
 
   // Info cards: stagger pop
@@ -57,7 +57,7 @@ const Contact = () => {
         targets: [...cards], from: { opacity: '0', transform: 'translateY(40px) scale(0.9)' },
         anim: {
           opacity: [0, 1], translateY: [40, 0], scale: [0.9, 1],
-          duration: 1200, delay: stagger(80, { start: 200 }), ease: 'outBack'
+          duration: 600, delay: stagger(60, { start: 100 }), ease: 'outBack'
         }
       },
     ];
@@ -71,18 +71,18 @@ const Contact = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...fields], from: { opacity: '0', transform: 'translateY(25px)' },
         anim: {
           opacity: [0, 1], translateY: [25, 0],
-          duration: 1000, delay: stagger(50, { start: 300 }), ease: 'outQuart'
+          duration: 500, delay: stagger(40, { start: 100 }), ease: 'outQuart'
         }
       },
       {
         targets: [...btn], from: { opacity: '0', transform: 'translateY(20px) scale(0.9)' },
-        anim: { opacity: [0, 1], translateY: [20, 0], scale: [0.9, 1], duration: 1000, delay: 700, ease: 'outBack' }
+        anim: { opacity: [0, 1], translateY: [20, 0], scale: [0.9, 1], duration: 500, delay: 250, ease: 'outBack' }
       },
     ];
   });
@@ -94,11 +94,11 @@ const Contact = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...img], from: { opacity: '0', transform: 'scale(1.1)' },
-        anim: { opacity: [0, 1], scale: [1.1, 1], duration: 1800, delay: 300, ease: 'outQuart' }
+        anim: { opacity: [0, 1], scale: [1.1, 1], duration: 700, delay: 100, ease: 'outQuart' }
       },
     ];
   });

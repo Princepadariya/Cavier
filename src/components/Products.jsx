@@ -1,11 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Heart, ShoppingCart, Star, ChevronRight } from 'lucide-react';
-import { animate, stagger } from 'animejs';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const cockProducts = [
   { id: 1, title: 'SO 04 101 | Pillar Cock with Base', price: 'INR 1930', img: '/images/product1.png' },
@@ -22,97 +16,10 @@ const accessoryProducts = [
 ];
 
 const ProductGrid = ({ title, products, gridIndex }) => {
-  const containerRef = useRef(null);
-
-  // GSAP: Keep parallax scrub on product images
-  useGSAP(() => {
-    gsap.utils.toArray(containerRef.current.querySelectorAll('.product-image')).forEach((img) => {
-      gsap.fromTo(img,
-        { y: '5%' },
-        {
-          y: '-5%',
-          ease: 'none',
-          scrollTrigger: {
-            trigger: img.parentElement,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          }
-        }
-      );
-    });
-  }, { scope: containerRef });
-
-  // Anime.js: Wave cascade reveal for product cards
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const titleEl = el.querySelector('.product-title');
-    const cards = el.querySelectorAll('.product-card');
-    const viewBtn = el.querySelector('.view-more-btn');
-
-    const reset = () => {
-      if (titleEl) { titleEl.style.opacity = '0'; titleEl.style.transform = 'translateY(35px)'; }
-      cards.forEach((c, i) => {
-        c.style.opacity = '0';
-        // Alternate x-offset for wave effect
-        const xOff = i % 2 === 0 ? -30 : 30;
-        c.style.transform = `translateY(70px) translateX(${xOff}px) scale(0.92)`;
-      });
-      if (viewBtn) { viewBtn.style.opacity = '0'; viewBtn.style.transform = 'translateY(25px)'; }
-    };
-    reset();
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Title slides up
-          if (titleEl) {
-            animate(titleEl, {
-              opacity: [0, 1],
-              translateY: [35, 0],
-              duration: 1000,
-              ease: 'outExpo',
-            });
-          }
-
-          // Cards wave cascade — alternating X offsets resolve to 0
-          animate(cards, {
-            opacity: [0, 1],
-            translateY: [70, 0],
-            translateX: [(_el, i) => (i % 2 === 0 ? -30 : 30), 0],
-            scale: [0.92, 1],
-            duration: 1200,
-            delay: stagger(100, { start: 300 }),
-            ease: 'outQuart',
-          });
-
-          // View more button
-          if (viewBtn) {
-            animate(viewBtn, {
-              opacity: [0, 1],
-              translateY: [25, 0],
-              duration: 900,
-              delay: 800,
-              ease: 'outQuart',
-            });
-          }
-        } else {
-          reset();
-        }
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={containerRef} className="mb-24 last:mb-0">
+    <div className="mb-24 last:mb-0">
       {/* Section Title */}
-      <h2 className="product-title text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-medium text-white tracking-wide mb-8 md:mb-10 opacity-0 will-change-transform">
+      <h2 className="product-title text-xl sm:text-2xl md:text-3xl lg:text-[2rem] font-medium text-white tracking-wide mb-8 md:mb-10">
         {title}
       </h2>
 
@@ -121,7 +28,7 @@ const ProductGrid = ({ title, products, gridIndex }) => {
         {products.map((product) => (
           <div
             key={product.id}
-            className="product-card flex flex-col group cursor-pointer opacity-0 will-change-transform"
+            className="product-card flex flex-col group cursor-pointer"
           >
             {/* Image Box */}
             <div className="relative w-full aspect-square bg-[#111] rounded-2xl border border-white/10
@@ -176,7 +83,7 @@ const ProductGrid = ({ title, products, gridIndex }) => {
             <button
             className="view-more-btn flex items-center gap-3 px-8 py-3 border border-white/40
                         text-white text-xs tracking-[0.2em] uppercase
-                        hover:bg-white hover:text-black transition-all duration-300 opacity-0 will-change-transform"
+                        hover:bg-white hover:text-black transition-all duration-300"
             >
             View More
             <ChevronRight size={15} />

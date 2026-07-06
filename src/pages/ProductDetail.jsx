@@ -26,7 +26,6 @@ const ProductDetail = () => {
   const { cartItems, addToCart, updateQty, removeItem, subtotal } = useCart();
   const detailRef = useRef(null);
   const featRef = useRef(null);
-  const reviewRef = useRef(null);
   const similarRef = useRef(null);
 
   // Material Morph State
@@ -103,19 +102,6 @@ const ProductDetail = () => {
     ];
   });
 
-  // Review section: fade in
-  useSection(reviewRef, el => {
-    const items = el.querySelectorAll('.review-item');
-    return [
-      {
-        targets: [...items], from: { opacity: '0', transform: 'translateY(30px)' },
-        anim: {
-          opacity: [0, 1], translateY: [30, 0],
-          duration: 1200, delay: stagger(100, { start: 200 }), ease: 'outQuart'
-        }
-      },
-    ];
-  });
 
   // Similar Items: card cascade
   useSection(similarRef, el => {
@@ -269,26 +255,6 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* User Review */}
-      <section ref={reviewRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12 lg:px-32">
-        <div className="review-item flex items-center gap-5 mb-6 will-change-transform">
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#333] overflow-hidden border border-white/20">
-            <img src="/images/team_rakesh.png" alt="Yash Patel" className="w-full h-full object-cover" />
-          </div>
-          <h3 className="text-white text-xl md:text-2xl font-semibold font-outfit">Yash Patel</h3>
-        </div>
-        <textarea placeholder="Enter Your Opinion" className="review-item w-full bg-transparent border border-[#ffffff] rounded-sm text-white text-base md:text-lg px-5 py-4 h-28 resize-none outline-none focus:border-white transition-colors placeholder:text-white/30 mb-6 will-change-transform" />
-        <div className="review-item flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 will-change-transform">
-          <button className="flex items-center justify-center gap-2 border border-white rounded-full text-white text-sm md:text-base px-7 py-3.5 hover:bg-white hover:text-black transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="M21 15l-5-5L5 21" /></svg>
-            <span>Add a photo</span>
-          </button>
-          <button className="flex items-center justify-center gap-2 border border-white rounded-full text-white text-sm md:text-base px-7 py-3.5 hover:bg-white hover:text-black transition-colors">
-            <span>Share your content</span>
-          </button>
-        </div>
-      </section>
-
       {/* Similar Items */}
       <section ref={similarRef} className="w-full bg-[#1F1F21] py-16 px-6 md:px-12 lg:px-32">
         <h2 className="sim-title text-white text-3xl md:text-4xl font-light tracking-wide font-outfit mb-10 will-change-transform">Similar items</h2>
@@ -308,9 +274,6 @@ const ProductDetail = () => {
                     className="w-full h-full object-contain transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.08] will-change-transform"
                   />
                 </Link>
-                <button className="absolute top-4 right-4 z-10 text-white/60 hover:text-white transition-colors">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
-                </button>
               </div>
               <div className="flex flex-col items-center text-center px-1">
                 <h3 className="text-white text-xs sm:text-sm md:text-base tracking-wide font-light mb-1.5 sm:mb-2 line-clamp-1 w-full">SO 04 101 | Pillar Cock with Base</h3>

@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
-import { animate, stagger, createSpring } from 'animejs';
+import { animate, stagger } from 'animejs';
 import { ChevronDown } from 'lucide-react';
+import Testimonials from '../components/Testimonials';
 
 /* ─── helper: attach IntersectionObserver + animate on enter, reset on leave ─── */
 function useSection(ref, buildConfigs) {
@@ -16,8 +17,10 @@ function useSection(ref, buildConfigs) {
     reset();
 
     const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) configs.forEach(c => animate(c.targets, c.anim));
-      else reset();
+      if (e.isIntersecting) {
+        configs.forEach(c => animate(c.targets, c.anim));
+        obs.disconnect();
+      }
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     obs.observe(el);
     return () => obs.disconnect();
@@ -33,7 +36,6 @@ const About = () => {
   const engRef = useRef(null);
   const dealerRef = useRef(null);
   const teamRef = useRef(null);
-  const testRef = useRef(null);
 
 
   // ── Hero banner: text fade-up + image reveal ──
@@ -45,12 +47,12 @@ const About = () => {
         targets: [...text], from: { opacity: '0', transform: 'translateY(40px)' },
         anim: {
           opacity: [0, 1], translateY: [40, 0],
-          duration: 1200, delay: stagger(120, { start: 200 }), ease: 'outQuart'
+          duration: 600, delay: stagger(60, { start: 50 }), ease: 'outQuart'
         }
       },
       {
         targets: [...img], from: { opacity: '0', transform: 'scale(1.08)' },
-        anim: { opacity: [0, 1], scale: [1.08, 1], duration: 1600, ease: 'outQuart' }
+        anim: { opacity: [0, 1], scale: [1.08, 1], duration: 700, ease: 'outQuart' }
       },
     ];
   });
@@ -62,13 +64,13 @@ const About = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...cards], from: { opacity: '0', transform: 'translateY(60px) scale(0.9)' },
         anim: {
           opacity: [0, 1], translateY: [60, 0], scale: [0.9, 1],
-          duration: 1400, delay: stagger(120, { start: 300 }), ease: 'outQuart'
+          duration: 600, delay: stagger(60, { start: 100 }), ease: 'outQuart'
         }
       },
     ];
@@ -100,17 +102,17 @@ const About = () => {
     const obs = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         // Title fade-up
-        if (title) animate(title, { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' });
+        if (title) animate(title, { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' });
         // Cards fade-up with stagger
-        animate(cards, { opacity: [0, 1], translateY: [20, 0], duration: 900, delay: stagger(120, { start: 200 }), ease: 'outQuart' });
+        animate(cards, { opacity: [0, 1], translateY: [20, 0], duration: 500, delay: stagger(60, { start: 100 }), ease: 'outQuart' });
         // Count-up each number with stagger
         counters.forEach((counter, i) => {
           const { value, suffix, format } = statsData[i];
           const obj = { val: 0 };
           animate(obj, {
             val: [0, value],
-            duration: 1800,
-            delay: 300 + i * 150,
+            duration: 900,
+            delay: 100 + i * 60,
             ease: 'outExpo',
             onUpdate: () => {
               const rounded = Math.round(obj.val);
@@ -118,8 +120,7 @@ const About = () => {
             },
           });
         });
-      } else {
-        reset();
+        obs.disconnect();
       }
     }, { threshold: 0.15 });
     obs.observe(el);
@@ -160,13 +161,13 @@ const About = () => {
     return [
       {
         targets: [...text], from: { opacity: '0', transform: 'translateX(-50px)' },
-        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 1400, ease: 'outExpo' }
+        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 600, ease: 'outExpo' }
       },
       {
         targets: [...img], from: { opacity: '0', transform: 'translateX(50px) scale(0.95)' },
         anim: {
           opacity: [0, 1], translateX: [50, 0], scale: [0.95, 1],
-          duration: 1600, delay: 200, ease: 'outQuart'
+          duration: 700, delay: 80, ease: 'outQuart'
         }
       },
     ];
@@ -179,13 +180,13 @@ const About = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: [...cards], from: { opacity: '0', transform: 'translateY(60px)' },
         anim: {
           opacity: [0, 1], translateY: [60, 0],
-          duration: 1200, delay: stagger(80, { start: 300 }), ease: 'outQuart'
+          duration: 600, delay: stagger(50, { start: 100 }), ease: 'outQuart'
         }
       },
     ];
@@ -199,18 +200,18 @@ const About = () => {
     return [
       {
         targets: [...img], from: { opacity: '0', transform: 'translateX(-60px)' },
-        anim: { opacity: [0, 1], translateX: [-60, 0], duration: 1600, ease: 'outExpo' }
+        anim: { opacity: [0, 1], translateX: [-60, 0], duration: 700, ease: 'outExpo' }
       },
       {
         targets: [...text], from: { opacity: '0', transform: 'translateY(40px)' },
         anim: {
           opacity: [0, 1], translateY: [40, 0],
-          duration: 1200, delay: stagger(100, { start: 300 }), ease: 'outQuart'
+          duration: 600, delay: stagger(60, { start: 100 }), ease: 'outQuart'
         }
       },
       {
         targets: [...lines], from: { transform: 'scaleX(0)' },
-        anim: { scaleX: [0, 1], duration: 1000, delay: stagger(150, { start: 500 }), ease: 'inOutQuart' }
+        anim: { scaleX: [0, 1], duration: 500, delay: stagger(80, { start: 150 }), ease: 'inOutQuart' }
       },
     ];
   });
@@ -222,13 +223,13 @@ const About = () => {
     return [
       {
         targets: [...text], from: { opacity: '0', transform: 'translateX(-50px)' },
-        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 1400, ease: 'outExpo' }
+        anim: { opacity: [0, 1], translateX: [-50, 0], duration: 600, ease: 'outExpo' }
       },
       {
         targets: [...img], from: { opacity: '0', transform: 'translateX(50px) scale(0.95)' },
         anim: {
           opacity: [0, 1], translateX: [50, 0], scale: [0.95, 1],
-          duration: 1600, delay: 200, ease: 'outQuart'
+          duration: 700, delay: 80, ease: 'outQuart'
         }
       },
     ];
@@ -241,35 +242,15 @@ const About = () => {
     return [
       {
         targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 1200, ease: 'outQuart' }
+        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
       },
       {
         targets: el.querySelectorAll('.team-curtain'), from: { transform: 'translateX(0%)' },
-        anim: { translateX: ['0%', '101%'], duration: 1200, delay: stagger(200, { start: 400 }), ease: 'inOutExpo' }
+        anim: { translateX: ['0%', '101%'], duration: 600, delay: stagger(100, { start: 100 }), ease: 'inOutExpo' }
       },
       {
         targets: [...members], from: { opacity: '0', transform: 'scale(1.1)' },
-        anim: { opacity: [0, 1], scale: [1.1, 1], duration: 1400, delay: stagger(200, { start: 400 }), ease: 'outQuart' }
-      },
-    ];
-  });
-
-  // ── Testimonial section: spring ──
-  useSection(testRef, el => {
-    const text = el.querySelectorAll('.test-left');
-    const card = el.querySelectorAll('.test-card');
-    return [
-      {
-        targets: [...text], from: { opacity: '0', transform: 'translateX(-40px)' },
-        anim: { opacity: [0, 1], translateX: [-40, 0], duration: 1400, ease: 'outExpo' }
-      },
-      {
-        targets: [...card], from: { opacity: '0', transform: 'translateY(50px) scale(0.92)' },
-        anim: {
-          opacity: [0, 1], translateY: [50, 0], scale: [0.92, 1],
-          duration: 1400, delay: 300,
-          ease: createSpring({ stiffness: 70, damping: 16, mass: 1 })
-        }
+        anim: { opacity: [0, 1], scale: [1.1, 1], duration: 600, delay: stagger(100, { start: 100 }), ease: 'outQuart' }
       },
     ];
   });
@@ -473,34 +454,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Experiences That Speak for Quality */}
-      <section ref={testRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
-          <div className="test-left w-full md:w-[35%] flex flex-col justify-center will-change-transform">
-            <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-10 font-outfit">
-              Experiences That<br />Speak for Quality
-            </h2>
-            <button className="flex items-center space-x-2 text-white border border-white/30 px-5 py-2.5 text-xs md:text-sm tracking-wide hover:bg-white hover:text-black transition-colors w-fit">
-              <span>Explore Products</span><span>›</span>
-            </button>
-          </div>
-          <div className="test-card w-full md:w-[65%] will-change-transform">
-            <div className="bg-[#2a2a2c] border border-white/10 rounded-lg p-8 md:p-10 shadow-xl">
-              <h3 className="text-white text-lg md:text-xl font-semibold mb-1 font-outfit">James Walker</h3>
-              <p className="text-[#a3a3a3] text-xs italic mb-6">— Distributor</p>
-              <p className="text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light italic mb-6">
-                Cavier products have exceeded our expectations in terms of durability and finish. The consistency in quality across orders makes them a reliable partner for our projects.
-              </p>
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map(s => <span key={s} className="text-yellow-400 text-lg">★</span>)}
-              </div>
-            </div>
-            <div className="mt-8 w-full h-[2px] bg-white/10 rounded-full">
-              <div className="h-full w-1/3 bg-white rounded-full" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <Testimonials bgClass="bg-[#1F1F21]" />
     </div>
   );
 };
