@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 
 import { animate, stagger } from 'animejs';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight, ChevronRight } from 'lucide-react';
 import Testimonials from '../components/Testimonials';
 
 /* ─── helper: attach IntersectionObserver + animate on enter, reset on leave ─── */
@@ -35,7 +35,7 @@ const About = () => {
   const foundRef = useRef(null);
   const engRef = useRef(null);
   const dealerRef = useRef(null);
-  const teamRef = useRef(null);
+
 
 
   // ── Hero banner: text fade-up + image reveal ──
@@ -235,45 +235,26 @@ const About = () => {
     ];
   });
 
-  // ── Team members: stagger up with spring ──
-  useSection(teamRef, el => {
-    const title = el.querySelectorAll('.sec-title');
-    const members = el.querySelectorAll('.team-member');
-    return [
-      {
-        targets: [...title], from: { opacity: '0', transform: 'translateY(40px)' },
-        anim: { opacity: [0, 1], translateY: [40, 0], duration: 600, ease: 'outQuart' }
-      },
-      {
-        targets: el.querySelectorAll('.team-curtain'), from: { transform: 'translateX(0%)' },
-        anim: { translateX: ['0%', '101%'], duration: 600, delay: stagger(100, { start: 100 }), ease: 'inOutExpo' }
-      },
-      {
-        targets: [...members], from: { opacity: '0', transform: 'scale(1.1)' },
-        anim: { opacity: [0, 1], scale: [1.1, 1], duration: 600, delay: stagger(100, { start: 100 }), ease: 'outQuart' }
-      },
-    ];
-  });
 
   return (
     <div className="w-full bg-[#1F1F21] min-h-screen relative overflow-x-hidden">
 
       {/* Hero Banner */}
-      <section ref={heroRef} className="relative w-full min-h-screen md:h-screen flex flex-col md:flex-row bg-[#1F1F21]">
+      <section ref={heroRef} className="relative w-full min-h-screen md:h-screen flex flex-col md:flex-row md:gap-8 lg:gap-12 bg-[#1F1F21]">
         {/* Left: text */}
-        <div className="w-full md:w-[52%] flex flex-col justify-center px-6 md:px-12 lg:px-32 pt-28 pb-16 md:py-0">
-          <h1 className="hero-anim text-white text-5xl md:text-6xl lg:text-7xl font-light leading-[1.1] tracking-tight font-outfit mb-8 will-change-transform">
+        <div className="w-full md:w-[calc(52%-1rem)] lg:w-[calc(52%-1.5rem)] flex flex-col justify-center pl-6 pr-0 md:pl-12 lg:pl-32 pt-28 pb-16 md:pt-[102px] md:pb-0">
+          <h1 className="hero-anim text-white text-5xl md:text-6xl lg:text-7xl font-light leading-[1.2] md:leading-[1.2] lg:leading-[1.2] tracking-tight font-outfit mb-8 will-change-transform">
             Redefining<br />Everyday Luxury
           </h1>
-          <p className="hero-anim text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light max-w-md mb-10 will-change-transform">
+          <p className="hero-anim text-[#7E7E7E] text-[1.25rem] md:text-[1.25rem] leading-[1.8] md:leading-[1.8] font-light mb-10 will-change-transform">
             Eco-friendly, lead-free bath fittings designed to meet global safety standards. Pioneering innovation with high-performance solutions for modern info At CAVIER, we craft premium bathroom solutions that blend timeless design with modern functionality—elevating spaces with precision, elegance, and innovation. Infrastructure.
           </p>
-          <button className="hero-anim flex items-center gap-2 text-white border border-white/30 px-5 py-2.5 text-xs md:text-sm tracking-wide hover:bg-white hover:text-black transition-colors w-fit will-change-transform">
-            <span>Scroll Down</span><ChevronDown size={16} />
+          <button className="hero-anim flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform">
+            <span>Scroll Down</span><ChevronDown size={18} />
           </button>
         </div>
         {/* Right: image */}
-        <div className="w-full md:w-[48%] h-[45vh] md:h-full overflow-hidden">
+        <div className="w-full md:w-[calc(48%-1rem)] lg:w-[calc(48%-1.5rem)] h-[45vh] md:h-full overflow-hidden">
           <img src="/images/about_hero.png" alt="Cavier Bath Fittings" className="hero-img w-full h-full object-cover will-change-transform" />
         </div>
       </section>
@@ -290,11 +271,11 @@ const About = () => {
             { img: '/images/img1.png', label: 'Wallness' },
             { img: '/images/img2.png', label: 'Sanitary Ware' },
           ].map((c) => (
-            <div key={c.label} className="cat-card group relative w-full aspect-[4/3] overflow-hidden cursor-pointer will-change-transform">
+            <div key={c.label} className="cat-card group relative w-full aspect-[4/3] md:aspect-[16/14] overflow-hidden cursor-pointer will-change-transform">
               <img src={c.img} alt={c.label} className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
               <div className="absolute bottom-0 right-0 p-6 md:p-8">
-                <span className="text-white md:text-lg font-light tracking-wide">{c.label}</span>
+                <span className="text-white text-xl md:text-2xl font-light tracking-wide">{c.label}</span>
               </div>
             </div>
           ))}
@@ -359,12 +340,12 @@ const About = () => {
             { n: '04', t: 'Elegance', d: 'Each CAVIER creation is designed with refined beauty and timeless appeal, enhancing the ambiance of every space with simplicity and sophistication.' },
             { n: '05', t: 'Reliability', d: 'We ensure consistent performance and dependable quality in every product, building long-term trust with our customers through excellence and durability.' },
           ].map((c) => (
-            <div key={c.n} className="found-card border border-[#F9F9F9] rounded-sm p-5 md:p-6 flex flex-col justify-between min-h-[190px] will-change-transform">
-              <span className="text-white/50 text-sm font-light">{c.n}</span>
-              <div>
-                <h3 className="text-white text-lg md:text-xl font-semibold tracking-wide mb-4 font-outfit uppercase">{c.t}</h3>
-                <p className="text-[#a3a3a3] text-xs md:text-sm leading-relaxed font-light">{c.d}</p>
+            <div key={c.n} className="found-card relative border border-[#F9F9F9] rounded-sm p-5 md:p-6 min-h-[190px] will-change-transform">
+              <span className="text-[#FFFFFF] text-base font-light">{c.n}</span>
+              <div className="absolute inset-0 flex items-center px-5 md:px-6">
+                <h3 className="text-white text-xl md:text-2xl font-semibold tracking-wide font-outfit uppercase">{c.t}</h3>
               </div>
+              <p className="absolute bottom-5 md:bottom-6 left-5 md:left-6 right-5 md:right-6 text-[#a3a3a3] text-[1.025rem] md:text-[1.025rem] leading-relaxed font-light">{c.d}</p>
             </div>
           ))}
           <div className="found-card relative overflow-hidden rounded-sm border border-[#F9F9F9] min-h-[190px] will-change-transform">
@@ -376,25 +357,25 @@ const About = () => {
       {/* Engineered Perfection */}
       <section ref={engRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
-          <div className="eng-img w-full md:w-[45%] will-change-transform">
+          <div className="eng-img w-full md:w-1/2 will-change-transform">
             <img src="/images/img6.png" alt="Engineered Perfection" className="w-full h-auto object-contain" />
           </div>
-          <div className="w-full md:w-[55%] flex flex-col justify-center">
+          <div className="w-full md:w-1/2 flex flex-col justify-center">
             <span className="eng-text text-[#a3a3a3] text-xs tracking-[0.3em] uppercase mb-6 font-light will-change-transform">Materiality</span>
-            <h2 className="eng-text text-white text-4xl md:text-5xl lg:text-6xl font-semibold tracking-wide leading-[1.1] mb-10 md:mb-16 font-outfit uppercase will-change-transform">
+            <h2 className="eng-text text-white text-4xl md:text-5xl lg:text-6xl font-semibold tracking-wide leading-[1.4] md:leading-[1.4] lg:leading-[1.4] mb-10 md:mb-16 font-outfit uppercase will-change-transform">
               Engineered<br />Perfection.
             </h2>
-            <div className="mb-10">
+            <div className="mb-12">
               <div className="eng-line w-full h-px bg-white/10 mb-8" style={{ transformOrigin: 'left center' }} />
-              <h3 className="eng-text text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3 will-change-transform">Precision Milling</h3>
-              <p className="eng-text text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light max-w-lg will-change-transform">
+              <h3 className="eng-text text-[#E7E5E5] text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3 will-change-transform">Precision Milling</h3>
+              <p className="eng-text text-[#ACABAB] text-base md:text-lg leading-relaxed font-light will-change-transform">
                 Each component is milled from a single block of aerospace-grade stainless steel.
               </p>
             </div>
             <div>
               <div className="eng-line w-full h-px bg-white/10 mb-8" style={{ transformOrigin: 'left center' }} />
-              <h3 className="eng-text text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3 will-change-transform">Vapor Deposition</h3>
-              <p className="eng-text text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light max-w-lg will-change-transform">
+              <h3 className="eng-text text-[#E7E5E5] text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3 will-change-transform">Vapor Deposition</h3>
+              <p className="eng-text text-[#ACABAB] text-base md:text-lg leading-relaxed font-light will-change-transform">
                 Molecular-level coating for a finish that resists the passage of time and tide.
               </p>
             </div>
@@ -406,20 +387,25 @@ const About = () => {
       <section ref={dealerRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:pl-12 md:pr-0 lg:pl-32">
         <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-stretch">
           <div className="dealer-text w-full md:w-[40%] flex flex-col justify-center will-change-transform">
-            <h2 className="text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide leading-snug mb-8 font-outfit">
+            <h2 className="text-4xl md:text-5xl lg:text-[2.75rem] font-light text-white tracking-wide leading-[1.5] md:leading-[1.5] lg:leading-[1.5] mb-8 font-outfit">
               Cavier Authorised<br />Dealer Showroom
             </h2>
-            <p className="text-[#ffffff] text-sm md:text-base leading-relaxed font-light mb-6 max-w-lg">
+            <p className="text-[#ffffff] text-base md:text-lg leading-relaxed font-light mb-6 max-w-lg">
               The CAVIER Authorized Showroom is a dedicated retail space designed to showcase our complete range of premium bathroom solutions. Located across key markets, these showrooms offer customers an immersive experience where design, quality, and innovation come together.
             </p>
-            <p className="text-[#ffffff] text-sm md:text-base leading-relaxed font-light mb-6 max-w-lg">
+            <p className="text-[#ffffff] text-base md:text-lg leading-relaxed font-light mb-6 max-w-lg">
               Our showrooms feature an extensive collection of bathroom fittings, including elegant faucets, sanitaryware, shower systems, and a wide range of accessories—each crafted to meet modern lifestyle needs. Every product is displayed in thoughtfully designed setups, allowing customers to explore styles, finishes, and functionalities in a real-world environment.
             </p>
-            <p className="text-[#ffffff] text-sm md:text-base leading-relaxed font-light mb-10 max-w-lg">
+            <p className="text-[#ffffff] text-base md:text-lg leading-relaxed font-light mb-10 max-w-lg">
               From contemporary designs to timeless finishes, CAVIER offers a comprehensive range that caters to residential and commercial spaces. Our showrooms are your one-stop destination for creating modern, functional, and aesthetically refined bathrooms.
             </p>
-            <button className="flex items-center space-x-2 text-white border border-white/30 px-5 py-2.5 text-xs md:text-sm tracking-wide hover:bg-white hover:text-black transition-colors w-fit">
-              <span>Cavier Display Showroom</span><span>›</span>
+            <button
+              className="faucet-view-btn flex items-center gap-3 px-5 py-3 border border-white
+                       text-white text-sm
+                       hover:bg-white hover:text-black transition-all duration-300 w-fit"
+            >
+              Cavier Display Showroom
+              <ChevronRight size={18} />
             </button>
           </div>
           <div className="dealer-img w-full md:w-[60%] overflow-hidden will-change-transform h-[500px] md:h-[750px]">
@@ -428,31 +414,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Meet Our Team */}
-      <section ref={teamRef} className="w-full bg-[#1F1F21] pt-6 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <h2 className="sec-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-12 font-outfit will-change-transform">
-          Meet Our Team
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0 w-full">
-          {[
-            { name: 'Varna Ajudiya', img: '/images/team_varna.png' },
-            { name: 'Rakesh Ajudiya', img: '/images/team_rakesh.png' },
-            { name: 'Bhautik Ajudiya', img: '/images/team_bhautik.png' },
-          ].map((m) => (
-            <div key={m.name} className="team-member group relative flex flex-col will-change-transform overflow-hidden">
-              <div className="relative w-full aspect-[4/5] overflow-hidden">
-                {/* Cinematic Curtain */}
-                <div className="team-curtain absolute inset-0 bg-[#1F1F21] z-10 will-change-transform" />
-                <img src={m.img} alt={m.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
-              </div>
-              <div className="p-6 bg-black/20 backdrop-blur-sm border-t border-white/5 mt-auto">
-                <p className="text-white text-sm md:text-base font-medium font-outfit tracking-wider uppercase">{m.name}</p>
-                <p className="text-[#a3a3a3] text-[10px] uppercase tracking-[0.2em] mt-1">Directorship</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <Testimonials bgClass="bg-[#1F1F21]" />
     </div>

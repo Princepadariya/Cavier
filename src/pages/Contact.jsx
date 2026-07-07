@@ -150,7 +150,7 @@ const Contact = () => {
             <a
               key={c.t}
               href={c.href}
-              className="info-card border border-white py-6 md:py-8 px-3 md:px-4 flex flex-col items-center justify-center text-center will-change-transform hover:bg-white hover:text-black transition-colors duration-300 group"
+              className="info-card border border-white py-6 md:py-10 px-3 md:px-4 flex flex-col items-center justify-center text-center will-change-transform hover:bg-white hover:text-black transition-colors duration-300 group"
             >
               <h3 className="text-white group-hover:text-black text-base md:text-lg font-outfit font-light mb-4 tracking-wide transition-colors duration-300">{c.t}</h3>
               <p className="text-white group-hover:text-black text-sm md:text-base font-text tracking-wide transition-colors duration-300">{c.v}</p>

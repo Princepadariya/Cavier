@@ -63,9 +63,9 @@ const Navbar = ({ variant = 'default' }) => {
 
   return (
     <>
-    <nav ref={containerRef} className="absolute top-0 w-full z-50 px-4 sm:px-6 md:px-12 lg:px-32 py-5 md:py-8 flex items-center justify-between">
+    <nav ref={containerRef} className="absolute top-0 w-full z-50 px-4 sm:px-6 md:px-12 lg:px-32 py-5 md:py-8 flex items-center justify-between" style={{ fontFamily: "'Poppins', sans-serif" }}>
       {/* Left Links */}
-      <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+      <div className="hidden md:flex items-center space-x-8 text-sm font-light tracking-wide">
         <Link to="/about" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
           About
           <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
@@ -78,12 +78,12 @@ const Navbar = ({ variant = 'default' }) => {
           Category
           <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
         </Link>
-        <Link to="/contact" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
-          Contact
-          <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
-        </Link>
         <Link to="/blog" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
           Blog
+          <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+        </Link>
+        <Link to="/contact" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
+          Contact
           <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
         </Link>
       </div>
@@ -104,7 +104,7 @@ const Navbar = ({ variant = 'default' }) => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`nav-icon flex items-center gap-2 border rounded-full px-5 py-2 text-sm font-medium tracking-wide transition-colors opacity-0 will-change-transform ${isContact ? 'border-black/50 text-black hover:bg-black hover:text-white' : 'border-white/30 text-white hover:bg-white hover:text-black'}`}
+            className={`nav-icon flex items-center gap-2 border rounded-full px-5 py-2 text-sm font-light tracking-wide transition-colors opacity-0 will-change-transform ${isContact ? 'border-black/50 text-black hover:bg-black hover:text-white' : 'border-white text-white hover:bg-white hover:text-black'}`}
           >
             <Store size={15} />
             <span>Dealership</span>
@@ -115,7 +115,7 @@ const Navbar = ({ variant = 'default' }) => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`nav-icon hidden md:flex items-center gap-2 border rounded-full px-5 py-2 text-sm font-medium tracking-wide transition-colors opacity-0 will-change-transform ${isContact ? 'border-black/50 text-black hover:bg-black hover:text-white' : 'border-white/30 text-white hover:bg-white hover:text-black'}`}
+          className={`nav-icon hidden md:flex items-center gap-2 border rounded-full px-5 py-2 text-sm font-light tracking-wide transition-colors opacity-0 will-change-transform ${isContact ? 'border-black/50 text-black hover:bg-black hover:text-white' : 'border-white text-white hover:bg-white hover:text-black'}`}
         >
           <Download size={15} />
           <span>Download</span>
@@ -153,6 +153,7 @@ const Navbar = ({ variant = 'default' }) => {
             exit={{ x: '100%' }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
             className="fixed top-0 right-0 h-full w-[75vw] max-w-[320px] bg-[#111] z-[110] md:hidden flex flex-col"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
           >
             {/* Close button */}
             <div className="flex justify-end p-5">
@@ -172,8 +173,8 @@ const Navbar = ({ variant = 'default' }) => {
                 { to: '/about', label: 'About' },
                 { to: '/product', label: 'Product' },
                 { to: '/#category', label: 'Category' },
-                { to: '/contact', label: 'Contact' },
                 { to: '/blog', label: 'Blog' },
+                { to: '/contact', label: 'Contact' },
               ].map((link, i) => (
                 <motion.div
                   key={link.to}
@@ -197,12 +198,12 @@ const Navbar = ({ variant = 'default' }) => {
               <Link
                 to="/dealership"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 border border-white/30 rounded-full px-5 py-3 text-white text-sm font-medium hover:bg-white hover:text-black transition-colors"
+                className="flex items-center justify-center gap-2 border border-white rounded-full px-5 py-3 text-white text-sm font-light hover:bg-white hover:text-black transition-colors"
               >
                 <Store size={16} />
                 <span>Dealership</span>
               </Link>
-              <button className="flex items-center justify-center gap-2 border border-white/30 rounded-full px-5 py-3 text-white text-sm font-medium hover:bg-white hover:text-black transition-colors">
+              <button className="flex items-center justify-center gap-2 border border-white rounded-full px-5 py-3 text-white text-sm font-light hover:bg-white hover:text-black transition-colors">
                 <Download size={16} />
                 <span>Download</span>
               </button>

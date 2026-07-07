@@ -129,12 +129,12 @@ const Insights = () => {
         </div>
 
         {/* Bottom Button */}
-        <div className="w-full flex justify-center mt-12 md:mt-20">
+        <div className="w-full flex justify-center mt-14 md:mt-14">
           <button
-            className="insight-btn flex items-center gap-3 px-6 md:px-8 py-3 border border-white/50 text-white text-xs md:text-sm tracking-widest hover:bg-white hover:text-black transition-colors duration-300 opacity-0 will-change-transform hover:scale-105 active:scale-95"
+            className="insight-btn flex items-center gap-3 px-5 py-3 border border-white text-white text-sm hover:bg-white hover:text-black transition-colors duration-300 opacity-0 will-change-transform hover:scale-105 active:scale-95"
           >
             View More
-            <ChevronRight size={16} />
+            <ChevronRight size={18} />
           </button>
         </div>
 

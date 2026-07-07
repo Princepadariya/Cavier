@@ -27,9 +27,12 @@ const posts = [
   { img: '/images/insight_1.jpg', title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026' },
   { img: '/images/insight_2.jpg', title: 'Choosing the Right Bathroom Accessories for a Cohesive Space' },
   { img: '/images/insight_3.jpg', title: 'How Premium Bath Fittings Enhance Bathroom Aesthetics' },
-  { img: '/images/img3.png', title: 'Top Bathroom Design Trends for Modern Homes' },
-  { img: '/images/img5.jpg', title: 'How to Choose the Perfect Bathroom Faucet' },
-  { img: '/images/img6.png', title: 'Brass vs. Stainless Steel Faucets: Which is Better?' },
+  { img: '/images/Top Bathroom Design Trends for Modern Homes.jpg', title: 'Top Bathroom Design Trends for Modern Homes' },
+  { img: '/images/How to Choose the Perfect Bathroom Faucet.jpg', title: 'How to Choose the Perfect Bathroom Faucet' },
+  { img: '/images/Brass vs. Stainless Steel Faucets Which Is Better.jpg', title: 'Brass vs. Stainless Steel Faucets: Which is Better?' },
+  { img: '/images/Essential Tips for Maintaining Chrome Bath Fittings.jpg', title: 'Essential Tips for Maintaining Chrome Bath Fittings' },
+  { img: '/images/Why Quality Bath Fittings Matter for Long-Term Performance.jpg', title: 'Why Quality Bath Fittings Matter for Long-Term Performance' },
+  { img: '/images/How Water-Saving Faucets Improve Everyday Living.jpg', title: 'How Water-Saving Faucets Improve Everyday Living' },
 ];
 
 const Blog = () => {
@@ -83,12 +86,12 @@ const Blog = () => {
 
         <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/blog_hero_banner.png')" }} />
         <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-20">
           <div className="blog-content flex flex-col items-center">
             <span className="text-white/70 text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">The Cavier Blog</span>
-            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-light tracking-wide leading-[1.15] mb-8 font-outfit will-change-transform">Insights That Inspire<br />Better Bathrooms</h1>
-            <p className="text-white/80 max-w-2xl text-sm md:text-base leading-relaxed font-light mb-12 will-change-transform">Explore the latest bathroom trends, product innovations, expert insights, and design inspiration from Cavier India.</p>
-            <button className="flex items-center space-x-3 text-white border border-white/30 px-6 py-3 text-sm hover:bg-white hover:text-black transition-all duration-500 will-change-transform group">
+            <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-light tracking-wide mb-8 font-outfit will-change-transform"><span className="block mb-2 md:mb-4">Insights That Inspire</span><span className="block">Better Bathrooms</span></h1>
+            <p className="text-[#ACABAB] max-w-3xl text-xl md:text-3xl leading-relaxed font-light mb-12 will-change-transform">Explore the latest bathroom trends, product innovations, expert insights, and design inspiration from Cavier India.</p>
+            <button className="flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform group">
               <span>Scroll Down</span><ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
             </button>
           </div>
@@ -110,7 +113,7 @@ const Blog = () => {
                   className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-white text-base md:text-lg font-light leading-relaxed group-hover:text-[#a3a3a3] transition-colors">
+              <h3 className="text-white text-base md:text-lg font-normal leading-relaxed group-hover:text-[#a3a3a3] transition-colors">
                 {p.title}
               </h3>
             </Link>

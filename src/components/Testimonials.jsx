@@ -109,10 +109,10 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
     if (diff === 0) return { x: 0, y: 0, scale: 1, zIndex: 50, opacity: 1 };
 
     // RIGHT CARD - Next
-    if (diff === 1) return { x: "12%", y: 0, scale: 0.9, zIndex: 40, opacity: 0.6 };
+    if (diff === 1) return { x: "10%", y: 0, scale: 0.9, zIndex: 40, opacity: 1 };
 
     // LEFT CARD - Previous
-    if (diff === total - 1) return { x: "-12%", y: 0, scale: 0.9, zIndex: 40, opacity: 0.6 };
+    if (diff === total - 1) return { x: "-10%", y: 0, scale: 0.9, zIndex: 40, opacity: 1 };
 
     // EXITED CARD - Hidden on left
     if (diff === total - 2) return { x: "-40%", y: 0, scale: 0.7, zIndex: 30, opacity: 0 };
@@ -123,11 +123,11 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
 
   return (
     <div ref={containerRef} className={`w-full relative ${bgClass}`}>
-      <section ref={sectionRef} className="w-full pt-0 pb-16 md:py-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
-        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 relative z-10">
+      <section ref={sectionRef} className="w-full pt-12 pb-24 px-4 sm:px-6 md:px-12 overflow-hidden flex items-center justify-center perspective-1000">
+        <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-12 relative z-10">
 
           {/* Left Side: Title & Info */}
-          <div className="w-full lg:w-5/12 flex flex-col items-start pr-0 md:pr-10">
+          <div className="w-full lg:w-4/12 flex flex-col items-start">
             <h2 className="test-title text-2xl md:text-4xl lg:text-[2.4rem] font-medium text-white tracking-wide mb-6 sm:mb-8 md:mb-10 leading-[1.5] md:leading-[1.5] lg:leading-[1.5] opacity-0 will-change-transform">
               Experiences That Speak for Quality
             </h2>
@@ -140,10 +140,10 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
           </div>
 
           {/* Right Side: 3D Stacked Card Engine */}
-          <div className="test-stack-container w-full lg:w-7/12 mt-0 lg:mt-0 px-6 sm:px-0 opacity-0 will-change-transform perspective-[1500px]">
+          <div className="test-stack-container w-full lg:w-8/12 mt-0 lg:mt-0 px-6 sm:px-0 opacity-0 will-change-transform perspective-[1500px]">
 
-            {/* STACK WRAPPER */}
-            <div className="relative w-full max-w-[600px] mx-auto h-[320px] sm:h-[380px] md:h-[340px]">
+            {/* STACK WRAPPER — nudged right */}
+            <div className="relative w-full max-w-[700px] mx-auto lg:translate-x-6 xl:translate-x-10 h-[270px] sm:h-[310px] md:h-[270px]">
               {testimonials.map((testimonial, i) => (
                 <motion.div
                   key={testimonial.id}
@@ -152,28 +152,33 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
                     duration: 1.1,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#2a2a2a] to-[#1e1e1e] border border-white/60 rounded-[1.5rem] p-8 md:p-12 shadow-2xl flex flex-col"
+                  className="absolute inset-0 w-full h-full border border-white rounded-[1.5rem] p-6 md:p-8 shadow-2xl flex flex-col overflow-hidden"
+                  style={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                    backdropFilter: 'blur(34px)',
+                    WebkitBackdropFilter: 'blur(34px)',
+                  }}
                 >
                   {/* Background Watermark Quote */}
-                  <Quote size={120} className="absolute right-6 top-6 text-white/5" strokeWidth={1} />
+                  <Quote size={80} className="absolute right-4 top-4 text-white/5" strokeWidth={1} />
 
                   {/* Content */}
-                  <div className="relative z-10 flex-grow flex flex-col">
-                    <h3 className="text-white text-xl md:text-2xl font-light tracking-wide mb-1">
+                  <div className="relative z-10 flex-grow flex flex-col min-h-0">
+                    <h3 className="text-white text-lg md:text-xl font-light tracking-wide mb-1">
                       {testimonial.name}
                     </h3>
-                    <p className="text-[#a0a0a0] italic text-xs md:text-sm mb-6 md:mb-8 font-light flex items-center gap-2">
+                    <p className="text-[#a0a0a0] italic text-xs md:text-sm mb-3 md:mb-4 font-light flex items-center gap-2">
                       <span className="w-4 h-[1px] bg-white/30"></span>
                       {testimonial.role}
                     </p>
 
-                    <p className="text-white text-sm md:text-base leading-relaxed italic mb-8 font-light opacity-90 line-clamp-4">
+                    <p className="text-white text-xs md:text-sm leading-relaxed italic mb-4 font-light opacity-90 line-clamp-3">
                       "{testimonial.text}"
                     </p>
 
                     <div className="mt-auto flex gap-1.5 text-[#eab308]">
                       {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} fill="currentColor" size={14} strokeWidth={0} />
+                        <Star key={idx} fill="currentColor" size={17} strokeWidth={0} />
                       ))}
                     </div>
                   </div>

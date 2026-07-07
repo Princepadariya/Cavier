@@ -191,14 +191,14 @@ const Dealership = () => {
         </div>
 
         <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/Dealership_hero_banner.png')" }} />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+        <div className="absolute inset-0" />
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-24 md:pt-[102px]">
           <div className="dealer-content flex flex-col items-center">
             <span className="text-white/70 text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">Partnership Opportunity</span>
             <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-light tracking-wide leading-[1.15] mb-8 font-outfit will-change-transform">Grow Your Business<br />with CAVIER</h1>
-            <p className="text-white/80 max-w-2xl text-sm md:text-base leading-relaxed font-light mb-12 will-change-transform">Define the future of luxury bathrooms through a synthesis of precision engineering, architectural innovation, and timeless design.</p>
-            <button className="flex items-center space-x-3 text-white border border-white/30 px-6 py-3 text-sm hover:bg-white hover:text-black transition-all duration-500 will-change-transform group">
-              <span>Scroll Down</span><ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
+            <p className="text-[#ACABAB] max-w-3xl text-xl md:text-3xl leading-relaxed font-light mb-12 will-change-transform">Define the future of luxury bathrooms through a synthesis of precision engineering, architectural innovation, and timeless design.</p>
+            <button className="flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform">
+              <span>Scroll Down</span><ChevronDown size={18} />
             </button>
           </div>
         </div>
@@ -206,20 +206,20 @@ const Dealership = () => {
 
       {/* Philosophy */}
       <section ref={philRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <span className="phil-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase block mb-10 font-light will-change-transform">The Philosophy</span>
+        <span className="phil-label text-[#757575] text-xs md:text-sm tracking-[0.35em] uppercase block mb-10 font-light will-change-transform">The Philosophy</span>
         <div className="flex flex-col md:flex-row gap-12 md:gap-20">
           <div className="phil-quote w-full md:w-[50%] will-change-transform">
-            <p className="text-white text-2xl md:text-3xl lg:text-[2rem] font-light leading-snug tracking-wide font-text">We believe in the power of enduring partnerships. Our network of dealers are more than distributors; they are ambassadors of high-end architectural living.</p>
+            <p className="text-[#E7E5E5] text-3xl md:text-4xl lg:text-[2.25rem] font-light tracking-wide font-text max-w-[500px]" style={{ lineHeight: 1.4 }}>We believe in the power of enduring partnerships. Our network of dealers are more than distributors; they are ambassadors of high-end architectural living.</p>
           </div>
           <div className="phil-desc w-full md:w-[50%] flex items-end will-change-transform">
-            <p className="text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light">Building a CAVIER partnership means investing in a legacy of excellence. We invite entrepreneurs and distributors who share our obsession with detail and quality to join an ecosystem built for long-term growth and market leadership in the premium segment.</p>
+            <p className="text-[#ACABAB] text-base md:text-lg font-light" style={{ lineHeight: 1.8 }}>Building a CAVIER partnership means investing in a legacy of excellence. We invite entrepreneurs and distributors who share our obsession with detail and quality to join an ecosystem built for long-term growth and market leadership in the premium segment.</p>
           </div>
         </div>
       </section>
 
       {/* Value Propositions */}
       <section ref={valRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <div className="text-center mb-12 md:mb-16"><span className="val-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Value Propositions</span></div>
+        <div className="text-center mb-12 md:mb-16"><span className="val-label text-[#FFFFFF] text-xs md:text-sm tracking-[0.35em] uppercase font-light will-change-transform">Value Propositions</span></div>
         <div className="grid grid-cols-1 md:grid-cols-3 border border-white/10">
           {[
             { icon: '/images/Icon.svg', title: 'Premium Product\nRange', desc: 'Meticulously crafted fittings that set new standards in architectural bathroom design.' },
@@ -229,10 +229,10 @@ const Dealership = () => {
             { icon: '/images/Icon_2.svg', title: 'Reliable Supply\nChain', desc: 'Streamlined logistics and inventory management ensuring consistent product availability.' },
             { icon: '/images/Icon_3.svg', title: 'Exclusive\nTerritories', desc: 'Protected regional distribution rights to ensure your market investment yields high returns.' },
           ].map((c, i) => (
-            <div key={i} className={`val-card border-white/10 p-8 md:p-10 flex flex-col min-h-[240px] md:min-h-[280px] will-change-transform border-b md:border-r ${i % 3 === 2 ? 'md:border-r-0' : ''} ${i >= 3 ? 'md:border-b-0' : ''} ${i === 5 ? 'border-b-0' : ''}`}>
-              <img src={c.icon} alt="" className="w-5 h-5 md:w-6 md:h-6 mb-6 md:mb-8 opacity-80" />
-              <h3 className="text-white text-sm md:text-base font-semibold tracking-wide mb-3 md:mb-4 font-outfit uppercase leading-snug whitespace-pre-line">{c.title}</h3>
-              <p className="text-[#a3a3a3] text-xs md:text-sm leading-relaxed font-light mt-auto">{c.desc}</p>
+            <div key={i} className={`val-card aspect-square border-white/10 p-10 md:p-16 flex flex-col min-h-[280px] md:min-h-[340px] justify-start will-change-transform border-b md:border-r ${i % 3 === 2 ? 'md:border-r-0' : ''} ${i >= 3 ? 'md:border-b-0' : ''} ${i === 5 ? 'border-b-0' : ''}`}>
+              <img src={c.icon} alt="" className="w-5 h-5 md:w-6 md:h-6 mb-4 md:mb-6 opacity-80" />
+              <h3 className="text-[#E7E5E5] text-lg md:text-xl font-semibold tracking-wide mb-4 md:mb-6 font-outfit uppercase leading-relaxed whitespace-pre-line">{c.title}</h3>
+              <p className="text-[#ACABAB] text-base md:text-[17px] leading-relaxed font-light">{c.desc}</p>
             </div>
           ))}
         </div>
@@ -258,23 +258,23 @@ const Dealership = () => {
                 <span className="text-white text-2xl md:text-3xl font-light font-outfit">{s.n}</span>
               </div>
               <h3 className="text-white text-xs md:text-sm font-semibold tracking-[0.15em] uppercase mb-3">{s.t}</h3>
-              <p className="text-[#a3a3a3] text-[11px] md:text-xs leading-[1.8] font-light uppercase tracking-wide max-w-[230px] mx-auto">{s.d}</p>
+              <p className="text-[#a3a3a3] text-[11px] md:text-xs font-light uppercase tracking-wide max-w-[230px] mx-auto" style={{ lineHeight: 1.8 }}>{s.d}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Candidate Profiles */}
-      <section ref={candRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32 relative z-10">
-        <div className="text-center mb-12 md:mb-16"><span className="cand-label text-[#a3a3a3] text-xs tracking-[0.35em] uppercase font-light will-change-transform">Candidate Profiles</span></div>
+      <section ref={candRef} className="w-full bg-[#1F1F21] pb-16 md:pb-24 px-6 md:px-12 lg:px-32 relative z-10">
+        <div className="text-center mb-12 md:mb-16"><span className="cand-label text-[#757575] text-xs md:text-sm tracking-[0.35em] uppercase font-light will-change-transform">Candidate Profiles</span></div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {[
             { t: 'Retail Showroom Details', d: 'Establishments catering to the luxury residential market with a focus on interior design and bespoke fittings.' },
             { t: 'Regional Distributors', d: 'Established partners with logistics capabilities and a network of sub-dealers in high-growth metropolitan areas.' },
           ].map(c => (
-            <div key={c.t} className="cand-card border border-white/10 p-8 md:p-16 min-h-[220px] flex flex-col justify-start will-change-transform transition-all duration-500 hover:border-white/30 hover:bg-white/[0.02] group">
-              <h3 className="text-white text-3xl md:text-4xl font-light tracking-wide mb-6 font-outfit group-hover:text-white transition-colors">{c.t}</h3>
-              <p className="text-[#a3a3a3] text-sm md:text-base leading-relaxed font-light group-hover:text-[#d1d1d1] transition-colors">{c.d}</p>
+            <div key={c.t} className="cand-card border border-white/10 p-8 md:p-12 min-h-[220px] flex flex-col justify-start will-change-transform transition-all duration-500 hover:border-white/30 hover:bg-white/[0.02] group">
+              <h3 className="text-white text-3xl md:text-4xl font-normal tracking-wide mb-6 font-outfit group-hover:text-white transition-colors">{c.t}</h3>
+              <p className="text-[#ACABAB] text-lg md:text-xl leading-relaxed font-light group-hover:text-[#d1d1d1] transition-colors">{c.d}</p>
             </div>
           ))}
         </div>
@@ -330,10 +330,10 @@ const Dealership = () => {
               { s: 'Support III', t: 'Marketing Material', d: 'Premium catalogs, physical finish swatches, and high-fidelity digital assets for your showroom.' },
               { s: 'Support IV', t: 'Dedicated Support', d: 'A direct line to our regional partnership managers for day-to-day operational excellence.' },
             ].map(c => (
-              <div key={c.s} className="offer-item will-change-transform max-w-[260px]">
-                <span className="text-[#a3a3a3] text-[11px] tracking-[0.25em] uppercase block mb-3 font-light">{c.s}</span>
-                <h3 className="text-white text-lg md:text-xl font-medium mb-3 font-outfit">{c.t}</h3>
-                <p className="text-[#a3a3a3] text-sm leading-relaxed font-light">{c.d}</p>
+              <div key={c.s} className="offer-item will-change-transform max-w-[260px] md:max-w-xs">
+                <span className="text-[#a3a3a3] text-xs md:text-sm tracking-[0.25em] uppercase block mb-3 font-light">{c.s}</span>
+                <h3 className="text-white text-xl md:text-2xl font-normal mb-3 font-outfit">{c.t}</h3>
+                <p className="text-[#a3a3a3] text-base md:text-lg leading-relaxed font-light">{c.d}</p>
               </div>
             ))}
           </div>

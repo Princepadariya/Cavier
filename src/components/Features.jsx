@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { Droplets, SlidersHorizontal, ShieldCheck, Leaf } from 'lucide-react';
 import { animate, stagger } from 'animejs';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,22 +8,22 @@ gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
-    icon: <Droplets strokeWidth={1} size={28} />,
+    icon: "/images/Water Efficiency.png",
     title: "Water Efficiency",
     description: "Advanced designs that optimize water flow, reducing consumption while maintaining powerful performance.",
   },
   {
-    icon: <SlidersHorizontal strokeWidth={1} size={28} />,
+    icon: "/images/Smart Experience.png",
     title: "Smart Experience",
     description: "Engineered for smooth operation and precise control, ensuring comfort and convenience in every use.",
   },
   {
-    icon: <ShieldCheck strokeWidth={1} size={28} />,
+    icon: "/images/Durability.png",
     title: "Durability",
     description: "High-quality coatings that resist corrosion, retain shine, and deliver long-lasting durability.",
   },
   {
-    icon: <Leaf strokeWidth={1} size={28} />,
+    icon: "/images/Sustainability.png",
     title: "Sustainability",
     description: "Environment-conscious processes focused on reducing impact while maintaining superior product standards.",
   }
@@ -104,7 +103,7 @@ const Features = () => {
   }, []);
 
   const quadStyle = "absolute w-1/2 h-1/2 overflow-hidden bg-no-repeat will-change-transform";
-  
+
   return (
     <section
       ref={sectionRef}
@@ -112,42 +111,42 @@ const Features = () => {
     >
       {/* ── 4-quadrant animated background ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div 
-          className={`quad-tl ${quadStyle}`} 
-          style={{ top: 0, left: 0, transform: 'translate(-100%, -100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 0%' }} 
-        />
-        <div 
-          className={`quad-tr ${quadStyle}`} 
-          style={{ top: 0, right: 0, transform: 'translate(100%, -100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 0%' }} 
-        />
-        <div 
-          className={`quad-bl ${quadStyle}`} 
-          style={{ bottom: 0, left: 0, transform: 'translate(-100%, 100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 100%' }} 
-        />
-        <div 
-          className={`quad-br ${quadStyle}`} 
-          style={{ bottom: 0, right: 0, transform: 'translate(100%, 100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 100%' }} 
+        <div
+          className={`quad-tl ${quadStyle}`}
+          style={{ top: 0, left: 0, transform: 'translate(-100%, -100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 0%' }}
         />
         <div
-          className="quad-overlay absolute inset-0 bg-black/60 opacity-0"
+          className={`quad-tr ${quadStyle}`}
+          style={{ top: 0, right: 0, transform: 'translate(100%, -100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 0%' }}
+        />
+        <div
+          className={`quad-bl ${quadStyle}`}
+          style={{ bottom: 0, left: 0, transform: 'translate(-100%, 100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '0% 100%' }}
+        />
+        <div
+          className={`quad-br ${quadStyle}`}
+          style={{ bottom: 0, right: 0, transform: 'translate(100%, 100%)', backgroundImage: "url('/images/features_bg.png')", backgroundSize: '200% 200%', backgroundPosition: '100% 100%' }}
+        />
+        <div
+          className="quad-overlay absolute inset-0 opacity-0"
           style={{ zIndex: 5 }}
         />
       </div>
 
       {/* ── Feature cards ── */}
-      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 sm:gap-y-16 lg:gap-x-24 lg:gap-y-28">
+      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-x-0 gap-y-16">
         {features.map((feature, index) => (
           <div
             key={index}
             className="feature-card flex flex-col items-center text-center opacity-0 will-change-transform"
           >
             <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-6">
-              <div className="feature-icon text-white will-change-transform opacity-0">{feature.icon}</div>
+              <div className="feature-icon will-change-transform opacity-0"><img src={feature.icon} alt={feature.title} className="w-9 h-9 object-contain" /></div>
               <h3 className="text-xl sm:text-2xl md:text-[1.6rem] font-medium tracking-wide text-white">
                 {feature.title}
               </h3>
             </div>
-            <p className="text-[#a8a8a8] text-sm sm:text-[0.95rem] md:text-base leading-relaxed md:leading-[1.8] max-w-sm">
+            <p className="text-[#949494] text-[0.9rem] sm:text-base md:text-lg leading-relaxed md:leading-[1.8] max-w-md">
               {feature.description}
             </p>
           </div>

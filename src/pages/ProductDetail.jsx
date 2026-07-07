@@ -285,7 +285,7 @@ const ProductDetail = () => {
                               group-hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
                 <Link to={`/product/${item}`} className="block w-full h-full relative">
                   <img
-                    src="/images/img2.png"
+                    src={item === 1 ? "/images/Similar items.png" : `/images/Similar items_${item}.png`}
                     alt="Similar Item"
                     className="w-full h-full object-contain transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.08] will-change-transform"
                   />

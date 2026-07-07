@@ -214,27 +214,27 @@ const FinishingTouch = () => {
           <div ref={anchorRef} className="max-w-7xl mx-auto h-0" aria-hidden="true" />
 
           <div
-            className="h-full flex flex-col lg:flex-row items-center justify-start sm:justify-center lg:justify-start gap-6 lg:gap-10"
-            style={{ paddingLeft: metrics.isMobile ? 0 : metrics.extraLeftInset }}
+            className="h-full flex flex-col lg:flex-row items-start justify-start sm:justify-center lg:justify-start gap-6 lg:gap-10"
+            style={{ paddingLeft: metrics.isMobile ? 0 : metrics.extraLeftInset, paddingRight: metrics.isMobile ? 0 : metrics.extraLeftInset }}
           >
 
             {/* ── Text block (Left on Desktop, Top Context on Mobile) ── */}
             <div
-              className="relative z-20 flex flex-col justify-center pointer-events-none flex-shrink-0 w-full lg:w-auto pt-6 sm:pt-20 lg:pt-0 pb-8 lg:pb-0"
+              className="relative z-20 flex flex-col justify-start pointer-events-none flex-shrink-0 w-full lg:w-auto pt-6 sm:pt-20 lg:pt-0 pb-8 lg:pb-0 lg:mt-10"
               style={{ maxWidth: metrics.isMobile ? '100%' : metrics.textBlockW }}
             >
               <div className="finishing-title pointer-events-auto opacity-0 will-change-transform">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white mb-3 lg:mb-5 leading-tight tracking-tight mt-0">
                   The Finishing Touch
                 </h2>
-                <p className="text-[#888] text-xs sm:text-sm lg:text-base leading-relaxed mb-6 lg:mb-10 font-light lg:pr-8">
+                <p className="text-[#999999] text-sm sm:text-base lg:text-lg leading-relaxed mb-6 lg:mb-10 font-light lg:pr-8">
                   Precision lies in every detail. Explore our curated bath collections
                   designed to enhance modern living with style, performance, and lasting quality.
                 </p>
-                <button className="flex items-center gap-3 px-6 lg:px-7 py-3 border border-white/40
-                                  text-white text-xs lg:text-sm tracking-widest hover:bg-white hover:text-black
+                <button className="flex items-center gap-3 px-5 py-3 border border-white
+                                  text-white text-sm hover:bg-white hover:text-black
                                   transition-all duration-300">
-                  View More <ArrowRight size={15} />
+                  View More <ArrowRight size={18} />
                 </button>
               </div>
             </div>
@@ -264,7 +264,7 @@ const FinishingTouch = () => {
                         className="overflow-hidden bg-[#111] shadow-2xl
                                   group-hover:shadow-[0_25px_60px_rgba(0,0,0,0.9)]
                                   transition-shadow duration-700 relative"
-                        style={{ width: metrics.cardW, height: Math.round(metrics.cardW * 1.35) }}
+                        style={{ width: metrics.cardW, height: Math.round(metrics.cardW * 1.6) }}
                       >
                         <div
                           className="card-inner-bg w-full h-full bg-cover bg-center transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110 will-change-transform"

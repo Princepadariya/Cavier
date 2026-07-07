@@ -66,19 +66,19 @@ const About = () => {
 
   return (
     <section ref={sectionRef} className="w-full bg-[#1F1F21] py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 flex justify-center items-center">
-      <div className="about-wrapper max-w-4xl text-center opacity-0 will-change-transform">
+      <div className="about-wrapper max-w-7xl mx-auto text-center opacity-0 will-change-transform">
         {/* Decorative gold line */}
         <div
           className="about-line w-16 h-[1px] mx-auto mb-8 will-change-transform"
           style={{ background: 'linear-gradient(90deg, transparent, #c9a227, transparent)', transformOrigin: 'center' }}
         />
 
-        <p className="text-xl md:text-3xl lg:text-4xl leading-normal md:leading-normal lg:leading-[1.4] font-light tracking-wide">
+        <p className="font-heading text-xl md:text-3xl lg:text-[2.75rem] leading-normal md:leading-normal lg:leading-[1.4] font-light tracking-wide">
           <span className="about-word text-white font-semibold will-change-transform inline-block opacity-0">
             {highlightText}&nbsp;
           </span>
           {allWords.map((word, i) => (
-            <span key={i} className="about-word text-[#b3b3b3] will-change-transform inline-block opacity-0">
+            <span key={i} className="about-word text-[#bebebe] will-change-transform inline-block opacity-0">
               {word}&nbsp;
             </span>
           ))}

@@ -81,12 +81,12 @@ const ProductGrid = ({ title, products, gridIndex }) => {
       {gridIndex === 0 && (
          <div className="w-full flex justify-center mt-14">
             <button
-            className="view-more-btn flex items-center gap-3 px-8 py-3 border border-white/40
-                        text-white text-xs tracking-[0.2em] uppercase
+            className="view-more-btn flex items-center gap-3 px-5 py-3 border border-white
+                        text-white text-sm
                         hover:bg-white hover:text-black transition-all duration-300"
             >
             View More
-            <ChevronRight size={15} />
+            <ChevronRight size={18} />
             </button>
         </div>
       )}

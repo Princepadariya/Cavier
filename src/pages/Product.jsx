@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Product = () => {
+  const [activeDropdown, setActiveDropdown] = useState(null);
+
+  const filters = [
+    {
+      name: 'Cocks',
+      options: ['Pillar Cocks', 'Bib Cock', 'Sink Cock', 'Angle Cock']
+    },
+    {
+      name: 'Mixers',
+      options: ['Sink Mixers', 'Wall Mixers', 'Bath Tub Spouts']
+    },
+    {
+      name: 'Single Lever',
+      options: ['Basin Mixer', 'Diverters', 'Wall Mixers', 'Sink Mixers', 'Shower Mixers']
+    },
+    {
+      name: 'Concealed Stop Cock',
+      options: ['Concealed Stop Cocks', 'Flush Cocks']
+    }
+  ];
+
   const products = [
     { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/productt.png' },
     { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/productt_2.png' },
@@ -34,14 +55,38 @@ const Product = () => {
       {/* Filter Bar */}
       <section className="w-full bg-[#1F1F21] pt-8 md:pt-12 px-4 sm:px-6 md:px-12 lg:px-32">
         <div className="w-full h-[1px] bg-white/10" />
-        <div className="flex items-center justify-between gap-3 sm:gap-6 py-5 overflow-x-auto no-scrollbar">
-          {['Price', 'Color Finishes', 'Category', 'Shape'].map((filter) => (
-            <button key={filter} className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2 text-white text-xs sm:text-sm font-medium whitespace-nowrap hover:text-white/70 transition-colors">
-              <span>{filter}</span>
-              <svg width="10" height="10" className="sm:w-3 sm:h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </button>
+        <div className="flex items-center justify-between gap-3 sm:gap-6 py-5 flex-wrap">
+          {filters.map((filter) => (
+            <div key={filter.name} className="relative flex-shrink-0">
+              <button 
+                onClick={() => setActiveDropdown(activeDropdown === filter.name ? null : filter.name)}
+                className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base md:text-lg font-medium whitespace-nowrap hover:text-white/70 transition-colors"
+              >
+                <span>{filter.name}</span>
+                <svg 
+                  width="14" height="14" 
+                  className={`sm:w-4 sm:h-4 transition-transform duration-200 ${activeDropdown === filter.name ? 'rotate-180' : ''}`} 
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                >
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              {activeDropdown === filter.name && (
+                <div className="absolute top-full left-0 mt-4 w-56 md:w-64 bg-[#2A2A2D] border border-white/10 rounded-lg shadow-xl z-50 py-2">
+                  {filter.options.map((option) => (
+                    <button
+                      key={option}
+                      className="w-full text-left px-4 py-3 text-base md:text-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+                      onClick={() => setActiveDropdown(null)}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
         <div className="w-full h-[1px] bg-white/10" />
