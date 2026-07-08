@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Product = () => {
+const Category = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   const filters = [
     {
-      name: 'Price'
+      name: 'Cocks',
+      options: ['Pillar Cocks', 'Bib Cock', 'Sink Cock', 'Angle Cock']
     },
     {
-      name: 'Color Finishes'
+      name: 'Mixers',
+      options: ['Sink Mixers', 'Wall Mixers', 'Bath Tub Spouts']
     },
     {
-      name: 'Category'
+      name: 'Single Lever',
+      options: ['Basin Mixer', 'Diverters', 'Wall Mixers', 'Sink Mixers', 'Shower Mixers']
     },
     {
-      name: 'Shape'
+      name: 'Concealed Stop Cock',
+      options: ['Concealed Stop Cocks', 'Flush Cocks']
     }
   ];
 
@@ -37,7 +41,7 @@ const Product = () => {
   return (
     <div className="w-full bg-[#1F1F21] min-h-screen overflow-hidden">
 
-      {/* Hero Section - Full Screen Product Showcase */}
+      {/* Hero Section - Full Screen Category Showcase */}
       <div className="relative h-screen w-full overflow-hidden z-10">
         <div className="absolute inset-0 w-full h-full bg-black">
           <img
@@ -54,14 +58,14 @@ const Product = () => {
         <div className="flex items-center justify-between gap-3 sm:gap-6 py-5 flex-wrap">
           {filters.map((filter) => (
             <div key={filter.name} className="relative flex-shrink-0">
-              <button
+              <button 
                 onClick={() => setActiveDropdown(activeDropdown === filter.name ? null : filter.name)}
                 className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base md:text-lg font-medium whitespace-nowrap hover:text-white/70 transition-colors"
               >
                 <span>{filter.name}</span>
-                <svg
-                  width="14" height="14"
-                  className={`sm:w-4 sm:h-4 transition-transform duration-200 ${activeDropdown === filter.name ? 'rotate-180' : ''}`}
+                <svg 
+                  width="14" height="14" 
+                  className={`sm:w-4 sm:h-4 transition-transform duration-200 ${activeDropdown === filter.name ? 'rotate-180' : ''}`} 
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                 >
                   <path d="M6 9l6 6 6-6" />
@@ -88,7 +92,7 @@ const Product = () => {
         <div className="w-full h-[1px] bg-white/10" />
       </section>
 
-      {/* Product Grid */}
+      {/* Category Grid */}
       <section className="w-full bg-[#1F1F21] py-6 md:py-8 px-4 sm:px-6 md:px-12 lg:px-32">
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-14 sm:gap-y-20">
           {products.map((product) => (
@@ -156,4 +160,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default Category;

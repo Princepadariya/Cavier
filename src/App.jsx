@@ -12,6 +12,7 @@ import CustomCursor from './components/CustomCursor';
 import Home from './pages/Home';
 import About from './pages/About';
 import Product from './pages/Product';
+import Category from './pages/Category';
 import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
@@ -82,6 +83,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/category" element={<Category />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/contact" element={<Contact />} />
@@ -90,7 +92,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetail />} />
       </Routes>
       {/* We only render Footer here. If certain pages shouldn't have it, we could conditionally hide it. */}
-      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={(['/', '/about', '/dealership', '/contact'].includes(location.pathname) || location.pathname.startsWith('/product') || location.pathname.startsWith('/blog')) ? 'light' : 'dark'} />}
+      {location.pathname !== '/checkout' && <Footer key={location.pathname} variant={(['/', '/about', '/dealership', '/contact'].includes(location.pathname) || location.pathname.startsWith('/product') || location.pathname.startsWith('/category') || location.pathname.startsWith('/blog')) ? 'light' : 'dark'} />}
     </div>
   );
 }

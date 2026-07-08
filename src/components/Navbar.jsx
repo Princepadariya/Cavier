@@ -74,7 +74,7 @@ const Navbar = ({ variant = 'default' }) => {
           Product
           <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
         </Link>
-        <Link to="/#category" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
+        <Link to="/category" className="nav-link hover:text-brand-gold transition-colors relative group text-white opacity-0 will-change-transform">
           Category
           <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
         </Link>
@@ -172,7 +172,7 @@ const Navbar = ({ variant = 'default' }) => {
               {[
                 { to: '/about', label: 'About' },
                 { to: '/product', label: 'Product' },
-                { to: '/#category', label: 'Category' },
+                { to: '/category', label: 'Category' },
                 { to: '/blog', label: 'Blog' },
                 { to: '/contact', label: 'Contact' },
               ].map((link, i) => (

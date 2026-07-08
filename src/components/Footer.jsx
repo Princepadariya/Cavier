@@ -153,9 +153,10 @@ const Footer = ({ variant = 'dark' }) => {
             <ul className={`flex flex-col gap-4 text-sm font-medium ${t.text}`}>
               <li><Link to="/" className={`transition-colors ${t.link}`}>Home</Link></li>
               <li><Link to="/about" className={`transition-colors ${t.link}`}>About</Link></li>
+              <li><Link to="/product" className={`transition-colors ${t.link}`}>Product</Link></li>
               <li><Link to="/dealership" className={`transition-colors ${t.link}`}>Dealership</Link></li>
-              <li><Link to="/contact" className={`transition-colors ${t.link}`}>Contact</Link></li>
               <li><Link to="/blog" className={`transition-colors ${t.link}`}>Blog</Link></li>
+              <li><Link to="/contact" className={`transition-colors ${t.link}`}>Contact</Link></li>
             </ul>
           </div>
 
@@ -164,7 +165,7 @@ const Footer = ({ variant = 'dark' }) => {
             <h4 className={`text-xl font-bold tracking-wide ${t.heading}`}>Shopping</h4>
             <ul className={`flex flex-col gap-4 text-sm font-medium ${t.text}`}>
               <li><Link to="/product" className={`transition-colors ${t.link}`}>Shop</Link></li>
-              <li><Link to="/#category" className={`transition-colors ${t.link}`}>Categories</Link></li>
+              <li><Link to="/category" className={`transition-colors ${t.link}`}>Categories</Link></li>
               <li><Link to="/checkout" className={`transition-colors ${t.link}`}>Cart</Link></li>
               <li><Link to="/checkout" className={`transition-colors ${t.link}`}>Wishlist</Link></li>
             </ul>
