@@ -140,34 +140,23 @@ const Category = () => {
         </div>
       </section>
 
-      {/* Pagination */}
-      <section className="w-full bg-[#1F1F21] py-8 md:py-10 px-4 sm:px-6 md:px-12">
-        <div className="flex flex-col items-center gap-4">
-          <p className="text-white/60 text-sm">Page 1 of 6</p>
-          <div className="flex items-center gap-2">
-            <span className="w-8 h-8 border border-white/40 flex items-center justify-center text-white text-sm bg-white/10">1</span>
-            <span className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/60 text-sm hover:bg-white/10 cursor-pointer transition-colors">2</span>
-            <span className="text-white/40 text-sm px-1">...</span>
-            <span className="w-8 h-8 border border-white/20 flex items-center justify-center text-white/60 text-sm hover:bg-white/10 cursor-pointer transition-colors">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </section>
+
 
       {/* Explore The Catalog */}
-      <section className="w-full bg-[#1F1F21] py-12 md:py-16 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-          <h2 className="text-2xl md:text-4xl font-light text-white tracking-wide font-outfit">Explore The catalog</h2>
-          <button className="flex items-center gap-2 md:gap-3 text-white border border-white/30 px-6 md:px-8 py-2.5 md:py-3 text-xs md:text-sm hover:bg-white hover:text-black transition-colors">
-            <span>Download</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-            </svg>
-          </button>
-        </div>
+      <section className="w-full bg-[#1F1F21] pt-16 pb-12 px-4 sm:px-6 md:px-12 lg:px-32 flex flex-col items-center text-center">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-wide font-outfit mb-6">
+          Download Our Product Catalogue
+        </h2>
+        <p className="text-[#ffffff] max-w-3xl text-sm md:text-base font-light mb-10 leading-relaxed font-outfit">
+          Browse our latest catalogue to explore premium bath fittings, innovative<br className="hidden md:block" />
+          designs, and expertly crafted collections for modern bathrooms.
+        </p>
+        <button className="flex items-center gap-3 text-white border border-white px-10 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit font-outfit">
+          <span>Download</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+          </svg>
+        </button>
       </section>
 
     </div>
