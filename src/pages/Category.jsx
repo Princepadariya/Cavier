@@ -77,7 +77,7 @@ const Category = () => {
           <aside className="w-full lg:w-1/4 xl:w-1/5 flex-shrink-0">
             <div className="w-full h-[1px] bg-white/15" />
             {filters.map((filter) => (
-              <div key={filter.name} className="border-b border-white/15">
+              <div key={filter.name} className="relative border-b border-white/15">
                 <button
                   onClick={() => setActiveDropdown(activeDropdown === filter.name ? null : filter.name)}
                   className="w-full flex items-center justify-between py-4 text-white text-base md:text-lg font-light hover:text-white/70 transition-colors"
@@ -89,12 +89,13 @@ const Category = () => {
                   />
                 </button>
 
-                {activeDropdown === filter.name && filter.options && filter.options.length > 0 && (
-                  <div className="pb-4 flex flex-col gap-3">
+                {/* Filter Options Popup — anchored to this filter row */}
+                {activeDropdown === filter.name && (
+                  <div className="absolute top-full left-0 mt-2 w-full min-w-[220px] bg-[#2A2A2D] border border-white/15 rounded-lg shadow-xl z-50 py-2">
                     {filter.options.map((option) => (
                       <button
                         key={option}
-                        className="text-left text-white/60 text-sm hover:text-white transition-colors w-fit"
+                        className="w-full text-left px-5 py-3 text-white/70 text-sm hover:text-white hover:bg-white/5 transition-colors"
                         onClick={() => setActiveDropdown(null)}
                       >
                         {option}
@@ -105,6 +106,11 @@ const Category = () => {
               </div>
             ))}
           </aside>
+
+          {/* Click-outside catcher (invisible, closes the popup) */}
+          {activeDropdown && (
+            <div className="fixed inset-0 z-40" onClick={() => setActiveDropdown(null)} />
+          )}
 
           {/* Right: Product Grid */}
           <div className="flex-1">
