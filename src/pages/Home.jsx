@@ -4,10 +4,7 @@ import About from '../components/About';
 import Features from '../components/Features';
 import Categories from '../components/Categories';
 import FinishingTouch from '../components/FinishingTouch';
-import HealthFaucets from '../components/HealthFaucets';
-import OpalPrime from '../components/OpalPrime';
-import BathroomAccessories from '../components/BathroomAccessories';
-import Products from '../components/Products';
+import HomeCategoryRows from '../components/HomeCategoryRows';
 
 import Banner from '../components/Banner';
 import Insights from '../components/Insights';
@@ -26,9 +23,7 @@ const Home = () => {
       <Features />
       <Categories />
       <FinishingTouch />
-      <HealthFaucets />
-      <OpalPrime />
-      <BathroomAccessories />
+      <HomeCategoryRows />
       <Banner />
       <Insights />
       <Testimonials />

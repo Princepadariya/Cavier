@@ -20,14 +20,20 @@ import Dealership from './pages/Dealership';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 
+import AdminApp from './admin/AdminApp';
+
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
   const isContactOrAbout = location.pathname === '/contact';
   const lenisRef = useRef(null);
 
   useEffect(() => {
+    // The admin panel is a plain document — no smooth-scroll hijacking.
+    if (isAdmin) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -62,7 +68,7 @@ function App() {
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
-  }, []);
+  }, [isAdmin]);
 
   // Scroll to top on route change
   useEffect(() => {
@@ -72,6 +78,15 @@ function App() {
       window.scrollTo(0, 0);
     }
   }, [location.pathname]);
+
+  // Admin panel: its own routes, no marketing chrome (navbar/footer/cursor).
+  if (isAdmin) {
+    return (
+      <Routes>
+        <Route path="/admin/*" element={<AdminApp />} />
+      </Routes>
+    );
+  }
 
   return (
     <div className="relative min-h-screen bg-black">

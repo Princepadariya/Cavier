@@ -1,71 +1,71 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { productsApi, categoriesApi } from '../lib/api';
 
 const Category = () => {
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selected, setSelected] = useState(searchParams.get('cat') || '');
 
-  const filters = [
-    {
-      name: 'Cocks',
-      options: ['Pillar Cocks', 'Bib Cock', 'Sink Cock', 'Angle Cock']
-    },
-    {
-      name: 'Mixers',
-      options: ['Sink Mixers', 'Wall Mixers', 'Bath Tub Spouts']
-    },
-    {
-      name: 'Single Lever',
-      options: ['Basin Mixer', 'Diverters', 'Wall Mixers', 'Sink Mixers', 'Shower Mixers']
-    },
-    {
-      name: 'Concealed Stop Cock',
-      options: ['Concealed Stop Cocks', 'Flush Cocks']
-    }
-  ];
+  useEffect(() => {
+    (async () => {
+      try {
+        const [prods, cats] = await Promise.all([
+          productsApi.list({ activeOnly: true }),
+          categoriesApi.list({ activeOnly: true }),
+        ]);
+        setProducts(prods);
+        setCategories(cats);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
-  const products = [
-    { id: 1, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/productt.png' },
-    { id: 2, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/productt_2.png' },
-    { id: 3, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/productt_3.png' },
-    { id: 4, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/productt_4.png' },
-    { id: 5, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/productt_5.png' },
-    { id: 6, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/productt_6.png' },
-    { id: 7, name: 'SO 04 101 | Pillar Cock with Base', price: 1930, image: '/images/productt.png' },
-    { id: 8, name: 'SO 04 102 | Bib Cock with Wall Flange', price: 1540, image: '/images/productt_2.png' },
-    { id: 9, name: 'SO 04 103 | Angle Valve', price: 1200, image: '/images/productt_3.png' },
-    { id: 10, name: 'SO 04 104 | Long Body Bib Cock', price: 1850, image: '/images/productt_4.png' },
-    { id: 11, name: 'SO 04 105 | Concealed Stop Cock', price: 2100, image: '/images/productt_5.png' },
-    { id: 12, name: 'SO 04 106 | Sink Mixer with Swinging Spout', price: 4250, image: '/images/productt_6.png' },
-  ];
+  useEffect(() => {
+    setSelected(searchParams.get('cat') || '');
+  }, [searchParams]);
+
+  const activeCategory = categories.find((c) => c.slug === selected) || null;
+
+  const filtered = useMemo(
+    () => (selected ? products.filter((p) => p.category?.slug === selected) : products),
+    [products, selected]
+  );
+
+  const selectCategory = (slug) => {
+    setSelected(slug);
+    const next = new URLSearchParams(searchParams);
+    if (slug) next.set('cat', slug);
+    else next.delete('cat');
+    setSearchParams(next, { replace: true });
+  };
+
+  const heroImage = activeCategory?.hero_image || '/images/category_hero_banner.png';
 
   return (
     <div className="w-full bg-[#1F1F21] min-h-screen overflow-hidden">
 
-      {/* Hero Section - Full Screen Category Showcase */}
+      {/* Hero */}
       <div className="relative h-screen w-full overflow-hidden z-10">
         <div className="absolute inset-0 w-full h-full bg-black">
-          <img
-            src="/images/category_hero_banner.png"
-            alt="Cavier Premium Bath Fittings"
-            className="w-full h-full object-cover"
-          />
+          <img src={heroImage} alt="Cavier Premium Bath Fittings" className="w-full h-full object-cover" />
         </div>
-
-        {/* Text content */}
         <div className="relative z-10 h-full w-full flex flex-col justify-center px-6 md:px-12 lg:px-32 pt-[102px]">
-          <span className="text-black text-[1.2rem] md:text-[1.2rem] tracking-[0.3em] uppercase font-medium mb-6">
+          <span className="text-black text-[1.2rem] tracking-[0.3em] uppercase font-medium mb-6">
             Explore Our Category
           </span>
-          <h1 className="text-black text-3xl md:text-4xl lg:text-5xl font-light leading-[1.5] md:leading-[1.5] lg:leading-[1.5] tracking-tight font-outfit mb-6 max-w-2xl">
-            Premium Bath<br />Fittings Collection
+          <h1 className="text-black text-3xl md:text-4xl lg:text-5xl font-light leading-[1.5] tracking-tight font-outfit mb-6 max-w-2xl">
+            {activeCategory ? activeCategory.name : <>Premium Bath<br />Fittings Collection</>}
           </h1>
-          <p className="text-black/70 text-[1.2rem] md:text-[1.2rem] leading-relaxed font-light max-w-md mb-10">
-            Explore thoughtfully designed bath fittings that combine contemporary aesthetics, superior craftsmanship, and reliable functionality for residential and commercial spaces.
+          <p className="text-black/70 text-[1.2rem] leading-relaxed font-light max-w-md mb-10">
+            {activeCategory?.description ||
+              'Explore thoughtfully designed bath fittings that combine contemporary aesthetics, superior craftsmanship, and reliable functionality for residential and commercial spaces.'}
           </p>
-          <button className="flex items-center gap-3 text-black border border-black px-5 py-3 text-sm hover:bg-black hover:text-white transition-all duration-300 w-fit">
-            <span>Scroll Down</span><ChevronDown size={18} />
-          </button>
         </div>
       </div>
 
@@ -73,80 +73,70 @@ const Category = () => {
       <section className="w-full bg-[#1F1F21] pt-16 pb-8 md:pt-20 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-32">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 
-          {/* Left: Filter Sidebar */}
+          {/* Sidebar: category filter */}
           <aside className="w-full lg:w-1/4 xl:w-1/5 flex-shrink-0">
             <div className="w-full h-[1px] bg-white/15" />
-            {filters.map((filter) => (
-              <div key={filter.name} className="relative border-b border-white/15">
+            <button
+              onClick={() => selectCategory('')}
+              className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
+                !selected ? 'text-white' : 'text-white/60 hover:text-white'
+              }`}
+            >
+              <span>All Products</span>
+              <span className="text-sm text-white/40">{products.length}</span>
+            </button>
+            {categories.map((c) => {
+              const count = products.filter((p) => p.category?.slug === c.slug).length;
+              return (
                 <button
-                  onClick={() => setActiveDropdown(activeDropdown === filter.name ? null : filter.name)}
-                  className="w-full flex items-center justify-between py-4 text-white text-base md:text-lg font-light hover:text-white/70 transition-colors"
+                  key={c.id}
+                  onClick={() => selectCategory(c.slug)}
+                  className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
+                    selected === c.slug ? 'text-white' : 'text-white/60 hover:text-white'
+                  }`}
                 >
-                  <span>{filter.name}</span>
-                  <ChevronDown
-                    size={16}
-                    className={`transition-transform duration-200 ${activeDropdown === filter.name ? 'rotate-180' : ''}`}
-                  />
+                  <span>{c.name}</span>
+                  <span className="text-sm text-white/40">{count}</span>
                 </button>
-
-                {/* Filter Options Popup — anchored to this filter row */}
-                {activeDropdown === filter.name && (
-                  <div className="absolute top-full left-0 mt-2 w-full min-w-[220px] bg-[#2A2A2D] border border-white/15 rounded-lg shadow-xl z-50 py-2">
-                    {filter.options.map((option) => (
-                      <button
-                        key={option}
-                        className="w-full text-left px-5 py-3 text-white/70 text-sm hover:text-white hover:bg-white/5 transition-colors"
-                        onClick={() => setActiveDropdown(null)}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </aside>
 
-          {/* Click-outside catcher (invisible, closes the popup) */}
-          {activeDropdown && (
-            <div className="fixed inset-0 z-40" onClick={() => setActiveDropdown(null)} />
-          )}
-
-          {/* Right: Product Grid */}
+          {/* Product grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-12">
-              {products.map((product) => (
-                <div key={product.id} className="flex flex-col group cursor-pointer">
-                  {/* Image Box */}
-                  <div className="relative w-full aspect-[9/10] bg-[#1F1F21] rounded-md border border-white
-                                  mb-4 overflow-hidden flex items-center justify-center p-6 sm:p-8
-                                  transition-all duration-300
-                                  group-hover:border-white
-                                  group-hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
-                    <Link to={`/product/${product.id}`} className="block w-full h-full relative">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-contain transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.08]"
-                      />
-                    </Link>
+            {loading ? (
+              <p className="text-white/50 py-20 text-center">Loading products…</p>
+            ) : filtered.length === 0 ? (
+              <p className="text-white/50 py-20 text-center">No products in this category yet.</p>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 sm:gap-x-6 gap-y-10 sm:gap-y-12">
+                {filtered.map((product) => (
+                  <div key={product.id} className="flex flex-col group cursor-pointer">
+                    <div className="relative w-full aspect-[9/10] bg-[#1F1F21] rounded-md border border-white
+                                    mb-4 overflow-hidden flex items-center justify-center p-6 sm:p-8
+                                    transition-all duration-300
+                                    group-hover:border-white
+                                    group-hover:shadow-[0_10px_35px_rgba(0,0,0,0.6)]">
+                      <Link to={`/product/${product.slug}`} className="block w-full h-full relative">
+                        <img
+                          src={product.main_image || ''}
+                          alt={product.name}
+                          className="w-full h-full object-contain transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.08]"
+                        />
+                      </Link>
+                    </div>
+                    <div className="flex flex-col items-center text-center px-1">
+                      <h3 className="font-outfit text-white text-xs sm:text-sm tracking-wide font-light line-clamp-1 w-full">
+                        {product.name}
+                      </h3>
+                    </div>
                   </div>
-
-                  {/* Details */}
-                  <div className="flex flex-col items-center text-center px-1">
-                    <h3 className="font-outfit text-white text-xs sm:text-sm tracking-wide font-light line-clamp-1 w-full">
-                      {product.name}
-                    </h3>
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
-
         </div>
       </section>
-
-
 
       {/* Explore The Catalog */}
       <section className="w-full bg-[#1F1F21] pt-16 pb-12 px-4 sm:px-6 md:px-12 lg:px-32 flex flex-col items-center text-center">
@@ -164,7 +154,6 @@ const Category = () => {
           </svg>
         </button>
       </section>
-
     </div>
   );
 };

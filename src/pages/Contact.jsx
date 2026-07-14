@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 import Testimonials from '../components/Testimonials';
 import { animate, stagger, createSpring } from 'animejs';
+import { contactApi } from '../lib/api';
 
 function useSection(ref, buildConfigs) {
   useEffect(() => {
@@ -26,6 +27,7 @@ const Contact = () => {
   const infoRef = useRef(null);
   const formRef = useRef(null);
   const mapRef = useRef(null);
+  const [submitState, setSubmitState] = useState('idle'); // idle | sending | success | error
 
   // Hero: spring entrance on mount
   useEffect(() => {
@@ -177,13 +179,28 @@ const Contact = () => {
               />
             </svg>
 
-            <form className="space-y-6 md:space-y-10 p-6 md:p-12 relative z-10" onSubmit={e => {
+            <form className="space-y-6 md:space-y-10 p-6 md:p-12 relative z-10" onSubmit={async e => {
               e.preventDefault();
-              const formData = new FormData(e.target);
+              const formEl = e.target;
+              const formData = new FormData(formEl);
               const data = Object.fromEntries(formData.entries());
-              console.log('Form Submitted:', data);
-              alert('Thank you for contacting CAVIER! We will get back to you shortly.');
-              e.target.reset();
+              setSubmitState('sending');
+              try {
+                await contactApi.submit({
+                  name: data.name,
+                  email: data.email,
+                  contact: data.contact || '',
+                  designation: data.designation || '',
+                  subject: data.subject || '',
+                  message: data.message,
+                });
+                setSubmitState('success');
+                formEl.reset();
+                setTimeout(() => setSubmitState('idle'), 5000);
+              } catch (err) {
+                console.error(err);
+                setSubmitState('error');
+              }
             }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 {['Name', 'Email'].map(l => (
@@ -209,13 +226,20 @@ const Contact = () => {
                 <label className="text-white text-sm font-outfit font-light mb-3 tracking-wide">Message</label>
                 <textarea name="message" required rows="4" className="bg-transparent border border-[#ffffff] px-4 py-3 text-white outline-none focus:border-[#d4af37]/50 focus:animate-[focus-pulse_2s_infinite] transition-all duration-300 font-outfit font-light resize-none" />
               </div>
-              <div className="flex justify-center pt-10">
+              <div className="flex flex-col items-center gap-4 pt-10">
                 <button
                   type="submit"
-                  className="form-btn text-white border border-white px-8 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition-colors duration-300 will-change-transform"
+                  disabled={submitState === 'sending'}
+                  className="form-btn text-white border border-white px-8 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition-colors duration-300 will-change-transform disabled:opacity-50"
                 >
-                  Contact Now
+                  {submitState === 'sending' ? 'Sending…' : 'Contact Now'}
                 </button>
+                {submitState === 'success' && (
+                  <p className="text-sm text-green-400">Thank you! We'll get back to you shortly.</p>
+                )}
+                {submitState === 'error' && (
+                  <p className="text-sm text-red-400">Something went wrong. Please try again or email us directly.</p>
+                )}
               </div>
             </form>
           </div>
