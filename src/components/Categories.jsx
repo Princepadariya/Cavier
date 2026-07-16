@@ -88,8 +88,8 @@ const Categories = () => {
   if (categories.length === 0) return null;
 
   return (
-    <section ref={containerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-4 sm:px-6 md:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col items-start">
+    <section ref={containerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-4 sm:px-6 md:px-12 lg:px-32">
+      <div className="max-w-[1440px] mx-auto w-full flex flex-col items-start">
 
         <h2 className="cat-title text-2xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-8 md:mb-12 opacity-0 will-change-transform">
           Crafted for Every Bath Space

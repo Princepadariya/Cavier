@@ -8,6 +8,7 @@ const Category = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(searchParams.get('cat') || '');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -32,10 +33,12 @@ const Category = () => {
 
   const activeCategory = categories.find((c) => c.slug === selected) || null;
 
-  const filtered = useMemo(
-    () => (selected ? products.filter((p) => p.category?.slug === selected) : products),
-    [products, selected]
-  );
+  const filtered = useMemo(() => {
+    let result = products;
+    if (selected) result = result.filter((p) => p.category?.slug === selected);
+    if (searchQuery) result = result.filter((p) => p.name?.toLowerCase().includes(searchQuery.toLowerCase()));
+    return result;
+  }, [products, selected, searchQuery]);
 
   const selectCategory = (slug) => {
     setSelected(slug);
@@ -48,7 +51,7 @@ const Category = () => {
   const heroImage = activeCategory?.hero_image || '/images/category_hero_banner.png';
 
   return (
-    <div className="w-full bg-[#1F1F21] min-h-screen overflow-hidden">
+    <div className="w-full bg-[#1F1F21] min-h-screen">
 
       {/* Hero */}
       <div className="relative h-screen w-full overflow-hidden z-10">
@@ -71,35 +74,63 @@ const Category = () => {
 
       {/* Filters + Product Grid */}
       <section className="w-full bg-[#1F1F21] pt-16 pb-8 md:pt-20 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
+        <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 
           {/* Sidebar: category filter */}
-          <aside className="w-full lg:w-1/4 xl:w-1/5 flex-shrink-0">
-            <div className="w-full h-[1px] bg-white/15" />
-            <button
-              onClick={() => selectCategory('')}
-              className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
-                !selected ? 'text-white' : 'text-white/60 hover:text-white'
-              }`}
-            >
-              <span>All Products</span>
-              <span className="text-sm text-white/40">{products.length}</span>
-            </button>
-            {categories.map((c) => {
-              const count = products.filter((p) => p.category?.slug === c.slug).length;
-              return (
+          <aside className="w-full lg:w-1/4 xl:w-1/5 flex-shrink-0 lg:sticky lg:top-24 lg:self-start">
+
+
+            {/* Desktop Category List */}
+            <div className="hidden lg:block">
+              <div className="w-full h-[1px] bg-white/15" />
+              <button
+                onClick={() => selectCategory('')}
+                className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
+                  !selected ? 'text-white' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                <span>All Products</span>
+                <span className="text-sm text-white/40">{products.length}</span>
+              </button>
+              {categories.map((c) => {
+                const count = products.filter((p) => p.category?.slug === c.slug).length;
+                return (
+                  <button
+                    key={c.id}
+                    onClick={() => selectCategory(c.slug)}
+                    className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
+                      selected === c.slug ? 'text-white' : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    <span>{c.name}</span>
+                    <span className="text-sm text-white/40">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Mobile Category Pills */}
+            <div className="flex lg:hidden flex-row flex-wrap gap-2 pb-4">
+              <button
+                onClick={() => selectCategory('')}
+                className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${
+                  !selected ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/30'
+                }`}
+              >
+                All Products
+              </button>
+              {categories.map((c) => (
                 <button
                   key={c.id}
                   onClick={() => selectCategory(c.slug)}
-                  className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
-                    selected === c.slug ? 'text-white' : 'text-white/60 hover:text-white'
+                  className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${
+                    selected === c.slug ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/30'
                   }`}
                 >
-                  <span>{c.name}</span>
-                  <span className="text-sm text-white/40">{count}</span>
+                  {c.name}
                 </button>
-              );
-            })}
+              ))}
+            </div>
           </aside>
 
           {/* Product grid */}
@@ -126,7 +157,7 @@ const Category = () => {
                       </Link>
                     </div>
                     <div className="flex flex-col items-center text-center px-1">
-                      <h3 className="font-outfit text-white text-xs sm:text-sm tracking-wide font-light line-clamp-1 w-full">
+                      <h3 className="font-outfit text-white text-xs sm:text-sm tracking-wide font-light break-words leading-snug w-full">
                         {product.name}
                       </h3>
                     </div>
@@ -140,19 +171,21 @@ const Category = () => {
 
       {/* Explore The Catalog */}
       <section className="w-full bg-[#1F1F21] pt-16 pb-12 px-4 sm:px-6 md:px-12 lg:px-32 flex flex-col items-center text-center">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-wide font-outfit mb-6">
-          Download Our Product Catalogue
-        </h2>
-        <p className="text-[#ffffff] max-w-3xl text-sm md:text-base font-light mb-10 leading-relaxed font-outfit">
+        <div className="max-w-[1440px] mx-auto w-full flex flex-col items-center">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-wide font-outfit mb-6">
+            Download Our Product Catalogue
+          </h2>
+          <p className="text-[#ffffff] max-w-3xl text-sm md:text-base font-light mb-10 leading-relaxed font-outfit">
           Browse our latest catalogue to explore premium bath fittings, innovative<br className="hidden md:block" />
           designs, and expertly crafted collections for modern bathrooms.
         </p>
-        <button className="flex items-center gap-3 text-white border border-white px-10 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit font-outfit">
-          <span>Download</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-          </svg>
-        </button>
+          <button className="flex items-center gap-3 text-white border border-white px-10 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit font-outfit">
+            <span>Download</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+            </svg>
+          </button>
+        </div>
       </section>
     </div>
   );

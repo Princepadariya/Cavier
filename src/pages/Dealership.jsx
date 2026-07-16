@@ -183,14 +183,14 @@ const Dealership = () => {
       </div>
 
       {/* Hero */}
-      <div ref={heroRef} className="relative h-screen w-full overflow-hidden">
+      <div ref={heroRef} className="relative h-[75vh] md:h-screen w-full overflow-hidden">
         {/* Radar Pulse Effect */}
         <div className="absolute inset-0 z-0 flex items-center justify-center">
           <div className="radar-circle w-[1px] h-[1px] rounded-full border border-white/20 animate-radar-pulse" />
           <div className="radar-circle w-[1px] h-[1px] rounded-full border border-white/10 animate-radar-pulse delay-700" />
         </div>
 
-        <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/images/Dealership_hero_banner.png')" }} />
+        <div className="absolute inset-0 w-full h-full bg-cover bg-[position:center_top] md:bg-center" style={{ backgroundImage: "url('/images/Dealership_hero_banner.png')" }} />
         <div className="absolute inset-0" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pt-24 md:pt-[102px]">
           <div className="dealer-content flex flex-col items-center">
@@ -318,19 +318,19 @@ const Dealership = () => {
 
       {/* What We Offer */}
       <section ref={offerRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <div className="flex flex-col md:flex-row gap-12 md:gap-20">
+        <div className="max-w-[1440px] mx-auto w-full flex flex-col md:flex-row gap-12 md:gap-20">
           <div className="w-full md:w-[360px] md:flex-shrink-0">
             <h2 className="offer-title text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.1] font-outfit max-w-[220px] will-change-transform">What We Offer</h2>
             <div className="offer-title w-12 h-[2px] bg-white mt-6 will-change-transform" />
           </div>
-          <div className="w-full md:w-[75%] grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-16 md:gap-y-16">
+          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-x-16 md:gap-y-16">
             {[
               { s: 'Support I', t: 'Product Training', d: 'In-depth technical workshops for your team on installation, maintenance, and material science.' },
               { s: 'Support II', t: 'Showroom Guidance', d: 'Architectural layout support to ensure the CAVIER experience is perfectly translated in your space.' },
               { s: 'Support III', t: 'Marketing Material', d: 'Premium catalogs, physical finish swatches, and high-fidelity digital assets for your showroom.' },
               { s: 'Support IV', t: 'Dedicated Support', d: 'A direct line to our regional partnership managers for day-to-day operational excellence.' },
             ].map(c => (
-              <div key={c.s} className="offer-item will-change-transform max-w-[260px] md:max-w-xs">
+              <div key={c.s} className="offer-item will-change-transform">
                 <span className="text-[#a3a3a3] text-xs md:text-sm tracking-[0.25em] uppercase block mb-3 font-light">{c.s}</span>
                 <h3 className="text-white text-xl md:text-2xl font-normal mb-3 font-outfit">{c.t}</h3>
                 <p className="text-[#a3a3a3] text-base md:text-lg leading-relaxed font-light">{c.d}</p>

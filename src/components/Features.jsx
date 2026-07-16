@@ -107,7 +107,7 @@ const Features = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full py-16 sm:py-24 md:py-48 lg:py-56 px-4 sm:px-6 md:px-12 bg-[#1F1F21] flex justify-center items-center min-h-[70vh] md:min-h-screen"
+      className="relative w-full py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-12 bg-[#1F1F21] flex justify-center items-center"
     >
       {/* ── 4-quadrant animated background ── */}
       <div className="absolute inset-0 z-0 overflow-hidden">

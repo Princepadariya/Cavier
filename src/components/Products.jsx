@@ -97,8 +97,8 @@ const ProductGrid = ({ title, products, gridIndex }) => {
 
 const Products = () => {
   return (
-    <section className="w-full bg-[#181818] pt-8 md:pt-12 pb-16 md:pb-24 px-4 sm:px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full bg-[#181818] pt-8 md:pt-12 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 lg:px-32">
+      <div className="max-w-[1440px] mx-auto w-full">
         <ProductGrid title="Cavier Sink Mixers" products={cockProducts} gridIndex={0} />
         <ProductGrid title="Bathroom Accessories" products={accessoryProducts} gridIndex={1} />
       </div>

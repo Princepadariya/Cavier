@@ -23,6 +23,7 @@ const Product = () => {
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
   const [selectedFinish, setSelectedFinish] = useState('');
   const [selectedPrice, setSelectedPrice] = useState(null); // index into PRICE_RANGES
+  const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const Product = () => {
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
+      if (searchQuery && !p.name?.toLowerCase().includes(searchQuery.toLowerCase())) return false;
       if (selectedCategory && p.category?.slug !== selectedCategory) return false;
       if (selectedFinish && !(p.finishes || []).some((f) => f.name === selectedFinish)) return false;
       if (selectedPrice != null) {
@@ -64,9 +66,9 @@ const Product = () => {
       }
       return true;
     });
-  }, [products, selectedCategory, selectedFinish, selectedPrice]);
+  }, [products, selectedCategory, selectedFinish, selectedPrice, searchQuery]);
 
-  useEffect(() => setPage(1), [selectedCategory, selectedFinish, selectedPrice]);
+  useEffect(() => setPage(1), [selectedCategory, selectedFinish, selectedPrice, searchQuery]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const pageItems = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -105,70 +107,88 @@ const Product = () => {
 
       {/* Filter Bar */}
       <section className="w-full bg-[#1F1F21] pt-8 md:pt-12 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="w-full h-[1px] bg-white/10" />
-        <div className="flex items-center justify-between gap-3 sm:gap-6 py-5 flex-wrap">
-          {filters.map((name) => {
-            const label = activeFilterLabel(name);
-            return (
-              <div key={name} className="relative flex-shrink-0">
-                <button
-                  onClick={() => setActiveDropdown(activeDropdown === name ? null : name)}
-                  className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base md:text-lg font-medium whitespace-nowrap hover:text-white/70 transition-colors"
-                >
-                  <span>{name}{label ? `: ${label}` : ''}</span>
-                  <svg width="14" height="14" className={`sm:w-4 sm:h-4 transition-transform duration-200 ${activeDropdown === name ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
+        <div className="max-w-[1440px] mx-auto w-full">
+          <div className="w-full h-[1px] bg-white/10" />
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 md:gap-16 py-5">
+          <div className="w-full flex items-center justify-between flex-wrap">
+            {filters.map((name) => {
+              const label = activeFilterLabel(name);
+              return (
+                <div key={name} className="relative flex-shrink-0">
+                  <button
+                    onClick={() => setActiveDropdown(activeDropdown === name ? null : name)}
+                    className="flex items-center gap-2 sm:gap-3 text-white text-sm sm:text-base md:text-lg font-medium whitespace-nowrap hover:text-white/70 transition-colors"
+                  >
+                    <span>{name}{label ? `: ${label}` : ''}</span>
+                    <svg width="14" height="14" className={`sm:w-4 sm:h-4 transition-transform duration-200 ${activeDropdown === name ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </button>
 
-                {activeDropdown === name && (
-                  <div className="absolute top-full left-0 mt-4 w-56 md:w-64 bg-[#2A2A2D] border border-white/10 rounded-lg shadow-xl z-50 py-2 max-h-72 overflow-auto">
-                    {name === 'Category' && (
-                      <>
-                        <FilterOption active={!selectedCategory} onClick={() => setCategory('')}>All categories</FilterOption>
-                        {categories.map((c) => (
-                          <FilterOption key={c.id} active={selectedCategory === c.slug} onClick={() => setCategory(c.slug)}>
-                            {c.name}
-                          </FilterOption>
-                        ))}
-                      </>
-                    )}
-                    {name === 'Color Finishes' && (
-                      <>
-                        <FilterOption active={!selectedFinish} onClick={() => { setSelectedFinish(''); setActiveDropdown(null); }}>All finishes</FilterOption>
-                        {finishOptions.length === 0 && <div className="px-4 py-3 text-sm text-white/40">No finishes</div>}
-                        {finishOptions.map((f) => (
-                          <FilterOption key={f} active={selectedFinish === f} onClick={() => { setSelectedFinish(f); setActiveDropdown(null); }}>
-                            {f}
-                          </FilterOption>
-                        ))}
-                      </>
-                    )}
-                    {name === 'Price' && (
-                      <>
-                        <FilterOption active={selectedPrice == null} onClick={() => { setSelectedPrice(null); setActiveDropdown(null); }}>Any price</FilterOption>
-                        {PRICE_RANGES.map((r, i) => (
-                          <FilterOption key={r.label} active={selectedPrice === i} onClick={() => { setSelectedPrice(i); setActiveDropdown(null); }}>
-                            {r.label}
-                          </FilterOption>
-                        ))}
-                      </>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+                  {activeDropdown === name && (
+                    <div className={`absolute top-full mt-4 w-56 md:w-64 bg-[#2A2A2D] border border-white/10 rounded-lg shadow-xl z-50 py-2 max-h-72 overflow-auto ${name === 'Price' ? 'right-0' : name === 'Color Finishes' ? 'left-1/2 -translate-x-1/2' : 'left-0'}`}>
+                      {name === 'Category' && (
+                        <>
+                          <FilterOption active={!selectedCategory} onClick={() => setCategory('')}>All categories</FilterOption>
+                          {categories.map((c) => (
+                            <FilterOption key={c.id} active={selectedCategory === c.slug} onClick={() => setCategory(c.slug)}>
+                              {c.name}
+                            </FilterOption>
+                          ))}
+                        </>
+                      )}
+                      {name === 'Color Finishes' && (
+                        <>
+                          <FilterOption active={!selectedFinish} onClick={() => { setSelectedFinish(''); setActiveDropdown(null); }}>All finishes</FilterOption>
+                          {finishOptions.length === 0 && <div className="px-4 py-3 text-sm text-white/40">No finishes</div>}
+                          {finishOptions.map((f) => (
+                            <FilterOption key={f} active={selectedFinish === f} onClick={() => { setSelectedFinish(f); setActiveDropdown(null); }}>
+                              {f}
+                            </FilterOption>
+                          ))}
+                        </>
+                      )}
+                      {name === 'Price' && (
+                        <>
+                          <FilterOption active={selectedPrice == null} onClick={() => { setSelectedPrice(null); setActiveDropdown(null); }}>Any price</FilterOption>
+                          {PRICE_RANGES.map((r, i) => (
+                            <FilterOption key={r.label} active={selectedPrice === i} onClick={() => { setSelectedPrice(i); setActiveDropdown(null); }}>
+                              {r.label}
+                            </FilterOption>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="relative w-full md:w-64">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search products..."
+              className="w-full bg-transparent border-b border-white/30 text-white placeholder-white/50 text-sm sm:text-base px-1 py-1.5 pr-8 focus:outline-none focus:border-white transition-colors"
+            />
+            <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
         </div>
         <div className="w-full h-[1px] bg-white/10" />
+        </div>
       </section>
 
       {activeDropdown && <div className="fixed inset-0 z-40" onClick={() => setActiveDropdown(null)} />}
 
       {/* Product Grid */}
       <section className="w-full bg-[#1F1F21] py-6 md:py-8 px-4 sm:px-6 md:px-12 lg:px-32">
-        {loading ? (
-          <p className="text-white/50 py-20 text-center">Loading products…</p>
+        <div className="max-w-[1440px] mx-auto w-full">
+          {loading ? (
+            <p className="text-white/50 py-20 text-center">Loading products…</p>
         ) : pageItems.length === 0 ? (
           <p className="text-white/50 py-20 text-center">No products match your filters.</p>
         ) : (
@@ -200,12 +220,13 @@ const Product = () => {
             ))}
           </div>
         )}
+        </div>
       </section>
 
       {/* Pagination */}
       {!loading && filtered.length > PAGE_SIZE && (
-        <section className="w-full bg-[#1F1F21] py-8 md:py-10 px-4 sm:px-6 md:px-12">
-          <div className="flex flex-col items-center gap-4">
+        <section className="w-full bg-[#1F1F21] py-8 md:py-10 px-4 sm:px-6 md:px-12 lg:px-32">
+          <div className="max-w-[1440px] mx-auto w-full flex flex-col items-center gap-4">
             <p className="text-white/60 text-sm">Page {page} of {totalPages}</p>
             <div className="flex items-center gap-2">
               {Array.from({ length: totalPages }).map((_, i) => (
@@ -226,7 +247,7 @@ const Product = () => {
 
       {/* Explore The Catalog */}
       <section className="w-full bg-[#1F1F21] py-12 md:py-16 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div className="max-w-[1440px] mx-auto w-full flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
           <h2 className="text-2xl md:text-4xl font-light text-white tracking-wide font-outfit">Explore The catalog</h2>
           <button className="flex items-center gap-2 md:gap-3 text-white border border-white/30 px-6 md:px-8 py-2.5 md:py-3 text-xs md:text-sm hover:bg-white hover:text-black transition-colors">
             <span>Download</span>

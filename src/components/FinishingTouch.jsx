@@ -207,11 +207,11 @@ const FinishingTouch = () => {
       style={{ height: `calc(100vh + ${metrics.totalTranslate}px)` }}
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <div ref={outerRef} className="h-full w-full px-4 sm:px-6 md:px-12">
-          {/* Hidden anchor — measures where a max-w-7xl centered container would
+        <div ref={outerRef} className="h-full w-full px-4 sm:px-6 md:px-12 lg:px-32">
+          {/* Hidden anchor — measures where a max-w-[1440px] centered container would
               start, so the text block lines up with every other section even on
               ultra-wide screens, without capping the track's available width */}
-          <div ref={anchorRef} className="max-w-7xl mx-auto h-0" aria-hidden="true" />
+          <div ref={anchorRef} className="max-w-[1440px] mx-auto h-0" aria-hidden="true" />
 
           <div
             className="h-full flex flex-col lg:flex-row items-start justify-start sm:justify-center lg:justify-start gap-6 lg:gap-10"
@@ -271,8 +271,8 @@ const FinishingTouch = () => {
                           style={{ backgroundImage: `url(${item.img})` }}
                         />
                       </div>
-                      <div className="flex justify-between items-center text-white mt-5 px-1 relative z-20">
-                        <span className="text-base lg:text-lg font-light tracking-wide">{item.title}</span>
+                      <div className="flex justify-between items-start text-white mt-5 px-1 relative z-20">
+                        <span className="text-sm sm:text-base lg:text-lg font-light tracking-wide break-words leading-snug">{item.title}</span>
                         <ArrowUpRight
                           size={20}
                           className="text-white/40 -translate-x-3 opacity-0

@@ -146,7 +146,7 @@ const Footer = ({ variant = 'dark' }) => {
       <div className="max-w-[1440px] mx-auto">
 
         {/* UPPER SECTION */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-8 mb-12 md:mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-8 mb-12 md:mb-16">
           {/* Column 1 */}
           <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className={`text-xl font-bold tracking-wide ${t.heading}`}>Cavier</h4>
@@ -182,16 +182,7 @@ const Footer = ({ variant = 'dark' }) => {
             </ul>
           </div>
 
-          {/* Column 4 */}
-          <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
-            <h4 className={`text-xl font-bold tracking-wide ${t.heading}`}>Categories</h4>
-            <ul className={`flex flex-col gap-4 text-sm font-medium ${t.text}`}>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Cock</Link></li>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Mixture</Link></li>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Single Lever</Link></li>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Concealed  Stop Cock</Link></li>
-            </ul>
-          </div>
+
 
           {/* Column 5 */}
           {isLight ? (

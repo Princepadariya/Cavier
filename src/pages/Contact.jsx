@@ -141,7 +141,7 @@ const Contact = () => {
       <div className="w-full px-6 md:px-12 lg:px-32 py-16 md:py-24 bg-[#1F1F21]">
 
         {/* Info Grid */}
-        <div ref={infoRef} className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 mb-16 md:mb-32 max-w-7xl mx-auto">
+        <div ref={infoRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-8 mb-16 md:mb-32 max-w-[1440px] mx-auto">
           {[
             { t: 'Contact', v: '(91) 288 2730 052, 53', href: 'tel:+912882730052' },
             { t: 'Fax', v: '(91) 288 2730 054', href: 'tel:+912882730054' },
@@ -161,7 +161,7 @@ const Contact = () => {
         </div>
 
         {/* Form Container */}
-        <div ref={formRef} className="max-w-4xl mx-auto pb-16 relative">
+        <div ref={formRef} className="w-full md:w-[75%] ml-auto pb-16 relative">
           <div className="text-center mb-16 relative z-10">
             <h2 className="form-title text-white text-4xl md:text-5xl font-outfit font-extralight tracking-tight will-change-transform">Experience CAVIER</h2>
             <div className="w-20 h-[1px] bg-white/20 mx-auto mt-6" />
@@ -246,7 +246,7 @@ const Contact = () => {
         </div>
 
         {/* Map Section */}
-        <div ref={mapRef} className="max-w-7xl mx-auto pt-16 border-t border-white/10">
+        <div ref={mapRef} className="max-w-[1440px] mx-auto pt-16 border-t border-white/10">
           <h2 className="map-title text-white text-4xl md:text-5xl font-outfit font-extralight tracking-tight mb-8 md:mb-12 will-change-transform">Open In Map</h2>
           <div className="map-img w-full h-[350px] md:h-[500px] bg-[#2a2a2a] relative overflow-hidden will-change-transform border border-white/10 rounded-sm">
             <iframe
