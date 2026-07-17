@@ -74,7 +74,7 @@ const Category = () => {
 
       {/* Filters + Product Grid */}
       <section className="w-full bg-[#1F1F21] pt-16 pb-8 md:pt-20 md:pb-12 px-4 sm:px-6 md:px-12 lg:px-32">
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
+        <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
 
           {/* Sidebar: category filter */}
           <aside className="w-full lg:w-1/4 xl:w-1/5 flex-shrink-0 lg:sticky lg:top-24 lg:self-start">
@@ -171,7 +171,7 @@ const Category = () => {
 
       {/* Explore The Catalog */}
       <section className="w-full bg-[#1F1F21] pt-16 pb-12 px-4 sm:px-6 md:px-12 lg:px-32 flex flex-col items-center text-center">
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-wide font-outfit mb-6">
             Download Our Product Catalogue
           </h2>

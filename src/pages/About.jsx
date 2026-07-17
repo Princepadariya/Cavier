@@ -243,7 +243,7 @@ const About = () => {
       <section ref={heroRef} className="relative w-full min-h-screen md:h-screen flex flex-col md:flex-row md:gap-8 lg:gap-12 bg-[#1F1F21]">
         {/* Left: text */}
         <div className="w-full md:w-[calc(52%-1rem)] lg:w-[calc(52%-1.5rem)] flex flex-col justify-center pl-6 pr-0 md:pl-12 lg:pl-32 pt-28 pb-16 md:pt-[102px] md:pb-0">
-          <h1 className="hero-anim text-white text-5xl md:text-6xl lg:text-7xl font-light leading-[1.2] md:leading-[1.2] lg:leading-[1.2] tracking-tight font-outfit mb-8 will-change-transform">
+          <h1 className="hero-anim text-white text-4xl md:text-5xl lg:text-6xl font-light leading-[1.2] md:leading-[1.2] lg:leading-[1.2] tracking-tight font-outfit mb-8 will-change-transform">
             Redefining<br />Everyday Luxury
           </h1>
           <p className="hero-anim text-[#7E7E7E] text-[1.25rem] md:text-[1.25rem] leading-[1.8] md:leading-[1.8] font-light mb-10 will-change-transform">

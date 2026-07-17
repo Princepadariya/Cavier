@@ -318,7 +318,7 @@ const Dealership = () => {
 
       {/* What We Offer */}
       <section ref={offerRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col md:flex-row gap-12 md:gap-20">
+        <div className="w-full flex flex-col md:flex-row gap-12 md:gap-20">
           <div className="w-full md:w-[360px] md:flex-shrink-0">
             <h2 className="offer-title text-4xl md:text-5xl font-bold text-white tracking-tight leading-[1.1] font-outfit max-w-[220px] will-change-transform">What We Offer</h2>
             <div className="offer-title w-12 h-[2px] bg-white mt-6 will-change-transform" />

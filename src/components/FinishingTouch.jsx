@@ -211,7 +211,7 @@ const FinishingTouch = () => {
           {/* Hidden anchor — measures where a max-w-[1440px] centered container would
               start, so the text block lines up with every other section even on
               ultra-wide screens, without capping the track's available width */}
-          <div ref={anchorRef} className="max-w-[1440px] mx-auto h-0" aria-hidden="true" />
+          <div ref={anchorRef} className="w-full h-0" aria-hidden="true" />
 
           <div
             className="h-full flex flex-col lg:flex-row items-start justify-start sm:justify-center lg:justify-start gap-6 lg:gap-10"

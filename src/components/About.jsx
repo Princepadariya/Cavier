@@ -66,7 +66,7 @@ const About = () => {
 
   return (
     <section ref={sectionRef} className="w-full bg-[#1F1F21] py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-12 lg:px-32 flex justify-center items-center">
-      <div className="about-wrapper max-w-[1440px] mx-auto w-full text-center opacity-0 will-change-transform">
+      <div className="about-wrapper w-full text-center opacity-0 will-change-transform">
         {/* Decorative gold line */}
         <div
           className="about-line w-16 h-[1px] mx-auto mb-8 will-change-transform"

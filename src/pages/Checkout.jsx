@@ -66,7 +66,7 @@ const Checkout = () => {
   return (
     <div className="bg-[#1C1C1C] min-h-screen font-outfit text-white pt-20">
 
-      <main className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-32 py-12">
+      <main className="w-full px-6 md:px-12 lg:px-32 py-12">
         {/* Top Section: Cart & Summary */}
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
           

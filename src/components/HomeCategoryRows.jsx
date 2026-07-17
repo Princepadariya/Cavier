@@ -23,7 +23,7 @@ function CategoryRow({ category }) {
 
   return (
     <section className="w-full bg-[#1F1F21] pt-0 pb-16 md:pb-24 px-4 sm:px-6 md:px-12 lg:px-32">
-      <div className="max-w-[1440px] mx-auto w-full">
+      <div className="w-full">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-medium text-white tracking-wide mb-8 md:mb-12">
           {category.name}
         </h2>

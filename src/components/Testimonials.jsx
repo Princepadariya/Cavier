@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, Star, Quote } from 'lucide-react';
 import { animate, stagger, createSpring } from 'animejs';
@@ -124,7 +125,7 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
   return (
     <div ref={containerRef} className={`w-full relative ${bgClass}`}>
       <section ref={sectionRef} className="w-full pt-12 pb-24 px-4 sm:px-6 md:px-12 lg:px-32 overflow-hidden flex items-center justify-center perspective-1000">
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-12 relative z-10">
+        <div className="w-full flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-12 relative z-10">
 
           {/* Left Side: Title & Info */}
           <div className="w-full lg:w-4/12 flex flex-col items-start">
@@ -132,11 +133,14 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
               Experiences That Speak for Quality
             </h2>
 
-            <button className="flex items-center gap-2 sm:gap-3 px-3.5 py-2 sm:px-5 sm:py-3.5 border border-white text-white text-xs sm:text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300">
+            <Link 
+              to="/product"
+              className="flex items-center gap-2 sm:gap-3 px-3.5 py-2 sm:px-5 sm:py-3.5 border border-white text-white text-xs sm:text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300 w-fit"
+            >
               Explore Products
               <ChevronRight size={14} className="sm:hidden" />
               <ChevronRight size={16} className="hidden sm:block" />
-            </button>
+            </Link>
           </div>
 
           {/* Right Side: 3D Stacked Card Engine */}
