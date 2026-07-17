@@ -58,7 +58,7 @@ export default function Hero() {
       >
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-loose">
           Live Extra Ordinary with <br className="hidden md:block" />
-          <span className="font-semibold inline-block mt-4 md:mt-6">Cavier</span>
+          <span className="font-semibold inline-block mt-0 md:mt-6">Cavier</span>
         </h1>
 
         <p className="mt-4 sm:mt-6 max-w-md sm:max-w-2xl md:max-w-4xl text-sm sm:text-base md:text-lg text-white-400 leading-loose">

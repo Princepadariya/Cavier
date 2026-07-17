@@ -172,7 +172,7 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
                       {testimonial.role}
                     </p>
 
-                    <p className="text-white text-xs md:text-sm leading-relaxed italic mb-4 font-light opacity-90 line-clamp-3">
+                    <p className="text-white text-xs md:text-sm leading-snug md:leading-relaxed italic mb-4 font-light opacity-90 line-clamp-3">
                       "{testimonial.text}"
                     </p>
 
