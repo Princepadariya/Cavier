@@ -18,6 +18,7 @@ const Preloader = ({ onComplete }) => {
       ease: 'inOutQuad',
       update: () => {
         if (counterRef.current) {
+          counterRef.current.style.opacity = '1';
           counterRef.current.innerHTML = `${counter.value}%`;
         }
       },
@@ -65,9 +66,8 @@ const Preloader = ({ onComplete }) => {
       <div className="overflow-hidden">
         <div
           ref={counterRef}
-          className="text-[#a3a3a3] text-5xl md:text-7xl font-light tracking-widest font-outfit"
+          className="text-[#a3a3a3] text-5xl md:text-7xl font-light tracking-widest font-outfit opacity-0"
         >
-          0%
         </div>
       </div>
     </div>

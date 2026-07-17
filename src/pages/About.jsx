@@ -96,7 +96,7 @@ const About = () => {
     const reset = () => {
       if (title) { title.style.opacity = '0'; title.style.transform = 'translateY(40px)'; }
       cards.forEach(c => { c.style.opacity = '0'; c.style.transform = 'translateY(20px)'; });
-      counters.forEach(c => { c.textContent = '0'; });
+      counters.forEach(c => { c.textContent = ''; });
     };
     reset();
 
@@ -109,6 +109,7 @@ const About = () => {
         // Count-up each number with stagger
         counters.forEach((counter, i) => {
           const { value, suffix, format } = statsData[i];
+          counter.textContent = '0' + suffix;
           const obj = { val: 0 };
           animate(obj, {
             val: [0, value],
@@ -296,7 +297,7 @@ const About = () => {
             { label: 'Faucets Manufacture' },
           ].map((s, i) => (
             <div key={i} className="stat-card border border-white/20 rounded-sm px-4 md:px-6 py-6 md:py-10 flex flex-col items-center text-center will-change-transform">
-              <span className="stat-counter text-white text-2xl md:text-3xl lg:text-4xl font-semibold font-outfit mb-3">0</span>
+              <span className="stat-counter text-white text-2xl md:text-3xl lg:text-4xl font-semibold font-outfit mb-3">&nbsp;</span>
               <span className="text-[#a3a3a3] text-xs md:text-sm font-light">{s.label}</span>
             </div>
           ))}

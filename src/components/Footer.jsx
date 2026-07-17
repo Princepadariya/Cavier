@@ -1,10 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { animate, stagger } from 'animejs';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Facebook, Linkedin, Twitter, Pin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { categoriesApi } from '../lib/api';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,13 @@ const Footer = ({ variant = 'dark' }) => {
   const isLight = variant === 'light';
   const containerRef = useRef(null);
   const bigTextRef = useRef(null);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    categoriesApi.list({ activeOnly: true })
+      .then(setCategories)
+      .catch(console.error);
+  }, []);
 
   // Theme tokens
   const t = isLight
@@ -166,8 +174,6 @@ const Footer = ({ variant = 'dark' }) => {
             <ul className={`flex flex-col gap-4 text-sm font-medium ${t.text}`}>
               <li><Link to="/product" className={`transition-colors ${t.link}`}>Shop</Link></li>
               <li><Link to="/category" className={`transition-colors ${t.link}`}>Categories</Link></li>
-              <li><Link to="/checkout" className={`transition-colors ${t.link}`}>Cart</Link></li>
-              <li><Link to="/checkout" className={`transition-colors ${t.link}`}>Wishlist</Link></li>
             </ul>
           </div>
 
@@ -175,10 +181,13 @@ const Footer = ({ variant = 'dark' }) => {
           <div className="gsap-footer-col opacity-0 will-change-transform flex flex-col gap-5">
             <h4 className={`text-xl font-bold tracking-wide ${t.heading}`}>Categories</h4>
             <ul className={`flex flex-col gap-4 text-sm font-medium ${t.text}`}>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Premium</Link></li>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Intermediate</Link></li>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Economy</Link></li>
-              <li><Link to="/product" className={`transition-colors ${t.link}`}>Bath Accessories</Link></li>
+              {categories.slice(0, 4).map((c) => (
+                <li key={c.id}>
+                  <Link to={`/category?cat=${c.slug}`} onClick={() => window.scrollTo(0, 0)} className={`transition-colors ${t.link}`}>
+                    {c.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

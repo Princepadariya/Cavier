@@ -13,8 +13,8 @@ export default function Hero() {
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
     const update = () => setHero(mq.matches
-      ? { bg: HERO_BG_MOBILE, pos: "center 70%" }
-      : { bg: HERO_BG_DESKTOP, pos: "center bottom" });
+      ? { bg: HERO_BG_MOBILE, pos: "center 70%", transform: "scale(1.0) translateX(1%)" }
+      : { bg: HERO_BG_DESKTOP, pos: "center bottom", transform: "scale(1.0) translateX(1%)" });
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
@@ -29,6 +29,7 @@ export default function Hero() {
         style={{
           backgroundImage: `url(${hero.bg})`,
           backgroundPosition: hero.pos,
+          transform: hero.transform,
         }}
       />
 
@@ -56,7 +57,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2.0, duration: 1.8, ease: [0.33, 1, 0.68, 1] }}
-        className="hero-text-content relative z-40 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 pointer-events-none"
+        className="hero-text-content relative z-40 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 pb-24 md:pb-0 pointer-events-none"
       >
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-loose">
           Live Extra Ordinary with <br className="hidden md:block" />

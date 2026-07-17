@@ -59,7 +59,7 @@ const Category = () => {
           <img src={heroImage} alt="Cavier Premium Bath Fittings" className="w-full h-full object-cover" />
         </div>
         <div className="relative z-10 h-full w-full flex flex-col justify-center px-6 md:px-12 lg:px-32 pt-[102px]">
-          <span className="text-black text-[1.2rem] tracking-[0.3em] uppercase font-medium mb-6">
+          <span className="text-black text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">
             Explore Our Category
           </span>
           <h1 className="text-black text-3xl md:text-4xl lg:text-5xl font-light leading-[1.5] tracking-tight font-outfit mb-6 max-w-2xl">

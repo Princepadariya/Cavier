@@ -135,7 +135,7 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
 
             <Link 
               to="/product"
-              className="flex items-center gap-2 sm:gap-3 px-3.5 py-2 sm:px-5 sm:py-3.5 border border-white text-white text-xs sm:text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300 w-fit"
+              className="flex items-center gap-3 px-5 py-3 border border-white text-white text-sm tracking-widest hover:bg-white hover:text-black transition-all duration-300 will-change-transform hover:scale-105 active:scale-95 w-fit"
             >
               Explore Products
               <ChevronRight size={14} className="sm:hidden" />

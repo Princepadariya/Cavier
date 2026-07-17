@@ -1,31 +1,29 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { animate, stagger } from 'animejs';
-
-const insights = [
-  {
-    id: 1,
-    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026',
-    img: '/images/insight_1.jpg'
-  },
-  {
-    id: 2,
-    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026',
-    img: '/images/insight_2.jpg'
-  },
-  {
-    id: 3,
-    title: 'The Future of Premium Bath Fittings: Trends to Watch in 2026',
-    img: '/images/insight_3.jpg'
-  },
-];
+import { blogsApi } from '../lib/api';
 
 const Insights = () => {
   const containerRef = useRef(null);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    blogsApi.list({ publishedOnly: true })
+      .then(data => {
+        setPosts(data.slice(0, 3));
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || posts.length === 0) return;
 
     const title = el.querySelector('.insight-title');
     const cards = el.querySelectorAll('.gsap-insight-card');
@@ -97,7 +95,11 @@ const Insights = () => {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [posts]);
+
+  if (loading || posts.length === 0) {
+    return null;
+  }
 
   return (
     <section ref={containerRef} className="w-full bg-[#1F1F21] py-16 md:py-24 px-4 sm:px-6 md:px-12 lg:px-32">
@@ -110,13 +112,13 @@ const Insights = () => {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-          {insights.map((item) => (
-            <div key={item.id} className="gsap-insight-card opacity-0 will-change-transform flex flex-col group cursor-pointer">
+          {posts.map((item) => (
+            <Link to={`/blog/${item.slug}`} key={item.id} className="gsap-insight-card opacity-0 will-change-transform flex flex-col group cursor-pointer">
               {/* Image Box */}
               <div className="w-full aspect-square overflow-hidden bg-black mb-6">
                 <div
                   className="insight-image w-full h-full bg-cover bg-center transform transition-transform duration-[1200ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-110 will-change-transform origin-center"
-                  style={{ backgroundImage: `url(${item.img})` }}
+                  style={{ backgroundImage: `url(${item.header_image || ''})` }}
                 ></div>
               </div>
 
@@ -124,18 +126,19 @@ const Insights = () => {
               <h3 className="text-white text-[0.95rem] md:text-base leading-relaxed tracking-wide font-light pr-4 group-hover:text-gray-300 transition-colors duration-300">
                 {item.title}
               </h3>
-            </div>
+            </Link>
           ))}
         </div>
 
         {/* Bottom Button */}
         <div className="w-full flex justify-center mt-14 md:mt-14">
-          <button
+          <Link
+            to="/blog"
             className="insight-btn flex items-center gap-3 px-5 py-3 border border-white text-white text-sm hover:bg-white hover:text-black transition-colors duration-300 opacity-0 will-change-transform hover:scale-105 active:scale-95"
           >
             View More
             <ChevronRight size={18} />
-          </button>
+          </Link>
         </div>
 
       </div>
