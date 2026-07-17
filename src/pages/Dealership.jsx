@@ -197,7 +197,7 @@ const Dealership = () => {
             <span className="text-white/70 text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">Partnership Opportunity</span>
             <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-light tracking-wide leading-[1.15] mb-8 font-outfit will-change-transform">Grow Your Business<br />with CAVIER</h1>
             <p className="text-[#ACABAB] max-w-3xl text-xl md:text-3xl leading-relaxed font-light mb-12 will-change-transform">Define the future of luxury bathrooms through a synthesis of precision engineering, architectural innovation, and timeless design.</p>
-            <button className="flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform">
+            <button onClick={() => philRef.current?.scrollIntoView({ behavior: 'smooth' })} className="flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform">
               <span>Scroll Down</span><ChevronDown size={18} />
             </button>
           </div>

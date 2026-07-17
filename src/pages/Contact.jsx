@@ -51,6 +51,16 @@ const Contact = () => {
     }, 50);
   }, []);
 
+  // Scroll to hash
+  useEffect(() => {
+    if (window.location.hash === '#map') {
+      const element = document.getElementById('map');
+      if (element) {
+        setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 100);
+      }
+    }
+  }, []);
+
   // Info cards: stagger pop
   useSection(infoRef, el => {
     const cards = el.querySelectorAll('.info-card');
@@ -246,7 +256,7 @@ const Contact = () => {
         </div>
 
         {/* Map Section */}
-        <div ref={mapRef} className="w-full pt-16 border-t border-white/10">
+        <div id="map" ref={mapRef} className="w-full pt-16 border-t border-white/10">
           <h2 className="map-title text-white text-4xl md:text-5xl font-outfit font-extralight tracking-tight mb-8 md:mb-12 will-change-transform">Open In Map</h2>
           <div className="map-img w-full h-[350px] md:h-[500px] bg-[#2a2a2a] relative overflow-hidden will-change-transform border border-white/10 rounded-sm">
             <iframe

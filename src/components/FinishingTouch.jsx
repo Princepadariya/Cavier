@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { animate, stagger } from 'animejs';
@@ -231,11 +232,11 @@ const FinishingTouch = () => {
                   Precision lies in every detail. Explore our curated bath collections
                   designed to enhance modern living with style, performance, and lasting quality.
                 </p>
-                <button className="flex items-center gap-3 px-5 py-3 border border-white
+                <Link to="/product" className="flex items-center gap-3 px-5 py-3 border border-white
                                   text-white text-sm hover:bg-white hover:text-black
-                                  transition-all duration-300">
+                                  transition-all duration-300 w-fit">
                   View More <ArrowRight size={18} />
-                </button>
+                </Link>
               </div>
             </div>
 

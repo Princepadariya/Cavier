@@ -60,7 +60,7 @@ function CategoryRow({ category }) {
 
         <div className="w-full flex justify-center mt-12 md:mt-14">
           <Link
-            to={`/product?category=${category.slug}`}
+            to={`/category?cat=${category.slug}`}
             className="flex items-center gap-3 px-5 py-3 border border-white text-white text-sm hover:bg-white hover:text-black transition-all duration-300"
           >
             View More

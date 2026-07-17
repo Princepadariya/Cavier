@@ -98,7 +98,7 @@ const Categories = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full">
           {categories.map((cat, i) => (
             <Link
-              to={`/product?category=${cat.slug}`}
+              to={`/category?cat=${cat.slug}`}
               key={cat.id}
               className="category-card group relative w-full aspect-square sm:aspect-[4/5] md:aspect-square lg:aspect-[4/5] overflow-hidden bg-black cursor-pointer opacity-0 will-change-transform perspective-1000"
             >

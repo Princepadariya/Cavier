@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { animate, stagger } from 'animejs';
 import { ChevronDown, ArrowRight, ChevronRight } from 'lucide-react';
@@ -317,9 +318,9 @@ const About = () => {
               product reflects our commitment to quality,
               durability, and timeless appeal.
             </p>
-            <button className="flex items-center space-x-2 text-white border border-white/30 px-5 py-2.5 text-xs md:text-sm tracking-wide hover:bg-white hover:text-black transition-colors w-fit">
+            <Link to="/contact#map" className="flex items-center space-x-2 text-white border border-white/30 px-5 py-2.5 text-xs md:text-sm tracking-wide hover:bg-white hover:text-black transition-colors w-fit">
               <span>Explore Location</span><span>›</span>
-            </button>
+            </Link>
           </div>
           <div className="craft-img w-full md:w-[55%] aspect-[4/3] md:aspect-[1/1] overflow-hidden will-change-transform">
             <img src="/images/img3.png" alt="Crafted Bath Space" className="w-full h-full object-cover" />
@@ -399,14 +400,15 @@ const About = () => {
             <p className="text-[#ffffff] text-base md:text-lg leading-relaxed font-light mb-10 max-w-lg">
               From contemporary designs to timeless finishes, CAVIER offers a comprehensive range that caters to residential and commercial spaces. Our showrooms are your one-stop destination for creating modern, functional, and aesthetically refined bathrooms.
             </p>
-            <button
+            <Link
+              to="/dealership"
               className="faucet-view-btn flex items-center gap-3 px-5 py-3 border border-white
                        text-white text-sm
                        hover:bg-white hover:text-black transition-all duration-300 w-fit"
             >
               Cavier Display Showroom
               <ChevronRight size={18} />
-            </button>
+            </Link>
           </div>
           <div className="dealer-img w-full md:w-[60%] overflow-hidden will-change-transform h-[500px] md:h-[750px]">
             <img src="/images/img5.jpg" alt="Cavier Authorised Dealer Showroom" className="w-full h-full object-cover" />

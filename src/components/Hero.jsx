@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 // Mobile uses hero-bg.jpg; desktop (≥768px) uses hero-bg_desktop.png
 const HERO_BG_MOBILE = "/images/hero-bg.jpg";
 const HERO_BG_DESKTOP = "/images/hero-bg_desktop.png";
 
 export default function Hero() {
+  const navigate = useNavigate();
   const [hero, setHero] = useState({ bg: HERO_BG_DESKTOP, pos: "center bottom" });
 
   useEffect(() => {
@@ -69,6 +71,7 @@ export default function Hero() {
 
         {/* Rule 8. Buttons: Use Motion: hover scale: 1 -> 1.05 tap scale: 0.95 */}
         <motion.button
+          onClick={() => navigate('/about')}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="mt-10 sm:mt-12 px-3 sm:px-4 py-2.5 sm:py-3 border border-white hover:bg-white hover:text-black transition text-[11px] sm:text-[15px] tracking-widest pointer-events-auto"
