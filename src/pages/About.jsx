@@ -250,7 +250,7 @@ const About = () => {
           <p className="hero-anim text-[#7E7E7E] text-[1.25rem] md:text-[1.25rem] leading-[1.8] md:leading-[1.8] font-light mb-10 will-change-transform">
             Eco-friendly, lead-free bath fittings designed to meet global safety standards. Pioneering innovation with high-performance solutions for modern info At CAVIER, we craft premium bathroom solutions that blend timeless design with modern functionality—elevating spaces with precision, elegance, and innovation. Infrastructure.
           </p>
-          <button className="hero-anim flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform">
+          <button onClick={() => catRef.current?.scrollIntoView({ behavior: 'smooth' })} className="hero-anim flex items-center gap-3 text-white border border-white px-5 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit will-change-transform">
             <span>Scroll Down</span><ChevronDown size={18} />
           </button>
         </div>
