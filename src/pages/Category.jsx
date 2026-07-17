@@ -55,7 +55,7 @@ const Category = () => {
 
       {/* Hero */}
       <div className="relative h-screen w-full overflow-hidden z-10">
-        <div className="absolute inset-0 w-full h-full bg-black">
+        <div className="absolute inset-0 w-full h-full">
           <img src={heroImage} alt="Cavier Premium Bath Fittings" className="w-full h-full object-cover" />
         </div>
         <div className="relative z-10 h-full w-full flex flex-col justify-center px-6 md:px-12 lg:px-32 pt-[102px]">
@@ -85,9 +85,8 @@ const Category = () => {
               <div className="w-full h-[1px] bg-white/15" />
               <button
                 onClick={() => selectCategory('')}
-                className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
-                  !selected ? 'text-white' : 'text-white/60 hover:text-white'
-                }`}
+                className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${!selected ? 'text-white' : 'text-white/60 hover:text-white'
+                  }`}
               >
                 <span>All Products</span>
                 <span className="text-sm text-white/40">{products.length}</span>
@@ -98,9 +97,8 @@ const Category = () => {
                   <button
                     key={c.id}
                     onClick={() => selectCategory(c.slug)}
-                    className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${
-                      selected === c.slug ? 'text-white' : 'text-white/60 hover:text-white'
-                    }`}
+                    className={`w-full flex items-center justify-between py-4 text-base md:text-lg font-light border-b border-white/15 transition-colors ${selected === c.slug ? 'text-white' : 'text-white/60 hover:text-white'
+                      }`}
                   >
                     <span>{c.name}</span>
                     <span className="text-sm text-white/40">{count}</span>
@@ -113,9 +111,8 @@ const Category = () => {
             <div className="flex lg:hidden flex-row flex-wrap gap-2 pb-4">
               <button
                 onClick={() => selectCategory('')}
-                className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${
-                  !selected ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/30'
-                }`}
+                className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${!selected ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/30'
+                  }`}
               >
                 All Products
               </button>
@@ -123,9 +120,8 @@ const Category = () => {
                 <button
                   key={c.id}
                   onClick={() => selectCategory(c.slug)}
-                  className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${
-                    selected === c.slug ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/30'
-                  }`}
+                  className={`flex-shrink-0 px-5 py-2.5 rounded-full text-sm font-medium transition-colors border ${selected === c.slug ? 'bg-white text-black border-white' : 'bg-transparent text-white border-white/30'
+                    }`}
                 >
                   {c.name}
                 </button>
@@ -176,9 +172,9 @@ const Category = () => {
             Download Our Product Catalogue
           </h2>
           <p className="text-[#ffffff] max-w-3xl text-sm md:text-base font-light mb-10 leading-relaxed font-outfit">
-          Browse our latest catalogue to explore premium bath fittings, innovative<br className="hidden md:block" />
-          designs, and expertly crafted collections for modern bathrooms.
-        </p>
+            Browse our latest catalogue to explore premium bath fittings, innovative<br className="hidden md:block" />
+            designs, and expertly crafted collections for modern bathrooms.
+          </p>
           <button className="flex items-center gap-3 text-white border border-white px-10 py-3 text-sm hover:bg-white hover:text-black transition-all duration-300 w-fit font-outfit">
             <span>Download</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

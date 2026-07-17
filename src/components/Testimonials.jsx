@@ -151,17 +151,13 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
               {testimonials.map((testimonial, i) => (
                 <motion.div
                   key={testimonial.id}
+                  initial={getCardAnimation(i, currentIndex)}
                   animate={getCardAnimation(i, currentIndex)}
                   transition={{
                     duration: 1.1,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className="absolute inset-0 w-full h-full border border-white rounded-[1.5rem] p-6 md:p-8 shadow-2xl flex flex-col overflow-hidden"
-                  style={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.06)',
-                    backdropFilter: 'blur(34px)',
-                    WebkitBackdropFilter: 'blur(34px)',
-                  }}
+                  className="absolute inset-0 w-full h-full border border-white/20 bg-[#252528] rounded-[1.5rem] p-6 md:p-8 shadow-2xl flex flex-col overflow-hidden"
                 >
                   {/* Background Watermark Quote */}
                   <Quote size={80} className="absolute right-4 top-4 text-white/5" strokeWidth={1} />

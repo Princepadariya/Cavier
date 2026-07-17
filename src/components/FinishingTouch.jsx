@@ -206,21 +206,21 @@ const FinishingTouch = () => {
       className="relative bg-[#1F1F21]"
       style={{ height: `calc(100vh + ${metrics.totalTranslate}px)` }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <div ref={outerRef} className="h-full w-full px-4 sm:px-6 md:px-12 lg:px-32">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center">
+        <div ref={outerRef} className="h-full w-full px-4 sm:px-6 md:px-12 lg:px-32 py-16 sm:py-24 md:py-32 flex flex-col justify-center">
           {/* Hidden anchor — measures where a max-w-[1440px] centered container would
               start, so the text block lines up with every other section even on
               ultra-wide screens, without capping the track's available width */}
           <div ref={anchorRef} className="w-full h-0" aria-hidden="true" />
 
           <div
-            className="h-full flex flex-col lg:flex-row items-start justify-start sm:justify-center lg:justify-start gap-6 lg:gap-10"
+            className="flex flex-col lg:flex-row items-center lg:items-start justify-start gap-6 lg:gap-10"
             style={{ paddingLeft: metrics.isMobile ? 0 : metrics.extraLeftInset, paddingRight: metrics.isMobile ? 0 : metrics.extraLeftInset }}
           >
 
             {/* ── Text block (Left on Desktop, Top Context on Mobile) ── */}
             <div
-              className="relative z-20 flex flex-col justify-start pointer-events-none flex-shrink-0 w-full lg:w-auto pt-6 sm:pt-20 lg:pt-0 pb-8 lg:pb-0 lg:mt-10"
+              className="relative z-20 flex flex-col justify-center pointer-events-none flex-shrink-0 w-full lg:w-auto pb-8 lg:pb-0"
               style={{ maxWidth: metrics.isMobile ? '100%' : metrics.textBlockW }}
             >
               <div className="finishing-title pointer-events-auto opacity-0 will-change-transform">
