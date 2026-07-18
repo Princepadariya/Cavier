@@ -14,6 +14,7 @@ const empty = {
   excerpt: '',
   content: [],
   is_published: true,
+  published_at: '',
 };
 
 // Content block editor — an ordered list of heading / paragraph / image blocks.
@@ -121,7 +122,11 @@ export default function BlogForm() {
       try {
         const b = await blogsApi.get(id);
         if (b) {
-          setForm({ ...empty, ...b, content: b.content || [] });
+          let formattedDate = '';
+          if (b.published_at) {
+            formattedDate = new Date(b.published_at).toISOString().split('T')[0];
+          }
+          setForm({ ...empty, ...b, content: b.content || [], published_at: formattedDate });
           setSlugTouched(true);
         }
       } catch (e) {
@@ -153,6 +158,9 @@ export default function BlogForm() {
       content: form.content,
       is_published: form.is_published,
     };
+    if (form.published_at) {
+      payload.published_at = new Date(form.published_at).toISOString();
+    }
     try {
       if (isEdit) await blogsApi.update(id, payload);
       else await blogsApi.create(payload);
@@ -197,9 +205,14 @@ export default function BlogForm() {
               <Input value={form.read_time} onChange={(e) => set('read_time', e.target.value)} placeholder="4 min read" />
             </Field>
           </div>
-          <Field label="Author">
-            <Input value={form.author} onChange={(e) => set('author', e.target.value)} />
-          </Field>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field label="Author">
+              <Input value={form.author} onChange={(e) => set('author', e.target.value)} />
+            </Field>
+            <Field label="Publish Date" hint="Leave empty to use current date">
+              <Input type="date" value={form.published_at} onChange={(e) => set('published_at', e.target.value)} />
+            </Field>
+          </div>
           <Field label="Excerpt / intro" hint="Shown on the blog card and at the top of the article.">
             <Textarea rows={3} value={form.excerpt} onChange={(e) => set('excerpt', e.target.value)} />
           </Field>
