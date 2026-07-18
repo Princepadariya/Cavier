@@ -151,12 +151,9 @@ export default function ProductForm() {
       <form onSubmit={handleSubmit} className="mt-6 space-y-6">
         {/* Basic info */}
         <Card className="space-y-5 p-6">
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-5">
             <Field label="Name" required>
               <Input value={form.name} onChange={(e) => onNameChange(e.target.value)} required placeholder="Pillar Cock with Base" />
-            </Field>
-            <Field label="Product code" hint="e.g. SO 04 101">
-              <Input value={form.code} onChange={(e) => set('code', e.target.value)} placeholder="SO 04 101" />
             </Field>
           </div>
           <div className="grid gap-5 sm:grid-cols-3">
@@ -304,10 +301,7 @@ export default function ProductForm() {
         </Card>
 
         {/* Meta */}
-        <Card className="grid gap-5 p-6 sm:grid-cols-3">
-          <Field label="Rating (1–5)">
-            <Input type="number" min="0" max="5" value={form.rating} onChange={(e) => set('rating', e.target.value)} />
-          </Field>
+        <Card className="grid gap-5 p-6 sm:grid-cols-2">
           <Field label="Sort order" hint="Lower shows first">
             <Input type="number" value={form.sort_order} onChange={(e) => set('sort_order', e.target.value)} />
           </Field>

@@ -3,8 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 
 import { animate, stagger, createSpring } from 'animejs';
 
-import { useCart } from '../context/CartContext';
 import { productsApi } from '../lib/api';
+
+// Store links — to be filled in once the mobile app is published.
+const PLAY_STORE_URL = '#';
+const APP_STORE_URL = '#';
 
 function useSection(ref, buildConfigs, deps = []) {
   useEffect(() => {
@@ -25,7 +28,6 @@ function useSection(ref, buildConfigs, deps = []) {
 
 const ProductDetail = () => {
   const { id } = useParams(); // slug
-  const { cartItems, addToCart, updateQty, removeItem, subtotal } = useCart();
 
   const [product, setProduct] = useState(null);
   const [similar, setSimilar] = useState([]);
@@ -39,9 +41,9 @@ const ProductDetail = () => {
   const [isMorphing, setIsMorphing] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
 
-  const [cartOpen, setCartOpen] = useState(false);
-  const drawerRef = useRef(null);
-  const backdropRef = useRef(null);
+  const [appModalOpen, setAppModalOpen] = useState(false);
+  const modalRef = useRef(null);
+  const modalBackdropRef = useRef(null);
 
   // Fetch product + similar items
   useEffect(() => {
@@ -69,24 +71,22 @@ const ProductDetail = () => {
     return () => { alive = false; };
   }, [id]);
 
-  const openCart = useCallback((p) => { addToCart(p); setCartOpen(true); }, [addToCart]);
-  const closeCart = useCallback(() => setCartOpen(false), []);
+  const openAppModal = useCallback(() => setAppModalOpen(true), []);
+  const closeAppModal = useCallback(() => setAppModalOpen(false), []);
 
   useEffect(() => {
-    const drawer = drawerRef.current;
-    const backdrop = backdropRef.current;
-    if (!drawer || !backdrop) return;
-    if (cartOpen) {
+    const modal = modalRef.current;
+    const backdrop = modalBackdropRef.current;
+    if (!modal || !backdrop) return;
+    if (appModalOpen) {
       document.body.style.overflow = 'hidden';
       animate(backdrop, { opacity: [0, 1], duration: 300, ease: 'outQuart' });
-      animate(drawer, { translateX: ['100%', '0%'], duration: 500, ease: 'outExpo' });
+      animate(modal, { opacity: [0, 1], scale: [0.9, 1], translateY: [20, 0], duration: 450, ease: 'outExpo' });
     } else {
       document.body.style.overflow = '';
-      animate(backdrop, { opacity: [1, 0], duration: 250, ease: 'inQuart' });
-      animate(drawer, { translateX: ['0%', '100%'], duration: 400, ease: 'inExpo' });
     }
     return () => { document.body.style.overflow = ''; };
-  }, [cartOpen]);
+  }, [appModalOpen]);
 
   // Detail hero entrance — re-run when product loads
   useEffect(() => {
@@ -161,25 +161,28 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch pt-8 md:pt-12">
 
             {/* Image + thumbnails */}
-            <div className="detail-img w-full will-change-transform relative">
-              <div className="relative w-full aspect-[9/8] rounded-sm overflow-hidden p-6 md:p-10" style={{ border: '0.5px solid #FFFFFF' }}>
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <img src={heroImage} alt={product.name} className="absolute w-full h-full object-contain" style={{ filter: finishFilter }} />
-                  <div className={`absolute inset-0 z-30 pointer-events-none transition-all duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 ${isMorphing ? 'translate-x-[200%] opacity-100' : '-translate-x-[200%] opacity-0'}`} />
-                </div>
-              </div>
+            <div className="detail-img w-full will-change-transform">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
 
-              {gallery.length > 1 && (
-                <div className="flex gap-2 sm:gap-0 sm:justify-between mt-5 w-full">
-                  {gallery.slice(0, 4).map((src, i) => (
-                    <button key={i} onClick={() => setActiveThumb(i)}
-                      className={`flex-1 sm:flex-initial sm:w-24 md:w-32 aspect-[4/3] rounded-sm overflow-hidden min-w-0 sm:flex-shrink-0 transition-colors duration-200 ${activeThumb === i ? 'ring-1 ring-white' : ''}`}
-                      style={{ border: '0.5px solid #FFFFFF' }}>
-                      <img src={src} alt={`Thumb ${i + 1}`} className="w-full h-full object-contain p-2" style={{ filter: finishFilter }} />
-                    </button>
-                  ))}
+                <div className="relative flex-1 aspect-[9/8] rounded-sm overflow-hidden p-6 md:p-10" style={{ border: '0.5px solid #FFFFFF' }}>
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <img src={heroImage} alt={product.name} className="absolute w-full h-full object-contain" style={{ filter: finishFilter }} />
+                    <div className={`absolute inset-0 z-30 pointer-events-none transition-all duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 ${isMorphing ? 'translate-x-[200%] opacity-100' : '-translate-x-[200%] opacity-0'}`} />
+                  </div>
                 </div>
-              )}
+
+                {gallery.length > 1 && (
+                  <div className="flex sm:flex-col gap-3 sm:gap-4 sm:w-24 md:w-28 sm:flex-shrink-0">
+                    {gallery.slice(0, 4).map((src, i) => (
+                      <button key={i} onClick={() => setActiveThumb(i)}
+                        className={`flex-1 min-w-0 sm:flex-none sm:w-full aspect-square rounded-sm overflow-hidden transition-colors duration-200 ${activeThumb === i ? 'ring-1 ring-white' : ''}`}
+                        style={{ border: '0.5px solid #FFFFFF' }}>
+                        <img src={src} alt={`Thumb ${i + 1}`} className="w-full h-full object-contain p-2" style={{ filter: finishFilter }} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Info */}
@@ -192,16 +195,6 @@ const ProductDetail = () => {
                   {product.short_desc}
                 </p>
               )}
-              <div className="detail-info flex gap-1 mb-6 will-change-transform">
-                {[1, 2, 3, 4, 5].map(s => <span key={s} className={s <= (product.rating || 5) ? 'text-white text-xl' : 'text-white/20 text-xl'}>★</span>)}
-              </div>
-
-              {product.code && (
-                <h2 className="detail-info text-white text-2xl md:text-3xl font-normal font-outfit mb-10 will-change-transform">
-                  Code :- {product.code}
-                </h2>
-              )}
-
               {product.finishes?.length > 0 && (
                 <div className="detail-info mb-16 mt-auto will-change-transform">
                   <h3 className="text-white text-2xl md:text-3xl font-bold font-outfit mb-5">Finishing</h3>
@@ -228,14 +221,7 @@ const ProductDetail = () => {
               </h3>
 
               <button
-                onClick={() => openCart({
-                  id: product.code || product.slug,
-                  name: product.name,
-                  finish: selectedFinish?.name || '—',
-                  height: product.specifications?.find(s => /height|length/i.test(s.label))?.value || '—',
-                  price: Number(product.price),
-                  img: product.main_image || heroImage,
-                })}
+                onClick={openAppModal}
                 className="detail-info flex items-center justify-center gap-2 w-full border border-white text-white rounded-full py-2 text-sm md:text-base font-medium tracking-wide hover:bg-white hover:text-black transition-colors will-change-transform"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" /></svg>
@@ -299,63 +285,49 @@ const ProductDetail = () => {
         </section>
       )}
 
-      {/* Cart drawer */}
-      <div ref={backdropRef} onClick={closeCart} className={`fixed inset-0 bg-black/60 z-[9998] ${cartOpen ? 'pointer-events-auto' : 'pointer-events-none opacity-0'}`} />
-      <div ref={drawerRef} className="fixed top-0 right-0 h-full w-full max-w-[380px] bg-[#1A1A1A] z-[9999] flex flex-col shadow-2xl" style={{ transform: 'translateX(100%)' }}>
-        <div className="px-6 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex items-center justify-between">
-          <h2 className="text-white text-2xl font-bold font-outfit">Your Cart</h2>
-          <button onClick={closeCart} className="text-white/30 hover:text-white transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
-          </button>
-        </div>
-        <div className="mx-6 md:mx-10 border-t border-white/10" />
-        <div className="flex-1 overflow-y-auto px-6 md:px-10 py-8 md:py-10">
-          {cartItems.length === 0 ? (
-            <p className="text-white/20 text-sm text-center mt-20">Your cart is empty</p>
-          ) : (
-            <div className="flex flex-col gap-10">
-              {cartItems.map(item => (
-                <div key={item.id} className="flex gap-4">
-                  <div className="w-24 h-24 bg-black border border-white/10 rounded-sm overflow-hidden shrink-0">
-                    <img src={item.img} alt={item.name} className="w-full h-full object-contain p-2" />
-                  </div>
-                  <div className="flex-1 flex flex-col min-h-[96px]">
-                    <div className="mb-3">
-                      <h3 className="text-white text-[13px] font-bold font-outfit leading-tight mb-2 pr-1">{item.name}</h3>
-                      <p className="text-white/40 text-[10px] mb-1">Color / Finish : {item.finish}</p>
-                      <p className="text-white/40 text-[10px]">Total Height = {item.height}</p>
-                    </div>
-                    <div className="mt-auto flex items-center justify-between">
-                      <div className="flex items-center border border-white/20 rounded-[2px] h-7">
-                        <button onClick={() => updateQty(item.id, 1)} className="w-7 h-full flex items-center justify-center text-white/50 hover:text-white transition-colors text-xs">+</button>
-                        <span className="w-6 h-full flex items-center justify-center text-white text-[11px] border-x border-white/20">{item.qty}</span>
-                        <button onClick={() => updateQty(item.id, -1)} className="w-7 h-full flex items-center justify-center text-white/50 hover:text-white transition-colors text-xs">−</button>
-                      </div>
-                      <div className="flex flex-col items-end">
-                        <span className="text-white text-sm font-bold font-outfit mb-0.5">₹{item.price * item.qty}</span>
-                        <button onClick={() => removeItem(item.id)} className="text-white/30 text-[10px] underline underline-offset-2 hover:text-white/60 transition-colors">Remove</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        {cartItems.length > 0 && (
-          <div className="px-6 md:px-10 pb-10 md:pb-12 pt-6 md:pt-8">
-            <div className="border-t border-white/10 mb-8" />
-            <div className="flex items-center justify-between mb-10">
-              <span className="text-white text-2xl font-bold font-outfit">Cart Total</span>
-              <span className="text-white text-2xl font-bold font-outfit">₹{subtotal}</span>
-            </div>
-            <div className="flex gap-4">
-              <button className="flex-1 border border-white/30 rounded-sm text-white text-[11px] py-3 hover:bg-white/5 transition-colors uppercase tracking-[0.2em] font-medium">View Cart</button>
-              <Link to="/checkout" className="flex-1 border border-white/30 rounded-sm text-white text-[11px] py-3 hover:bg-white hover:text-black transition-colors uppercase tracking-[0.2em] font-medium text-center">Checkout</Link>
+      {/* Get the app modal */}
+      {appModalOpen && (
+        <div className="fixed inset-0 z-[9998] flex items-center justify-center p-4">
+          <div ref={modalBackdropRef} onClick={closeAppModal} className="absolute inset-0 bg-black/70 backdrop-blur-sm" style={{ opacity: 0 }} />
+          <div ref={modalRef} className="relative z-10 w-full max-w-md bg-[#1A1A1A] border border-white/10 rounded-2xl shadow-2xl px-8 py-10 text-center" style={{ opacity: 0 }}>
+            <button onClick={closeAppModal} className="absolute top-4 right-4 text-white/30 hover:text-white transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            </button>
+
+            <h2 className="text-white text-2xl md:text-3xl font-bold font-outfit mb-3">Purchase on our app</h2>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-8 max-w-xs mx-auto">
+              You can purchase this product using our mobile app. Download it below to get started.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 w-full sm:w-auto justify-center border border-white/20 rounded-xl px-5 py-3 hover:border-white/60 hover:bg-white/5 transition-colors">
+                <svg width="24" height="24" viewBox="0 0 512 512" aria-hidden="true">
+                  <path fill="#00D0FF" d="M48 32l224 224L48 480c-10-6-16-17-16-30V62c0-13 6-24 16-30z"/>
+                  <path fill="#00F076" d="M48 32c6-3 13-4 20-1l278 158-70 67L48 32z"/>
+                  <path fill="#FFCE00" d="M448 226c22 12 22 48 0 60l-70 40-70-70 70-70 70 40z"/>
+                  <path fill="#FF3A44" d="M276 256l70 67L68 481c-7 3-14 2-20-1l228-224z"/>
+                </svg>
+                <span className="text-left leading-tight">
+                  <span className="block text-white/50 text-[9px] uppercase tracking-wider">Get it on</span>
+                  <span className="block text-white text-sm font-semibold font-outfit">Google Play</span>
+                </span>
+              </a>
+
+              <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 w-full sm:w-auto justify-center border border-white/20 rounded-xl px-5 py-3 hover:border-white/60 hover:bg-white/5 transition-colors">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                  <path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.9-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.78 1.29 10.32.86 1.24 1.88 2.63 3.22 2.58 1.29-.05 1.78-.83 3.34-.83 1.55 0 2 .83 3.37.81 1.39-.03 2.27-1.26 3.12-2.51.98-1.44 1.39-2.83 1.41-2.9-.03-.01-2.7-1.04-2.73-4.1zM14.6 4.5c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44z"/>
+                </svg>
+                <span className="text-left leading-tight">
+                  <span className="block text-white/50 text-[9px] uppercase tracking-wider">Download on the</span>
+                  <span className="block text-white text-sm font-semibold font-outfit">App Store</span>
+                </span>
+              </a>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -34,8 +34,7 @@ export default function Products() {
     return products.filter((p) => {
       const matchesQuery =
         !query ||
-        p.name.toLowerCase().includes(query.toLowerCase()) ||
-        (p.code || '').toLowerCase().includes(query.toLowerCase());
+        p.name.toLowerCase().includes(query.toLowerCase());
       const matchesCat = !catFilter || p.category_id === catFilter;
       return matchesQuery && matchesCat;
     });
@@ -72,7 +71,7 @@ export default function Products() {
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by name or code…"
+            placeholder="Search by name…"
             className="pl-9"
           />
         </div>
@@ -125,7 +124,6 @@ export default function Products() {
                   </td>
                   <td className="px-5 py-3">
                     <div className="font-medium text-neutral-900">{p.name}</div>
-                    {p.code && <div className="text-xs text-neutral-400">{p.code}</div>}
                   </td>
                   <td className="px-5 py-3 text-neutral-600">{p.category?.name || <span className="text-neutral-300">—</span>}</td>
                   <td className="px-5 py-3 text-neutral-600">₹{Number(p.price).toLocaleString('en-IN')}</td>
