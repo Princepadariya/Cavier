@@ -39,16 +39,31 @@ const testimonials = [
 
 const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // First time the section is in view we reveal the cards one-by-one, then
+  // hand off to the continuous auto-advance loop. This also gives the glass
+  // (backdrop-filter) layer time to composite before the peeking cards show.
+  const [entered, setEntered] = useState(false);
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
 
-  // Auto-advance carousel
+  // Carousel timing: sequential intro on first view, then steady 4s loop.
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+    if (!entered) return;
+    let loopId;
+    let step = 0;
+    const introId = setInterval(() => {
+      step += 1;
+      if (step < testimonials.length) {
+        setCurrentIndex(step);
+      } else {
+        clearInterval(introId);
+        loopId = setInterval(() => {
+          setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+        }, 4000);
+      }
+    }, 2000); // sequential intro cadence between cards
+    return () => { clearInterval(introId); clearInterval(loopId); };
+  }, [entered]);
 
   // Anime.js scroll-triggered entrance animations
   useEffect(() => {
@@ -60,13 +75,18 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
 
     const reset = () => {
       if (title) { title.style.opacity = '0'; title.style.transform = 'translateY(50px)'; }
-      if (stack) { stack.style.opacity = '0'; stack.style.transform = 'translateY(60px) scale(0.92)'; }
+      // NB: do NOT animate the stack's opacity — an opacity < 1 on the ancestor
+      // disables the cards' backdrop-filter (glass), which makes them render
+      // see-through and pile up. Reveal it with transform only.
+      if (stack) { stack.style.transform = 'translateY(60px) scale(0.96)'; }
     };
     reset();
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          setEntered(true);
+
           // Title with spring physics
           if (title) {
             animate(title, {
@@ -77,12 +97,11 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
             });
           }
 
-          // Card stack emerges with spring
+          // Card stack emerges with spring — transform only (no opacity).
           if (stack) {
             animate(stack, {
-              opacity: [0, 1],
               translateY: [60, 0],
-              scale: [0.92, 1],
+              scale: [0.96, 1],
               duration: 1400,
               delay: 300,
               ease: createSpring({ stiffness: 70, damping: 16, mass: 1 }),
@@ -144,7 +163,7 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
           </div>
 
           {/* Right Side: 3D Stacked Card Engine */}
-          <div className="test-stack-container w-full lg:w-8/12 mt-0 lg:mt-0 px-6 sm:px-0 opacity-0 will-change-transform perspective-[1500px]">
+          <div className="test-stack-container w-full lg:w-8/12 mt-0 lg:mt-0 px-6 sm:px-0 will-change-transform perspective-[1500px]">
 
             {/* STACK WRAPPER — nudged right */}
             <div className="relative w-full max-w-[700px] mx-auto lg:translate-x-6 xl:translate-x-10 h-[270px] sm:h-[310px] md:h-[270px]">
@@ -157,10 +176,13 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
                     duration: 1.1,
                     ease: [0.19, 1, 0.22, 1]
                   }}
-                  className="absolute inset-0 w-full h-full border border-white/20 bg-[#252528] rounded-[1.5rem] p-6 md:p-8 shadow-2xl flex flex-col overflow-hidden"
+                  className="absolute inset-0 w-full h-full border border-white/25 bg-gradient-to-br from-white/15 to-white/[0.04] backdrop-blur-2xl rounded-[1.5rem] p-6 md:p-8 shadow-2xl ring-1 ring-inset ring-white/10 flex flex-col overflow-hidden"
                 >
+                  {/* Glass sheen highlight */}
+                  <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent" />
+
                   {/* Background Watermark Quote */}
-                  <Quote size={80} className="absolute right-4 top-4 text-white/5" strokeWidth={1} />
+                  <Quote size={80} className="absolute right-4 top-4 text-white/10" strokeWidth={1} />
 
                   {/* Content */}
                   <div className="relative z-10 flex-grow flex flex-col min-h-0">

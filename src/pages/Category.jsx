@@ -58,17 +58,26 @@ const Category = () => {
         <div className="absolute inset-0 w-full h-full">
           <img src={heroImage} alt="Cavier Premium Bath Fittings" className="w-full h-full object-cover" />
         </div>
-        <div className="relative z-10 h-full w-full flex flex-col justify-center px-6 md:px-12 lg:px-32 pt-[102px]">
+        <div className="relative z-10 h-full w-full flex flex-col justify-center px-4 sm:px-6 md:px-12 lg:px-32 lg:pr-[42%]">
           <span className="text-black text-xs md:text-sm tracking-[0.35em] uppercase mb-6 font-light will-change-transform">
             Explore Our Category
           </span>
-          <h1 className="text-black text-3xl md:text-4xl lg:text-5xl font-light leading-[1.5] tracking-tight font-outfit mb-6 max-w-2xl">
+          <h1 className="text-black text-3xl md:text-4xl lg:text-6xl font-light leading-[1.2] tracking-tight font-outfit mb-6 max-w-4xl">
             {activeCategory ? activeCategory.name : <>Premium Bath<br />Fittings Collection</>}
           </h1>
-          <p className="text-black/70 text-[1.2rem] leading-relaxed font-light max-w-md mb-10">
+          <p className="text-black/70 text-base md:text-[1.15rem] lg:text-[1.2rem] leading-relaxed font-light max-w-xl mb-8 lg:pr-16">
             {activeCategory?.description ||
               'Explore thoughtfully designed bath fittings that combine contemporary aesthetics, superior craftsmanship, and reliable functionality for residential and commercial spaces.'}
           </p>
+          <button
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            className="flex items-center gap-3 px-5 sm:px-6 py-2.5 sm:py-3 border border-black/50 text-black text-xs sm:text-sm hover:bg-black hover:text-white transition-colors duration-300 w-fit font-outfit"
+          >
+            <span className="tracking-wide">Explore Collection</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
         </div>
       </div>
 
