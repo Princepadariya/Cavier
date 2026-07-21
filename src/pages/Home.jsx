@@ -5,6 +5,7 @@ import Features from '../components/Features';
 import Categories from '../components/Categories';
 import FinishingTouch from '../components/FinishingTouch';
 import HomeCategoryRows from '../components/HomeCategoryRows';
+import BestSellers from '../components/BestSellers';
 
 import Banner from '../components/Banner';
 import Insights from '../components/Insights';
@@ -24,6 +25,7 @@ const Home = () => {
       <Categories />
       <FinishingTouch />
       <HomeCategoryRows />
+      <BestSellers />
       <Banner />
       <Insights />
       <Testimonials />

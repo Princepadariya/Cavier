@@ -6,8 +6,11 @@ One-time setup so the site + admin panel can read/write data. ~5 minutes.
 
 1. Open your project → **SQL Editor** → **New query**.
 2. Paste the entire contents of [`schema.sql`](./schema.sql) and click **Run**.
-   This creates the `categories`, `products`, `blogs`, `contact_submissions`
-   tables, the `media` storage bucket, and all the security (RLS) policies.
+   This creates the `categories`, `products`, `blogs`, `testimonials`,
+   `contact_submissions` tables, the `media` storage bucket, and all the
+   security (RLS) policies. It's safe to re-run any time you pull an update
+   that adds a new table (like `testimonials`) — existing tables are left
+   untouched.
 
 ## 2. (Optional) Seed sample content
 
@@ -45,8 +48,11 @@ Restart `npm run dev` after any `.env` change.
 | Table | Key fields |
 |-------|-----------|
 | `categories` | `name, slug, hero_image, card_image, show_on_home, home_order, sort_order, is_active` |
-| `products` | `name, slug, code, category_id, price, main_image, gallery[], finishes[], features[], specifications[], is_active, sort_order` |
+| `series` | `category_id, name, slug, description, image, sort_order, is_active` |
+| `products` | `name, slug, code, category_id, series_id, price, main_image, gallery[], finishes[], features[], specifications[], is_active, sort_order, view_count` |
+| `site_settings` | singleton row — `bestseller_auto_enabled` |
 | `blogs` | `title, slug, author, header_image, excerpt, content[] (blocks), is_published` |
+| `testimonials` | `name, role, quote, rating, sort_order, is_active` |
 | `contact_submissions` | `name, email, contact, designation, subject, message, is_read` |
 
 - **Blog `content`** is an array of blocks: `{type:'heading'|'paragraph'|'image', text|url}`.

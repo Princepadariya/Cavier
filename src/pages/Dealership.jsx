@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { animate, stagger, createSpring } from 'animejs';
 import { ChevronDown } from 'lucide-react';
 
@@ -21,7 +21,22 @@ function useSection(ref, buildConfigs) {
   }, []);
 }
 
+const DEALERSHIP_FIELDS = [
+  ['Dealer Name*', 'Firm Name*'],
+  ['GST Number*', 'Contact Number*'],
+];
+
+const PROJECT_FIELDS = [
+  ['Builder Name*', 'Project Name*'],
+  ['Area*', 'City*'],
+  ['State*', 'Pincode*'],
+  ['Number of Flats*', 'Mobile Number*'],
+];
+
+const fieldName = (label) => label.replace('*', '').toLowerCase().replace(/\s+/g, '_');
+
 const Dealership = () => {
+  const [profession, setProfession] = useState('dealership');
   const heroRef = useRef(null);
   const philRef = useRef(null);
   const valRef = useRef(null);
@@ -280,36 +295,86 @@ const Dealership = () => {
         </div>
       </section>
 
-      {/* Project Form */}
+      {/* Dealership / Project Form */}
       <section ref={formRef} className="w-full bg-[#1F1F21] pt-4 pb-16 md:py-24 px-6 md:px-12 lg:px-32">
-        <h2 className="form-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-10 md:mb-14 font-outfit text-center will-change-transform">Project Form</h2>
-        <form className="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto" onSubmit={e => {
-          e.preventDefault();
-          const formData = new FormData(e.target);
-          const data = Object.fromEntries(formData.entries());
-          console.log('Dealership Form Submitted:', data);
-          alert('Thank you for your interest! Our team will review your dealership inquiry and contact you soon.');
-          e.target.reset();
-        }}>
-          {[
-            ['Builder Name*', 'Project Name*'],
-            ['Area*', 'City*'],
-            ['State*', 'Pincode*'],
-            ['Number of Flats*', 'Mobile Number*'],
-          ].map((row, ri) => (
-            <div key={ri} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {row.map(label => (
-                <div key={label} className="form-field will-change-transform">
-                  <label className="text-white text-sm font-medium block mb-3">{label}</label>
-                  <input name={label.replace('*', '').toLowerCase().replace(' ', '_')} required type="text" className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors" />
+        <h2 className="form-title text-3xl md:text-4xl lg:text-[2.5rem] font-light text-white tracking-wide mb-10 font-outfit text-center will-change-transform">
+          {profession === 'dealership' ? 'Dealership Form' : 'Project Form'}
+        </h2>
+
+        {/* Profession type selector */}
+        <div className="form-field flex items-center justify-center gap-4 mb-10 md:mb-14 will-change-transform">
+          <span className="text-white/60 text-xs md:text-sm tracking-[0.2em] uppercase font-light mr-2">Select your profession type:</span>
+          <div className="flex border border-white/30 rounded-full overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setProfession('dealership')}
+              className={`px-5 md:px-6 py-2 text-xs md:text-sm tracking-wide transition-colors duration-300 ${profession === 'dealership' ? 'bg-white text-black' : 'text-white hover:bg-white/10'}`}
+            >
+              Dealership Form
+            </button>
+            <button
+              type="button"
+              onClick={() => setProfession('project')}
+              className={`px-5 md:px-6 py-2 text-xs md:text-sm tracking-wide transition-colors duration-300 ${profession === 'project' ? 'bg-white text-black' : 'text-white hover:bg-white/10'}`}
+            >
+              Project Form
+            </button>
+          </div>
+        </div>
+
+        <form
+          key={profession}
+          className="flex flex-col gap-6 md:gap-8 max-w-4xl mx-auto"
+          onSubmit={e => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            console.log(`${profession === 'dealership' ? 'Dealership' : 'Project'} Form Submitted:`, data);
+            alert('Thank you for your interest! Our team will review your inquiry and contact you soon.');
+            e.target.reset();
+          }}
+        >
+          {profession === 'dealership' ? (
+            <>
+              {DEALERSHIP_FIELDS.map((row, ri) => (
+                <div key={ri} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                  {row.map(label => (
+                    <div key={label} className="form-field will-change-transform">
+                      <label className="text-white text-sm font-medium block mb-3">{label}</label>
+                      <input name={fieldName(label)} required type="text" className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors" />
+                    </div>
+                  ))}
                 </div>
               ))}
-            </div>
-          ))}
-          <div className="form-field will-change-transform">
-            <label className="text-white text-sm font-medium block mb-3">Comment*</label>
-            <textarea name="comment" required rows={5} className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors resize-none" />
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <div className="form-field will-change-transform">
+                  <label className="text-white text-sm font-medium block mb-3">Visiting Card Photo*</label>
+                  <input name="visiting_card" required type="file" accept="image/*" className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors file:mr-4 file:py-1.5 file:px-3 file:border file:border-white/50 file:bg-transparent file:text-white file:text-xs file:tracking-wide file:cursor-pointer" />
+                </div>
+                <div className="form-field will-change-transform">
+                  <label className="text-white text-sm font-medium block mb-3">Email Id <span className="text-white/50 font-normal">(Optional)</span></label>
+                  <input name="email" type="email" className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors" />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              {PROJECT_FIELDS.map((row, ri) => (
+                <div key={ri} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                  {row.map(label => (
+                    <div key={label} className="form-field will-change-transform">
+                      <label className="text-white text-sm font-medium block mb-3">{label}</label>
+                      <input name={fieldName(label)} required type="text" className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors" />
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <div className="form-field will-change-transform">
+                <label className="text-white text-sm font-medium block mb-3">Comment*</label>
+                <textarea name="comment" required rows={5} className="w-full bg-transparent border border-[#ffffff] text-white px-4 py-3 text-sm outline-none focus:border-white transition-colors resize-none" />
+              </div>
+            </>
+          )}
           <div className="flex justify-center mt-4">
             <button type="submit" className="form-btn text-white border border-white px-8 py-3 text-sm tracking-wide hover:bg-white hover:text-black transition-colors will-change-transform">Contact Now</button>
           </div>

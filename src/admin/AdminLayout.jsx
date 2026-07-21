@@ -4,8 +4,11 @@ import {
   LayoutDashboard,
   Package,
   FolderTree,
+  Layers,
   Newspaper,
+  MessageSquareQuote,
   Mail,
+  TrendingUp,
   LogOut,
   Menu,
   X,
@@ -16,8 +19,11 @@ import { useAuth } from '../context/AuthContext';
 const nav = [
   { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/admin/categories', label: 'Categories', icon: FolderTree },
+  { to: '/admin/series', label: 'Series', icon: Layers },
   { to: '/admin/products', label: 'Products', icon: Package },
   { to: '/admin/blogs', label: 'Blog Posts', icon: Newspaper },
+  { to: '/admin/testimonials', label: 'Testimonials', icon: MessageSquareQuote },
+  { to: '/admin/analytics', label: 'Bestseller Analytics', icon: TrendingUp },
   { to: '/admin/contact', label: 'Contact Submissions', icon: Mail },
 ];
 

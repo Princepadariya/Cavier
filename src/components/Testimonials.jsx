@@ -3,41 +3,33 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, Star, Quote } from 'lucide-react';
 import { animate, stagger, createSpring } from 'animejs';
+import { testimonialsApi } from '../lib/api';
 
-const testimonials = [
+// Shown while the real testimonials load (and as a safety net if the table is
+// empty / the request fails), so the section is never blank.
+const fallbackTestimonials = [
   {
-    id: 1,
+    id: 'fallback-1',
     name: 'James Walker',
     role: 'Distributor',
     text: 'Cavier products have exceeded our expectations in terms of durability and finish. The consistency in quality across orders makes them a reliable partner for our massive residential projects.',
   },
   {
-    id: 2,
+    id: 'fallback-2',
     name: 'Sarah Jenkins',
     role: 'Interior Designer',
     text: 'The sleek designs and robust build quality of Cavier fittings have completely transformed the modern spaces I design. Clients are consistently thrilled with the luxurious feel.',
   },
   {
-    id: 3,
+    id: 'fallback-3',
     name: 'Michael Chen',
     role: 'Property Developer',
     text: 'We switched to Cavier for all our high-end residential projects. The meticulous attention to detail and premium materials utilized are unmatched in the current market.',
   },
-  {
-    id: 4,
-    name: 'Emma Thompson',
-    role: 'Architect',
-    text: 'A perfect blend of aesthetics and functionality. Integrating Cavier products into my architectural plans adds a layer of sophisticated elegance that sets our buildings apart.',
-  },
-  {
-    id: 5,
-    name: 'David Rossi',
-    role: 'Hotel Manager',
-    text: 'Our guests frequently compliment the bathroom fixtures. Upgrading to the Cavier collection was one of the best decisions we made for elevating our hotel\'s luxury experience.',
-  }
 ];
 
 const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
+  const [testimonials, setTestimonials] = useState(fallbackTestimonials);
   const [currentIndex, setCurrentIndex] = useState(0);
   // First time the section is in view we reveal the cards one-by-one, then
   // hand off to the continuous auto-advance loop. This also gives the glass
@@ -45,6 +37,25 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
   const [entered, setEntered] = useState(false);
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
+
+  // Load admin-managed testimonials from Supabase; keep the fallback list if
+  // the table is empty or the request fails, so the carousel is never empty.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await testimonialsApi.list({ activeOnly: true });
+        if (!cancelled && data && data.length > 0) {
+          setTestimonials(
+            data.map((t) => ({ id: t.id, name: t.name, role: t.role, text: t.quote, rating: t.rating }))
+          );
+        }
+      } catch (e) {
+        console.error('Failed to load testimonials, using fallback:', e);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   // Carousel timing: sequential intro on first view, then steady 4s loop.
   useEffect(() => {
@@ -200,7 +211,12 @@ const Testimonials = ({ bgClass = "bg-[#1F1F21]" }) => {
 
                     <div className="mt-auto flex gap-1.5 text-[#eab308]">
                       {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} fill="currentColor" size={17} strokeWidth={0} />
+                        <Star
+                          key={idx}
+                          fill={idx < (testimonial.rating ?? 5) ? 'currentColor' : 'none'}
+                          size={17}
+                          strokeWidth={idx < (testimonial.rating ?? 5) ? 0 : 1.5}
+                        />
                       ))}
                     </div>
                   </div>

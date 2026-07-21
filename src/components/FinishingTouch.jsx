@@ -232,7 +232,7 @@ const FinishingTouch = () => {
                   Precision lies in every detail. Explore our curated bath collections
                   designed to enhance modern living with style, performance, and lasting quality.
                 </p>
-                <Link to="/product" className="flex items-center gap-3 px-5 py-3 border border-white
+                <Link to="/about" className="flex items-center gap-3 px-5 py-3 border border-white
                                   text-white text-sm hover:bg-white hover:text-black
                                   transition-all duration-300 w-fit">
                   View More <ArrowRight size={18} />

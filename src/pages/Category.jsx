@@ -1,24 +1,28 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { productsApi, categoriesApi } from '../lib/api';
+import { productsApi, categoriesApi, seriesApi } from '../lib/api';
 
 const Category = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [series, setSeries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(searchParams.get('cat') || '');
+  const [selectedSeries, setSelectedSeries] = useState(searchParams.get('series') || '');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     (async () => {
       try {
-        const [prods, cats] = await Promise.all([
+        const [prods, cats, ser] = await Promise.all([
           productsApi.list({ activeOnly: true }),
           categoriesApi.list({ activeOnly: true }),
+          seriesApi.list({ activeOnly: true }),
         ]);
         setProducts(prods);
         setCategories(cats);
+        setSeries(ser);
       } catch (e) {
         console.error(e);
       } finally {
@@ -29,22 +33,36 @@ const Category = () => {
 
   useEffect(() => {
     setSelected(searchParams.get('cat') || '');
+    setSelectedSeries(searchParams.get('series') || '');
   }, [searchParams]);
 
   const activeCategory = categories.find((c) => c.slug === selected) || null;
+  const seriesInCategory = activeCategory ? series.filter((s) => s.category_id === activeCategory.id) : [];
+  const activeSeries = seriesInCategory.find((s) => s.slug === selectedSeries) || null;
 
   const filtered = useMemo(() => {
     let result = products;
     if (selected) result = result.filter((p) => p.category?.slug === selected);
+    if (activeSeries) result = result.filter((p) => p.series_id === activeSeries.id);
     if (searchQuery) result = result.filter((p) => p.name?.toLowerCase().includes(searchQuery.toLowerCase()));
     return result;
-  }, [products, selected, searchQuery]);
+  }, [products, selected, activeSeries, searchQuery]);
 
   const selectCategory = (slug) => {
     setSelected(slug);
+    setSelectedSeries('');
     const next = new URLSearchParams(searchParams);
     if (slug) next.set('cat', slug);
     else next.delete('cat');
+    next.delete('series');
+    setSearchParams(next, { replace: true });
+  };
+
+  const selectSeries = (slug) => {
+    setSelectedSeries(slug);
+    const next = new URLSearchParams(searchParams);
+    if (slug) next.set('series', slug);
+    else next.delete('series');
     setSearchParams(next, { replace: true });
   };
 
@@ -116,6 +134,30 @@ const Category = () => {
               })}
             </div>
 
+            {/* Desktop Series List — only shown once a category with series is selected */}
+            {seriesInCategory.length > 0 && (
+              <div className="hidden lg:block mt-6">
+                <span className="text-white/40 text-xs tracking-[0.25em] uppercase font-light mb-3 block">Series</span>
+                <button
+                  onClick={() => selectSeries('')}
+                  className={`w-full flex items-center justify-between py-3 text-sm font-light border-b border-white/10 transition-colors ${!selectedSeries ? 'text-white' : 'text-white/50 hover:text-white'
+                    }`}
+                >
+                  <span>All {activeCategory.name}</span>
+                </button>
+                {seriesInCategory.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => selectSeries(s.slug)}
+                    className={`w-full flex items-center justify-between py-3 text-sm font-light border-b border-white/10 transition-colors ${selectedSeries === s.slug ? 'text-white' : 'text-white/50 hover:text-white'
+                      }`}
+                  >
+                    <span>{s.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Mobile Category Pills */}
             <div className="flex lg:hidden flex-row flex-wrap gap-2 pb-4">
               <button
@@ -136,6 +178,29 @@ const Category = () => {
                 </button>
               ))}
             </div>
+
+            {/* Mobile Series Pills */}
+            {seriesInCategory.length > 0 && (
+              <div className="flex lg:hidden flex-row flex-wrap gap-2 pb-4 -mt-2">
+                <button
+                  onClick={() => selectSeries('')}
+                  className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-colors border ${!selectedSeries ? 'bg-white/90 text-black border-white/90' : 'bg-transparent text-white/70 border-white/20'
+                    }`}
+                >
+                  All {activeCategory.name}
+                </button>
+                {seriesInCategory.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => selectSeries(s.slug)}
+                    className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-medium transition-colors border ${selectedSeries === s.slug ? 'bg-white/90 text-black border-white/90' : 'bg-transparent text-white/70 border-white/20'
+                      }`}
+                  >
+                    {s.name}
+                  </button>
+                ))}
+              </div>
+            )}
           </aside>
 
           {/* Product grid */}

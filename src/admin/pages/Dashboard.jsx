@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, FolderTree, Newspaper, Mail, ArrowRight } from 'lucide-react';
-import { categoriesApi, productsApi, blogsApi, contactApi } from '../../lib/api';
+import { Package, FolderTree, Newspaper, MessageSquareQuote, Mail, ArrowRight } from 'lucide-react';
+import { categoriesApi, productsApi, blogsApi, testimonialsApi, contactApi } from '../../lib/api';
 import { Card, Spinner } from '../components/ui';
 
 export default function Dashboard() {
@@ -13,23 +13,25 @@ export default function Dashboard() {
   useEffect(() => {
     (async () => {
       try {
-        const [categories, products, blogs, contacts] = await Promise.all([
+        const [categories, products, blogs, testimonials, contacts] = await Promise.all([
           categoriesApi.list(),
           productsApi.list(),
           blogsApi.list(),
+          testimonialsApi.list(),
           contactApi.list(),
         ]);
         setStats({
           categories: categories.length,
           products: products.length,
           blogs: blogs.length,
+          testimonials: testimonials.length,
           unread: contacts.filter((c) => !c.is_read).length,
           contacts: contacts.length,
         });
         setRecent(contacts.slice(0, 5));
       } catch (e) {
         console.error(e);
-        setStats({ categories: 0, products: 0, blogs: 0, unread: 0, contacts: 0 });
+        setStats({ categories: 0, products: 0, blogs: 0, testimonials: 0, unread: 0, contacts: 0 });
         setError('Could not load data. Have you run supabase/schema.sql yet?');
       } finally {
         setLoading(false);
@@ -49,6 +51,7 @@ export default function Dashboard() {
     { label: 'Categories', value: stats.categories, icon: FolderTree, to: '/admin/categories' },
     { label: 'Products', value: stats.products, icon: Package, to: '/admin/products' },
     { label: 'Blog Posts', value: stats.blogs, icon: Newspaper, to: '/admin/blogs' },
+    { label: 'Testimonials', value: stats.testimonials, icon: MessageSquareQuote, to: '/admin/testimonials' },
     { label: 'Unread Messages', value: stats.unread, icon: Mail, to: '/admin/contact' },
   ];
 
@@ -63,7 +66,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
         {cards.map(({ label, value, icon: Icon, to }) => (
           <Link key={label} to={to}>
             <Card className="p-5 transition-shadow hover:shadow-md">

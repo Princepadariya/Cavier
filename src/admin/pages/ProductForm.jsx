@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Loader2, Plus, X } from 'lucide-react';
-import { productsApi, categoriesApi, slugify } from '../../lib/api';
+import { productsApi, categoriesApi, seriesApi, slugify } from '../../lib/api';
 import { Button, Card, Field, Input, Textarea, Select, Toggle, Spinner } from '../components/ui';
 import { ImageUpload, GalleryUpload } from '../components/ImageUpload';
 
@@ -20,6 +20,7 @@ const empty = {
   slug: '',
   code: '',
   category_id: '',
+  series_id: '',
   price: '',
   short_desc: '',
   description: '',
@@ -40,6 +41,7 @@ export default function ProductForm() {
 
   const [form, setForm] = useState(empty);
   const [categories, setCategories] = useState([]);
+  const [series, setSeries] = useState([]);
   const [slugTouched, setSlugTouched] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -48,14 +50,16 @@ export default function ProductForm() {
   useEffect(() => {
     (async () => {
       try {
-        const cats = await categoriesApi.list();
+        const [cats, ser] = await Promise.all([categoriesApi.list(), seriesApi.list()]);
         setCategories(cats);
+        setSeries(ser);
         if (isEdit) {
           const p = await productsApi.get(id);
           if (p) {
             setForm({
               ...empty,
               ...p,
+              series_id: p.series_id || '',
               price: p.price ?? '',
               gallery: p.gallery || [],
               finishes: p.finishes || [],
@@ -74,6 +78,12 @@ export default function ProductForm() {
   }, [id, isEdit]);
 
   const set = (key, value) => setForm((f) => ({ ...f, [key]: value }));
+
+  const seriesForCategory = series.filter((s) => s.category_id === form.category_id);
+
+  const onCategoryChange = (v) => {
+    setForm((f) => ({ ...f, category_id: v, series_id: '' }));
+  };
 
   const onNameChange = (v) => {
     set('name', v);
@@ -111,6 +121,7 @@ export default function ProductForm() {
       slug: form.slug.trim() || slugify(form.name),
       code: form.code.trim(),
       category_id: form.category_id || null,
+      series_id: form.series_id || null,
       price: Number(form.price) || 0,
       short_desc: form.short_desc,
       description: form.description,
@@ -156,7 +167,7 @@ export default function ProductForm() {
               <Input value={form.name} onChange={(e) => onNameChange(e.target.value)} required placeholder="Pillar Cock with Base" />
             </Field>
           </div>
-          <div className="grid gap-5 sm:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Slug">
               <Input
                 value={form.slug}
@@ -166,8 +177,13 @@ export default function ProductForm() {
                 }}
               />
             </Field>
+            <Field label="Price (₹)" required>
+              <Input type="number" min="0" step="0.01" value={form.price} onChange={(e) => set('price', e.target.value)} required placeholder="1930" />
+            </Field>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Category" required>
-              <Select value={form.category_id || ''} onChange={(e) => set('category_id', e.target.value)} required>
+              <Select value={form.category_id || ''} onChange={(e) => onCategoryChange(e.target.value)} required>
                 <option value="">Select…</option>
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -176,8 +192,15 @@ export default function ProductForm() {
                 ))}
               </Select>
             </Field>
-            <Field label="Price (₹)" required>
-              <Input type="number" min="0" step="0.01" value={form.price} onChange={(e) => set('price', e.target.value)} required placeholder="1930" />
+            <Field label="Series" hint={form.category_id ? undefined : 'Select a category first'}>
+              <Select value={form.series_id || ''} onChange={(e) => set('series_id', e.target.value)} disabled={!form.category_id}>
+                <option value="">None</option>
+                {seriesForCategory.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.name}
+                  </option>
+                ))}
+              </Select>
             </Field>
           </div>
           <Field label="Short description" hint="One line — shown under the product name.">

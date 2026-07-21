@@ -56,6 +56,7 @@ const ProductDetail = () => {
         setProduct(p);
         setSelectedFinish(p?.finishes?.[0] || null);
         setActiveThumb(0);
+        if (p?.id) productsApi.incrementView(p.id).catch(() => {});
         if (p?.category_id) {
           const sim = await productsApi.list({ activeOnly: true, categoryId: p.category_id, limit: 4 });
           if (alive) setSimilar(sim.filter((s) => s.id !== p.id).slice(0, 3));

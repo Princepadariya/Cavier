@@ -88,6 +88,51 @@ export const categoriesApi = {
 };
 
 // ---------------------------------------------------------------------------
+// Series (sub-categories that live inside a category)
+// ---------------------------------------------------------------------------
+export const seriesApi = {
+  /**
+   * @param {object} opts
+   * @param {boolean} opts.activeOnly
+   * @param {string}  opts.categoryId
+   */
+  async list({ activeOnly = false, categoryId = null } = {}) {
+    let q = supabase
+      .from('series')
+      .select('*, category:categories(id,name,slug)')
+      .order('sort_order', { ascending: true });
+    if (activeOnly) q = q.eq('is_active', true);
+    if (categoryId) q = q.eq('category_id', categoryId);
+    const { data, error } = await q;
+    throwIf(error);
+    return data;
+  },
+
+  async get(id) {
+    const { data, error } = await supabase.from('series').select('*').eq('id', id).maybeSingle();
+    throwIf(error);
+    return data;
+  },
+
+  async create(payload) {
+    const { data, error } = await supabase.from('series').insert(payload).select().single();
+    throwIf(error);
+    return data;
+  },
+
+  async update(id, payload) {
+    const { data, error } = await supabase.from('series').update(payload).eq('id', id).select().single();
+    throwIf(error);
+    return data;
+  },
+
+  async remove(id) {
+    const { error } = await supabase.from('series').delete().eq('id', id);
+    throwIf(error);
+  },
+};
+
+// ---------------------------------------------------------------------------
 // Products
 // ---------------------------------------------------------------------------
 export const productsApi = {
@@ -95,16 +140,18 @@ export const productsApi = {
    * @param {object} opts
    * @param {boolean} opts.activeOnly
    * @param {string}  opts.categoryId
+   * @param {string}  opts.seriesId
    * @param {number}  opts.limit
    */
-  async list({ activeOnly = false, categoryId = null, limit = null } = {}) {
+  async list({ activeOnly = false, categoryId = null, seriesId = null, limit = null } = {}) {
     let q = supabase
       .from('products')
-      .select('*, category:categories(id,name,slug)')
+      .select('*, category:categories(id,name,slug), series:series(id,name,slug)')
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false });
     if (activeOnly) q = q.eq('is_active', true);
     if (categoryId) q = q.eq('category_id', categoryId);
+    if (seriesId) q = q.eq('series_id', seriesId);
     if (limit) q = q.limit(limit);
     const { data, error } = await q;
     throwIf(error);
@@ -114,7 +161,7 @@ export const productsApi = {
   async getBySlug(slug) {
     const { data, error } = await supabase
       .from('products')
-      .select('*, category:categories(id,name,slug)')
+      .select('*, category:categories(id,name,slug), series:series(id,name,slug)')
       .eq('slug', slug)
       .maybeSingle();
     throwIf(error);
@@ -124,7 +171,7 @@ export const productsApi = {
   async get(id) {
     const { data, error } = await supabase
       .from('products')
-      .select('*, category:categories(id,name,slug)')
+      .select('*, category:categories(id,name,slug), series:series(id,name,slug)')
       .eq('id', id)
       .maybeSingle();
     throwIf(error);
@@ -146,6 +193,42 @@ export const productsApi = {
   async remove(id) {
     const { error } = await supabase.from('products').delete().eq('id', id);
     throwIf(error);
+  },
+
+  /** Top viewed products, for the automatic Bestsellers section / admin analytics. */
+  async topViewed({ activeOnly = false, limit = 8 } = {}) {
+    let q = supabase
+      .from('products')
+      .select('*, category:categories(id,name,slug), series:series(id,name,slug)')
+      .order('view_count', { ascending: false })
+      .limit(limit);
+    if (activeOnly) q = q.eq('is_active', true);
+    const { data, error } = await q;
+    throwIf(error);
+    return data;
+  },
+
+  /** Fire-and-forget view counter bump — call when a product detail page opens. */
+  async incrementView(id) {
+    const { error } = await supabase.rpc('increment_product_view', { p_id: id });
+    throwIf(error);
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Site settings (singleton row)
+// ---------------------------------------------------------------------------
+export const settingsApi = {
+  async get() {
+    const { data, error } = await supabase.from('site_settings').select('*').eq('id', true).maybeSingle();
+    throwIf(error);
+    return data;
+  },
+
+  async update(payload) {
+    const { data, error } = await supabase.from('site_settings').update(payload).eq('id', true).select().single();
+    throwIf(error);
+    return data;
   },
 };
 
@@ -187,6 +270,42 @@ export const blogsApi = {
 
   async remove(id) {
     const { error } = await supabase.from('blogs').delete().eq('id', id);
+    throwIf(error);
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Testimonials
+// ---------------------------------------------------------------------------
+export const testimonialsApi = {
+  async list({ activeOnly = false } = {}) {
+    let q = supabase.from('testimonials').select('*').order('sort_order', { ascending: true });
+    if (activeOnly) q = q.eq('is_active', true);
+    const { data, error } = await q;
+    throwIf(error);
+    return data;
+  },
+
+  async get(id) {
+    const { data, error } = await supabase.from('testimonials').select('*').eq('id', id).maybeSingle();
+    throwIf(error);
+    return data;
+  },
+
+  async create(payload) {
+    const { data, error } = await supabase.from('testimonials').insert(payload).select().single();
+    throwIf(error);
+    return data;
+  },
+
+  async update(id, payload) {
+    const { data, error } = await supabase.from('testimonials').update(payload).eq('id', id).select().single();
+    throwIf(error);
+    return data;
+  },
+
+  async remove(id) {
+    const { error } = await supabase.from('testimonials').delete().eq('id', id);
     throwIf(error);
   },
 };

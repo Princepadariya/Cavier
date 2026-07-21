@@ -153,15 +153,17 @@ const Contact = () => {
         {/* Info Grid */}
         <div ref={infoRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 lg:gap-8 mb-16 md:mb-32 w-full">
           {[
-            { t: 'Contact', v: '(91) 288 2730 052, 53', href: 'tel:+912882730052' },
-            { t: 'Fax', v: '(91) 288 2730 054', href: 'tel:+912882730054' },
+            { t: 'Contact', v: '(91) 7433993998', href: 'tel:+917433993998' },
             { t: 'Service Related', v: '(91) 96876 20054.', href: 'tel:+919687620054' },
             { t: 'Email', v: 'info@cavierindia.com', href: 'mailto:info@cavierindia.com' },
             { t: 'Trade Enquiry', v: '(91) 73839 33333', href: 'tel:+917383933333' },
+            { t: 'WhatsApp', v: '9978549494', href: 'https://wa.me/919978549494', target: '_blank' },
           ].map(c => (
             <a
               key={c.t}
               href={c.href}
+              target={c.target}
+              rel={c.target ? 'noreferrer' : undefined}
               className="info-card border border-white py-6 md:py-10 px-3 md:px-4 flex flex-col items-center justify-center text-center will-change-transform hover:bg-white hover:text-black transition-colors duration-300 group"
             >
               <h3 className="text-white group-hover:text-black text-base md:text-lg font-outfit font-light mb-4 tracking-wide transition-colors duration-300">{c.t}</h3>

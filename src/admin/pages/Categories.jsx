@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Pencil, Trash2, GripVertical } from 'lucide-react';
+import { Plus, Pencil, Trash2, GripVertical, Layers } from 'lucide-react';
 import { categoriesApi } from '../../lib/api';
 import { Button, Card, Badge, Spinner, EmptyState } from '../components/ui';
 
@@ -104,6 +104,13 @@ export default function Categories() {
                   </td>
                   <td className="px-5 py-3">
                     <div className="flex items-center justify-end gap-1">
+                      <Link
+                        to={`/admin/series?category=${c.id}`}
+                        title="Manage series"
+                        className="rounded-md p-2 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
+                      >
+                        <Layers size={15} />
+                      </Link>
                       <Link
                         to={`/admin/categories/${c.id}`}
                         className="rounded-md p-2 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
